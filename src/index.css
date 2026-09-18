@@ -1,0 +1,345 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--sans);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Force hide default OS cursor across the entire Negocios page when custom cursor is active */
+body.has-negocios-cursor .negocios-page,
+body.has-negocios-cursor .negocios-page * {
+  cursor: none !important;
+}
+
+/* Apply pixel pointer to the page elements via custom cursor component or inline state */
+body.has-negocios-cursor .negocios-page a,
+body.has-negocios-cursor .negocios-page button,
+body.has-negocios-cursor .negocios-page [role="button"],
+body.has-negocios-cursor .negocios-page input,
+body.has-negocios-cursor .negocios-page select,
+body.has-negocios-cursor .negocios-page textarea,
+body.has-negocios-cursor .negocios-page .card-hover,
+body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
+  cursor: none !important;
+}
+
+/* Fallback for touch/coarse pointer devices where custom cursors shouldn't block touch */
+@media (pointer: coarse) {
+  .negocios-page,
+  .negocios-page * {
+    cursor: auto !important;
+  }
+}
+
+/* Mathematical Typography Scale & Hierarchy */
+.bauhaus-num {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+/* Purposeful Scroll Reveal Transitions */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.scroll-reveal.animate-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.scroll-reveal-left.animate-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-reveal-scale {
+  opacity: 0;
+  transform: scale(0.98) translateY(20px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.scroll-reveal-scale.animate-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Functional Card Interaction: Communicates Actionability */
+.card-hover {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  border-color: #121210 !important;
+  background-color: #FFFFFF;
+}
+
+@keyframes floatSubtle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+.floating-mockup {
+  animation: floatSubtle 6s ease-in-out infinite;
+}
+
+/* Responsive Layout Grid */
+.negocios-header {
+  padding: 1.1rem 2rem;
+  border-bottom: 1px solid #E2E2DE;
+}
+.negocios-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+.negocios-main-content {
+  padding: 3.5rem 2rem 5rem;
+}
+.negocios-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+/* Bauhaus Editorial Layout Frameworks */
+.essentials-mosaic {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+.essentials-cell-lead {
+  grid-column: span 7;
+}
+.essentials-cell-secondary {
+  grid-column: span 5;
+}
+.essentials-cell-action-contact {
+  grid-column: span 6;
+}
+.essentials-cell-action-wa {
+  grid-column: span 6;
+}
+.essentials-cell-infra {
+  grid-column: span 3;
+}
+
+.respaldo-editorial-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+
+.economic-ledger-split {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+
+.colaboracion-split {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+
+.craft-editorial-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.45fr;
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+
+.journey-grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+
+.process-workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+
+.negocios-cta-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Floating WhatsApp interactive element */
+.dr-wa {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+.dr-wa-footer {
+  background-color: #FFFFFF !important;
+  color: #121210 !important;
+  border-color: #FFFFFF !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+.dr-wa-footer:hover {
+  background-color: #EAEAE6 !important;
+}
+
+@media (max-width: 1024px) {
+  .essentials-cell-lead,
+  .essentials-cell-secondary,
+  .essentials-cell-action-contact,
+  .essentials-cell-action-wa {
+    grid-column: span 6;
+  }
+  .essentials-cell-infra {
+    grid-column: span 6;
+  }
+  .respaldo-editorial-layout,
+  .economic-ledger-split,
+  .colaboracion-split,
+  .craft-editorial-layout {
+    grid-template-columns: 1fr;
+  }
+  .journey-grid-container,
+  .process-workflow-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 960px) {
+  .header-desktop-tabs {
+    display: none !important;
+  }
+  .header-mobile-menu-btn {
+    display: inline-flex !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .negocios-header {
+    padding: 0.75rem 1rem !important;
+  }
+  .header-desktop-tabs {
+    display: none !important;
+  }
+  .header-mobile-menu-btn {
+    display: inline-flex !important;
+  }
+  .instagram-header-btn {
+    display: none !important;
+  }
+  .header-whatsapp-label {
+    display: none !important;
+  }
+  .whatsapp-header-btn {
+    padding: 0.45rem 0.65rem !important;
+  }
+  .negocios-main-content {
+    padding: 2rem 1.25rem 4rem !important;
+  }
+  .negocios-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+    padding: 1.5rem 0 3.5rem !important;
+  }
+  .floating-mockup {
+    animation: none !important;
+  }
+  .essentials-cell-lead,
+  .essentials-cell-secondary,
+  .essentials-cell-action-contact,
+  .essentials-cell-action-wa,
+  .essentials-cell-infra {
+    grid-column: span 12;
+  }
+  .journey-grid-container,
+  .process-workflow-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .floating-whatsapp-tooltip {
+    display: none !important;
+  }
+  .floating-whatsapp-container {
+    bottom: 1.25rem !important;
+    right: 1.25rem !important;
+  }
+  .negocios-btn-mobile-full {
+    width: 100% !important;
+    text-align: center !important;
+    display: block !important;
+  }
+  .negocios-cta-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .negocios-cta-actions a {
+    width: 100% !important;
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .floating-whatsapp-container {
+    bottom: 1rem !important;
+    right: 1rem !important;
+  }
+  .dr-wa {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dr-wa,
+  .scroll-reveal,
+  .scroll-reveal-left,
+  .scroll-reveal-scale,
+  .floating-mockup {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

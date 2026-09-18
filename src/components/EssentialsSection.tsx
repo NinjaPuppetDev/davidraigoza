@@ -1,0 +1,254 @@
+import { useLanguage } from '../context/LanguageContext';
+
+export default function EssentialsSection() {
+  const { t } = useLanguage();
+  const e = t.essentials;
+
+  return (
+    <section id="que-incluye" className="scroll-reveal" style={{ padding: '4rem 0 3.5rem', borderTop: '1px solid #E2E2DE' }}>
+      <div style={{ marginBottom: '2.5rem' }}>
+        <span
+          style={{
+            fontSize: '0.7rem',
+            fontFamily: 'ui-monospace, monospace',
+            color: '#666660',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            display: 'block',
+            marginBottom: '0.5rem',
+          }}
+        >
+          {e.tag}
+        </span>
+        <h2
+          style={{
+            fontSize: 'clamp(1.75rem, 3.2vw, 2.25rem)',
+            fontWeight: 500,
+            color: '#121210',
+            letterSpacing: '-0.02em',
+            marginBottom: '0.75rem',
+            textWrap: 'balance',
+            maxWidth: '24ch',
+          }}
+        >
+          {e.title}
+        </h2>
+        <p style={{ color: '#444440', fontSize: '1.02rem', maxWidth: '64ch', lineHeight: 1.6, textWrap: 'pretty' }}>
+          {e.description}
+        </p>
+      </div>
+
+      {/* Asymmetrical Bauhaus Architectural Mosaic */}
+      <div className="essentials-mosaic">
+        {/* 01: Lead Cornerstone */}
+        <div
+          id="feature-card-01"
+          className="essentials-cell-lead card-hover scroll-reveal-scale"
+          style={{
+            backgroundColor: '#FFFFFF',
+            padding: 'clamp(2rem, 3.5vw, 2.75rem)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            minHeight: '230px',
+          }}
+        >
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+              <span className="bauhaus-num" style={{ fontSize: '1.5rem', fontWeight: 700, color: '#121210', lineHeight: 1 }}>
+                {e.card1.num}
+              </span>
+              <span
+                style={{
+                  fontSize: '0.65rem',
+                  fontFamily: 'ui-monospace, monospace',
+                  padding: '0.15rem 0.5rem',
+                  backgroundColor: '#F0F0EC',
+                  color: '#121210',
+                  fontWeight: 600,
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {e.card1.tag}
+              </span>
+            </div>
+            <h3 style={{ fontSize: 'clamp(1.25rem, 2.2vw, 1.5rem)', fontWeight: 600, color: '#121210', marginBottom: '0.75rem', letterSpacing: '-0.02em', textWrap: 'balance' }}>
+              {e.card1.title}
+            </h3>
+          </div>
+          <p style={{ fontSize: '0.98rem', color: '#444440', lineHeight: 1.6, margin: 0, maxWidth: '48ch', textWrap: 'pretty' }}>
+            {e.card1.desc}
+          </p>
+        </div>
+
+        {/* 02: Commercial Offer Anchor */}
+        <div
+          id="feature-card-02"
+          className="essentials-cell-secondary card-hover scroll-reveal-scale"
+          style={{
+            backgroundColor: '#FFFFFF',
+            padding: 'clamp(1.75rem, 3vw, 2.25rem)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            minHeight: '230px',
+            transitionDelay: '40ms',
+          }}
+        >
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+              <span className="bauhaus-num" style={{ fontSize: '1.1rem', fontWeight: 600, color: '#121210' }}>
+                {e.card2.num}
+              </span>
+              <span
+                style={{
+                  fontSize: '0.65rem',
+                  fontFamily: 'ui-monospace, monospace',
+                  padding: '0.15rem 0.5rem',
+                  backgroundColor: '#F0F0EC',
+                  color: '#121210',
+                  fontWeight: 600,
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {e.card2.tag}
+              </span>
+            </div>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#121210', marginBottom: '0.75rem', letterSpacing: '-0.015em', textWrap: 'balance' }}>
+              {e.card2.title}
+            </h3>
+          </div>
+          <p style={{ fontSize: '0.92rem', color: '#444440', lineHeight: 1.58, margin: 0, textWrap: 'pretty' }}>
+            {e.card2.desc}
+          </p>
+        </div>
+
+        {/* 03: Conversion Capture Hub */}
+        <div
+          id="feature-card-03"
+          className="essentials-cell-action-contact card-hover scroll-reveal-scale"
+          style={{
+            backgroundColor: '#FFFFFF',
+            padding: '1.75rem 1.75rem',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            minHeight: '190px',
+            transitionDelay: '70ms',
+          }}
+        >
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+              <span className="bauhaus-num" style={{ fontSize: '0.85rem', fontWeight: 600, color: '#666660' }}>
+                {e.card3.num}
+              </span>
+              <span
+                style={{
+                  fontSize: '0.65rem',
+                  fontFamily: 'ui-monospace, monospace',
+                  padding: '0.15rem 0.5rem',
+                  backgroundColor: '#F0F0EC',
+                  color: '#121210',
+                  fontWeight: 600,
+                  letterSpacing: '0.04em',
+                }}
+              >
+                {e.card3.tag}
+              </span>
+            </div>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 600, color: '#121210', marginBottom: '0.6rem', letterSpacing: '-0.01em', textWrap: 'balance' }}>
+              {e.card3.title}
+            </h3>
+          </div>
+          <p style={{ fontSize: '0.88rem', color: '#444440', lineHeight: 1.55, margin: 0, textWrap: 'pretty' }}>
+            {e.card3.desc}
+          </p>
+        </div>
+
+        {/* 04: Real-time Communication Bridge */}
+        <div
+          id="feature-card-04"
+          className="essentials-cell-action-wa card-hover scroll-reveal-scale"
+          style={{
+            backgroundColor: '#15803D',
+            color: '#FFFFFF',
+            padding: '1.75rem 1.75rem',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            minHeight: '190px',
+            transitionDelay: '100ms',
+          }}
+        >
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+              <span className="bauhaus-num" style={{ fontSize: '0.85rem', fontWeight: 600, color: 'rgba(255, 255, 255, 0.75)' }}>
+                {e.card4.num}
+              </span>
+              <span
+                style={{
+                  fontSize: '0.65rem',
+                  fontFamily: 'ui-monospace, monospace',
+                  padding: '0.2rem 0.55rem',
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                  color: '#FFFFFF',
+                  fontWeight: 600,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.35rem',
+                }}
+              >
+                <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#86EFAC' }} />
+                {e.card4.tag}
+              </span>
+            </div>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#FFFFFF', marginBottom: '0.6rem', letterSpacing: '-0.01em', textWrap: 'balance' }}>
+              {e.card4.title}
+            </h3>
+          </div>
+          <p style={{ fontSize: '0.9rem', color: '#DCFCE7', lineHeight: 1.55, margin: 0, textWrap: 'pretty' }}>
+            {e.card4.desc}
+          </p>
+        </div>
+
+        {/* Engineering Baseline Band: 05, 06, 07, 08 */}
+        {e.infraItems.map((item, idx) => (
+          <div
+            key={item.num}
+            id={`feature-card-${item.num}`}
+            className="essentials-cell-infra card-hover scroll-reveal-scale"
+            style={{
+              backgroundColor: '#FFFFFF',
+              padding: '1.5rem 1.35rem',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              minHeight: '185px',
+              borderTop: item.num === '08' ? '2px solid #2563EB' : 'none',
+              transitionDelay: `${(idx + 4) * 30}ms`,
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.75rem' }}>
+                {item.accent && (
+                  <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: item.accent }} />
+                )}
+                <span className="bauhaus-num" style={{ fontSize: '0.75rem', color: item.num === '08' ? '#2563EB' : '#666660', fontWeight: item.num === '08' ? 600 : 400 }}>
+                  {item.num}
+                </span>
+              </div>
+              <h3 style={{ fontSize: '0.98rem', fontWeight: 600, color: '#121210', marginBottom: '0.55rem', letterSpacing: '-0.01em', textWrap: 'balance' }}>
+                {item.title}
+              </h3>
+            </div>
+            <p style={{ fontSize: '0.835rem', color: '#555550', lineHeight: 1.5, margin: 0, textWrap: 'pretty' }}>
+              {item.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
