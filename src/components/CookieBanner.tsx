@@ -1,18 +1,29 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
-export default function CookieBanner() {
+interface CookieBannerProps {
+  isIntroComplete?: boolean;
+}
+
+export default function CookieBanner({ isIntroComplete = false }: CookieBannerProps) {
   const { t } = useLanguage();
   const cb = t.cookieBanner;
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Only evaluate and display once intro overlay has finished loading and reached landing page
+    if (!isIntroComplete) {
+      setIsVisible(false);
+      return;
+    }
+
     const consent = localStorage.getItem('davidraigoza_cookie_consent');
     if (!consent) {
-      const timer = setTimeout(() => setIsVisible(true), 800);
+      // Graceful delay after landing page is fully revealed
+      const timer = setTimeout(() => setIsVisible(true), 600);
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [isIntroComplete]);
 
   const handleAccept = () => {
     localStorage.setItem('davidraigoza_cookie_consent', 'accepted');
@@ -31,7 +42,22 @@ export default function CookieBanner() {
       <aside 
         aria-label={cb.title}
         className="max-w-xl w-full p-6 bg-[#ffffff] border-2 border-[#080808] shadow-[8px_8px_0px_0px_#080808] transition-all duration-300 ease-out pointer-events-auto"
+        style={{
+          animation: 'cookieBannerSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        }}
       >
+        <style>{`
+          @keyframes cookieBannerSlideUp {
+            from {
+              opacity: 0;
+              transform: translateY(18px) scale(0.98);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0) scale(1);
+            }
+          }
+        `}</style>
         {/* Geometric Bauhaus Chrome */}
         <div className="flex items-center justify-between mb-3 pb-3 border-b border-[#e5e5e5]">
           <div className="flex items-center gap-2">

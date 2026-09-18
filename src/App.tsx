@@ -21,6 +21,7 @@ import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 function AppContent() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isIntroComplete, setIsIntroComplete] = useState(false);
   const [isFooterIntersecting, setIsFooterIntersecting] = useState(false);
 
   useEffect(() => {
@@ -84,9 +85,9 @@ function AppContent() {
         overflowX: 'hidden',
       }}
     >
-      <IntroOverlay />
+      <IntroOverlay onComplete={() => setIsIntroComplete(true)} />
       <NegociosCursor />
-      <CookieBanner />
+      <CookieBanner isIntroComplete={isIntroComplete} />
       <HeaderNav />
 
       <main
