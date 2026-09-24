@@ -1,13 +1,13 @@
 {
+  "trailingSlash": false,
   "rewrites": [
     { "source": "/assets/(.*)", "destination": "/assets/$1" },
-    { "source": "/logo/(.*)", "destination": "/logo/$1" },
-    { "source": "/common-ground/(.*)", "destination": "/common-ground/$1" },
-    { "source": "/dra-victoria/(.*)", "destination": "/dra-victoria/$1" },
+    { "source": "/logo/(.*)", "destination": "/logo/(.*)" },
+    { "source": "/favicon.ico", "destination": "/favicon.ico" },
     { "source": "/founder/(.*)", "destination": "/founder/$1" },
+    { "source": "/dra-victoria/(.*)", "destination": "/dra-victoria/$1" },
+    { "source": "/common-ground/(.*)", "destination": "/common-ground/$1" },
     { "source": "/cursors/(.*)", "destination": "/cursors/$1" },
-    { "source": "/robots.txt", "destination": "/robots.txt" },
-    { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/((?!api).*)", "destination": "/index.html" }
   ]
 }
