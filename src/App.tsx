@@ -132,6 +132,26 @@ type AppRoute =
   | 'us-case-study-talent-showcase';
 
 function parseRoute(pathname: string): AppRoute {
+  // Validación directa del subdominio de EE. UU.
+  if (typeof window !== 'undefined' && window.location.hostname.toLowerCase() === 'us.davidraigoza.online') {
+    const normalizedPath = (pathname || '/').toLowerCase().replace(/\/+$/, '') || '/';
+    if (normalizedPath === '/case-studies/dra-victoria' || normalizedPath.startsWith('/case-studies/dra-victoria/')) {
+      return 'us-case-study-dra-victoria';
+    }
+    if (normalizedPath === '/case-studies/common-ground' || normalizedPath.startsWith('/case-studies/common-ground/')) {
+      return 'us-case-study-commonground';
+    }
+    if (
+      normalizedPath === '/case-studies/talent-showcase-hub' ||
+      normalizedPath.startsWith('/case-studies/talent-showcase-hub/') ||
+      normalizedPath === '/case-studies/talent-showcase' ||
+      normalizedPath.startsWith('/case-studies/talent-showcase/')
+    ) {
+      return 'us-case-study-talent-showcase';
+    }
+    return 'us';
+  }
+
   const normalized = (pathname || '/').toLowerCase().replace(/\/+$/, '') || '/';
 
   // Specific /us case study routes (strictly in English, no translation toggle)
