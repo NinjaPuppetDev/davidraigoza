@@ -1,0 +1,6 @@
+{
+  "name": "David Raigoza - Profesionales y Especialistas",
+  "description": "Presencia digital profesional e ingeniería de diseño de producto para profesionales y especialistas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
