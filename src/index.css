@@ -1,0 +1,640 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--sans);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Force hide default OS cursor across the entire Negocios page when custom cursor is active */
+body.has-negocios-cursor .negocios-page,
+body.has-negocios-cursor .negocios-page * {
+  cursor: none !important;
+}
+
+/* Apply pixel pointer to the page elements via custom cursor component or inline state */
+body.has-negocios-cursor .negocios-page a,
+body.has-negocios-cursor .negocios-page button,
+body.has-negocios-cursor .negocios-page [role="button"],
+body.has-negocios-cursor .negocios-page input,
+body.has-negocios-cursor .negocios-page select,
+body.has-negocios-cursor .negocios-page textarea,
+body.has-negocios-cursor .negocios-page .card-hover,
+body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
+  cursor: none !important;
+}
+
+/* Fallback for touch/coarse pointer devices where custom cursors shouldn't block touch */
+@media (pointer: coarse) {
+  .negocios-page,
+  .negocios-page * {
+    cursor: auto !important;
+  }
+}
+
+/* Mathematical Typography Scale & Hierarchy */
+.bauhaus-num {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+/* Purposeful Scroll Reveal Transitions */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.scroll-reveal.animate-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.scroll-reveal-left.animate-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-reveal-scale {
+  opacity: 0;
+  transform: scale(0.98) translateY(20px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.scroll-reveal-scale.animate-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Functional Card Interaction: Communicates Actionability */
+.card-hover {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  border-color: #121210 !important;
+  background-color: #FFFFFF;
+}
+
+@keyframes floatSubtle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+.floating-mockup {
+  animation: floatSubtle 6s ease-in-out infinite;
+}
+
+/* Responsive Layout Grid */
+.negocios-header {
+  padding: 1.1rem 2rem;
+  border-bottom: 1px solid #E2E2DE;
+}
+.negocios-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+.negocios-main-content {
+  padding: 3.5rem 2rem 5rem;
+}
+
+/* Fix: hero now always reserves at least a full viewport, so the next
+   section ("Dirección & Ejecución Directa") never renders in the same
+   screen as the hero on first paint. dvh is declared after vh so
+   browsers that support it get the more accurate dynamic viewport
+   value (accounts for mobile browser chrome); vh is the fallback. */
+.negocios-hero-grid {
+  display: block;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.hero-heading-line-1 {
+  display: block;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.hero-heading-line-2 {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.hero-static-preposition {
+  display: inline;
+  white-space: nowrap;
+}
+
+/* Reserved container width for the rotating word to ensure rock-solid stability */
+.hero-rotating-word-container {
+  display: inline-block;
+  vertical-align: baseline;
+  text-align: left;
+  min-width: 15ch;
+  width: 15ch;
+  position: relative;
+  line-height: inherit;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* Bauhaus Editorial Layout Frameworks */
+.essentials-mosaic {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+.essentials-cell-lead {
+  grid-column: span 7;
+}
+.essentials-cell-secondary {
+  grid-column: span 5;
+}
+.essentials-cell-action-contact {
+  grid-column: span 6;
+}
+.essentials-cell-action-wa {
+  grid-column: span 6;
+}
+.essentials-cell-infra {
+  grid-column: span 3;
+}
+
+.respaldo-editorial-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+
+.economic-ledger-split {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+
+.colaboracion-split {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+
+.craft-editorial-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.45fr;
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+
+.case-studies-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+
+@media (max-width: 768px) {
+  .case-studies-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    background-color: transparent;
+    border: none;
+  }
+}
+
+/* Horizontal Case Studies Scroll Gallery */
+.case-studies-gallery-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.25rem 0.15rem 1.25rem 0.15rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.case-studies-gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.case-studies-gallery-card {
+  flex: 0 0 clamp(290px, 84vw, 540px);
+  scroll-snap-align: start;
+}
+
+.journey-grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+
+.process-workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background-color: #E2E2DE;
+  border: 1px solid #E2E2DE;
+}
+
+.negocios-cta-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Floating WhatsApp interactive element */
+.dr-wa {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+.dr-wa-footer {
+  background-color: #FFFFFF !important;
+  color: #121210 !important;
+  border-color: #FFFFFF !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+.dr-wa-footer:hover {
+  background-color: #EAEAE6 !important;
+}
+
+@media (max-width: 1024px) {
+  .essentials-cell-lead,
+  .essentials-cell-secondary,
+  .essentials-cell-action-contact,
+  .essentials-cell-action-wa {
+    grid-column: span 6;
+  }
+  .essentials-cell-infra {
+    grid-column: span 6;
+  }
+  .respaldo-editorial-layout,
+  .economic-ledger-split,
+  .colaboracion-split,
+  .craft-editorial-layout {
+    grid-template-columns: 1fr;
+  }
+  .journey-grid-container,
+  .process-workflow-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.header-mobile-menu-btn {
+  display: none !important;
+}
+
+.header-desktop-lang-toggle {
+  display: inline-flex !important;
+}
+
+@media (max-width: 960px) {
+  .header-desktop-tabs {
+    display: none !important;
+  }
+  .header-desktop-lang-toggle {
+    display: none !important;
+  }
+  .header-mobile-menu-btn {
+    display: inline-flex !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .negocios-header {
+    padding: 0.75rem 1rem !important;
+  }
+  .header-desktop-tabs {
+    display: none !important;
+  }
+  .header-mobile-menu-btn {
+    display: inline-flex !important;
+  }
+  .header-btn-text {
+    display: none !important;
+  }
+  .instagram-header-btn {
+    padding: 0.45rem 0.65rem !important;
+  }
+  .whatsapp-header-btn,
+  .us-discovery-header-btn {
+    display: none !important;
+  }
+  .negocios-main-content {
+    padding: 1.5rem 1.25rem 3.5rem !important;
+  }
+  
+  /* Hero Grid Setup for Mobile */
+  /* Fix: was `min-height: auto !important;`, which let the hero collapse
+     to its content height and exposed the next section on the same
+     screen. Now it reserves a full dynamic viewport, same as desktop. */
+  .negocios-hero-grid {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 2.5rem 0.5rem clamp(5rem, 10vw, 7rem) !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    overflow: hidden !important;
+  }
+
+  /* Three.js Mobile Background Canvas Restored & Centered */
+  .hero-threejs-stage,
+  #hero-browser-mockup {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 380px !important;
+    opacity: 0.45 !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    display: block !important;
+  }
+
+  #hero-content-block,
+  #us-hero-content-block {
+    position: relative !important;
+    padding: 0 0.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    z-index: 2 !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Título principal optimizado con clamp equilibrado para móviles angostos (Español y US) */
+  #hero-heading,
+  #us-hero-heading {
+    position: relative !important;
+    z-index: 2 !important;
+    font-size: clamp(2.20rem, 7.75vw, 2.85rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.18 !important;
+    letter-spacing: -0.035em !important;
+    margin-bottom: 2rem !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* Fix: text-wrap: balance evens out the wrapped line lengths so a
+     single word (e.g. "digitales" / "products") no longer gets
+     stranded alone on its own line. */
+  .hero-heading-line-1 {
+    display: block !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    margin-bottom: 0.25rem !important;
+    white-space: normal !important;
+    text-wrap: balance !important;
+  }
+  
+  .hero-heading-line-2 {
+    display: inline-flex !important;
+    align-items: baseline !important;
+    justify-content: center !important;
+    text-align: center !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
+  }
+  
+  .hero-static-preposition {
+    display: inline !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+  
+  .hero-rotating-word-container {
+    display: inline-block !important;
+    vertical-align: baseline !important;
+    text-align: left !important;
+    min-width: 11ch !important;
+    max-width: 100% !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+  }
+
+  #hero-pricing-tile,
+  #us-hero-pricing-tile {
+    position: relative !important;
+    z-index: 2 !important;
+    margin-bottom: 2.25rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  #hero-pricing-tile .bauhaus-num,
+  #us-hero-pricing-tile .bauhaus-num {
+    font-size: 1.85rem !important;
+    line-height: 1.15 !important;
+  }
+  .negocios-btn-mobile-full {
+    position: relative !important;
+    z-index: 2 !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0.9rem 1.85rem !important;
+    min-height: 48px !important;
+    font-size: 0.92rem !important;
+    font-weight: 500 !important;
+  }
+  #hero-bottom-deck {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1.5rem !important;
+  }
+  .floating-mockup {
+    animation: none !important;
+  }
+  .essentials-cell-lead,
+  .essentials-cell-secondary,
+  .essentials-cell-action-contact,
+  .essentials-cell-action-wa,
+  .essentials-cell-infra {
+    grid-column: span 12;
+  }
+  .journey-grid-container,
+  .process-workflow-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .floating-whatsapp-tooltip {
+    display: none !important;
+  }
+  .floating-whatsapp-container {
+    bottom: 1.25rem !important;
+    right: 1.25rem !important;
+  }
+  .negocios-cta-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .negocios-cta-actions a {
+    width: 100% !important;
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .floating-whatsapp-container {
+    bottom: 1rem !important;
+    right: 1rem !important;
+  }
+  .dr-wa {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dr-wa,
+  .scroll-reveal,
+  .scroll-reveal-left,
+  .scroll-reveal-scale,
+  .floating-mockup {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Architectural US hero classification tag - strictly single-row across all mobile & desktop viewports */
+.us-hero-tag-container {
+  display: flex !important;
+  align-items: center !important;
+  max-width: 100% !important;
+  overflow-x: visible !important;
+}
+
+.us-hero-tag-box {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.us-hero-tag-prefix,
+.us-hero-tag-word-wrapper,
+.us-hero-tag-index {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
+}
+
+@media (max-width: 480px) {
+  .us-hero-tag-box {
+    padding: 0.3rem 0.52rem !important;
+    gap: 0.42rem !important;
+  }
+  .us-hero-tag-prefix {
+    font-size: 0.6rem !important;
+    letter-spacing: 0.05em !important;
+  }
+  .us-hero-tag-word-wrapper {
+    min-width: 108px !important;
+    height: 20px !important;
+  }
+  .us-hero-tag-word-wrapper span {
+    font-size: 0.88rem !important;
+  }
+  .us-hero-tag-index {
+    font-size: 0.6rem !important;
+    padding-left: 0.42rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #hero-heading,
+  #us-hero-heading {
+    font-size: 1.65rem !important;
+    font-weight: 800 !important;
+  }
+  .us-hero-tag-box {
+    padding: 0.26rem 0.42rem !important;
+    gap: 0.35rem !important;
+  }
+  .us-hero-tag-prefix {
+    font-size: 0.55rem !important;
+  }
+  .us-hero-tag-word-wrapper {
+    min-width: 96px !important;
+    height: 18px !important;
+  }
+  .us-hero-tag-word-wrapper span {
+    font-size: 0.8rem !important;
+  }
+  .us-hero-tag-index {
+    font-size: 0.55rem !important;
+    padding-left: 0.35rem !important;
+  }
+}
