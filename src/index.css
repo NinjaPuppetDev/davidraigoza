@@ -125,7 +125,7 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
   gap: 1.75rem;
 }
 .negocios-main-content {
-  padding: 3.5rem 2rem 5rem;
+  padding: 0 2rem 5rem;
 }
 
 /* Fix: hero now always reserves at least a full viewport, so the next
@@ -137,9 +137,9 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
   display: block;
   width: 100%;
   position: relative;
-  overflow: hidden;
-  min-height: 100vh;
-  min-height: 100dvh;
+  overflow: visible;
+  min-height: calc(100vh - 4rem);
+  min-height: calc(100dvh - 4rem);
 }
 
 .hero-heading-line-1 {
@@ -369,7 +369,7 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     display: none !important;
   }
   .negocios-main-content {
-    padding: 1.5rem 1.25rem 3.5rem !important;
+    padding: 0 1.25rem 3.5rem !important;
   }
   
   /* Hero Grid Setup for Mobile */
@@ -383,10 +383,10 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     align-items: center !important;
     justify-content: center !important;
     text-align: center !important;
-    padding: 2.5rem 0.5rem clamp(5rem, 10vw, 7rem) !important;
-    min-height: 100vh !important;
-    min-height: 100dvh !important;
-    overflow: hidden !important;
+    padding: 2rem 0.5rem 3.5rem !important;
+    min-height: calc(100vh - 3.75rem) !important;
+    min-height: calc(100dvh - 3.75rem) !important;
+    overflow: visible !important;
   }
 
   /* Three.js Mobile Background Canvas Restored & Centered */

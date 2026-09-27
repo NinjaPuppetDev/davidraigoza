@@ -818,15 +818,15 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       aria-hidden="true"
       style={{
         position: 'absolute',
-        top: '-4rem',
-        bottom: '-4rem',
+        top: '-8rem',
+        bottom: '-8rem',
         left: '50%',
         transform: 'translateX(-50%)',
         width: '100vw',
         maxWidth: '100vw',
         pointerEvents: 'none',
         zIndex: 1,
-        overflow: 'hidden',
+        overflow: 'visible',
       }}
     />
   );
