@@ -532,7 +532,7 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
       rotatingWords: ['médicos', 'arquitectos', 'profesionales', 'marcas', 'especialistas'],
       categoryLabel: 'Especialidad',
       rotatingCategories: ['médicos', 'arquitectos', 'profesionales', 'marcas', 'especialistas'],
-      pricingLabel: 'Inversión inicial transparente',
+      pricingLabel: 'Inversión inicial',
       price: 'Desde $1.300.000 COP',
       cta: 'Cuéntame qué necesita tu negocio',
       mockup: {
@@ -1174,7 +1174,7 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
       rotatingWords: ['doctors', 'architects', 'professionals', 'brands', 'specialists'],
       categoryLabel: 'Specialty',
       rotatingCategories: ['doctors', 'architects', 'professionals', 'brands', 'specialists'],
-      pricingLabel: 'Transparent initial investment',
+      pricingLabel: 'Initial investment',
       price: 'From $1,300,000 COP',
       cta: 'Tell me what your business needs',
       mockup: {
