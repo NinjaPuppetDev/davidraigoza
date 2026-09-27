@@ -414,9 +414,18 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     z-index: 2 !important;
     box-sizing: border-box !important;
   }
+
+  #negocios-hero {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  #hero-content-block {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
   
-  /* Título principal optimizado con clamp equilibrado para móviles angostos (Español y US) */
-  #hero-heading,
+  /* US Hero Heading on Mobile (unchanged) */
   #us-hero-heading {
     position: relative !important;
     z-index: 2 !important;
@@ -431,17 +440,37 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     word-break: normal !important;
     overflow-wrap: break-word !important;
   }
+
+  /* Root (/) Hero Heading on Mobile - zero orphans across all lines and rotating words */
+  #hero-heading {
+    position: relative !important;
+    z-index: 2 !important;
+    font-size: clamp(1.22rem, 5.75vw, 2.45rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.04em !important;
+    margin-bottom: 2rem !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+  }
   
-  /* Fix: text-wrap: balance evens out the wrapped line lengths so a
-     single word (e.g. "digitales" / "products") no longer gets
-     stranded alone on its own line. */
-  .hero-heading-line-1 {
+  #us-hero-heading .hero-heading-line-1 {
     display: block !important;
     font-weight: 800 !important;
     text-align: center !important;
     margin-bottom: 0.25rem !important;
     white-space: normal !important;
     text-wrap: balance !important;
+  }
+
+  #hero-heading .hero-heading-line-1 {
+    display: block !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    margin-bottom: 0.2rem !important;
+    white-space: nowrap !important;
   }
   
   .hero-heading-line-2 {
@@ -453,6 +482,14 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     white-space: nowrap !important;
     max-width: 100% !important;
   }
+
+  #hero-heading .hero-heading-line-2 {
+    display: flex !important;
+    align-items: baseline !important;
+    justify-content: center !important;
+    width: 100% !important;
+    white-space: nowrap !important;
+  }
   
   .hero-static-preposition {
     display: inline !important;
@@ -461,7 +498,7 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     flex-shrink: 0 !important;
   }
   
-  .hero-rotating-word-container {
+  #us-hero-heading .hero-rotating-word-container {
     display: inline-block !important;
     vertical-align: baseline !important;
     text-align: left !important;
@@ -471,6 +508,18 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     white-space: nowrap !important;
     box-sizing: border-box !important;
     overflow: visible !important;
+  }
+
+  #hero-heading .hero-rotating-word-container,
+  #hero-heading .hero-rotating-word-container > span {
+    display: inline-block !important;
+    vertical-align: baseline !important;
+    text-align: left !important;
+    min-width: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
   }
 
   #hero-pricing-tile,
@@ -485,10 +534,14 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     width: 100% !important;
     padding: 0 !important;
   }
-  #hero-pricing-tile .bauhaus-num,
   #us-hero-pricing-tile .bauhaus-num {
     font-size: 1.85rem !important;
     line-height: 1.15 !important;
+  }
+  #hero-pricing-tile .bauhaus-num {
+    font-size: clamp(1.35rem, 5.5vw, 1.85rem) !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
   }
   .negocios-btn-mobile-full {
     position: relative !important;
@@ -504,6 +557,11 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     min-height: 48px !important;
     font-size: 0.92rem !important;
     font-weight: 500 !important;
+  }
+  #hero-primary-cta {
+    padding: 0.9rem 1.1rem !important;
+    font-size: clamp(0.78rem, 3.7vw, 0.92rem) !important;
+    white-space: nowrap !important;
   }
   #hero-bottom-deck {
     flex-direction: column !important;
@@ -614,7 +672,6 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
 }
 
 @media (max-width: 360px) {
-  #hero-heading,
   #us-hero-heading {
     font-size: 1.65rem !important;
     font-weight: 800 !important;

@@ -534,7 +534,7 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
       rotatingCategories: ['médicos', 'arquitectos', 'profesionales', 'marcas', 'especialistas'],
       pricingLabel: 'Inversión inicial',
       price: 'Desde $1.300.000 COP',
-      cta: 'Cuéntame qué necesita tu negocio',
+      cta: 'Cuéntame sobre tu negocio',
       mockup: {
         domain: 'tudominio.co',
         businessName: 'Tu Negocio Profesional',

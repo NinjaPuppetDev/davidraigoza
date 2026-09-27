@@ -19,6 +19,7 @@ import ProcessSection from './components/ProcessSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import VoiceWidget from './components/VoiceWidget';
 import DraVictoriaCaseStudy from './components/DraVictoriaCaseStudy';
 import CommonGroundCaseStudy from './components/CommonGroundCaseStudy';
 import TalentShowcaseCaseStudy from './components/TalentShowcaseCaseStudy';
@@ -290,6 +291,7 @@ export default function App() {
     return (
       <LanguageProvider forcedLanguage="en">
         <UsApp />
+        <VoiceWidget />
       </LanguageProvider>
     );
   }
@@ -298,6 +300,7 @@ export default function App() {
     return (
       <LanguageProvider forcedLanguage="en">
         <DraVictoriaCaseStudy isUs={true} />
+        <VoiceWidget />
       </LanguageProvider>
     );
   }
@@ -306,6 +309,7 @@ export default function App() {
     return (
       <LanguageProvider forcedLanguage="en">
         <CommonGroundCaseStudy isUs={true} />
+        <VoiceWidget />
       </LanguageProvider>
     );
   }
@@ -314,6 +318,7 @@ export default function App() {
     return (
       <LanguageProvider forcedLanguage="en">
         <TalentShowcaseCaseStudy isUs={true} />
+        <VoiceWidget />
       </LanguageProvider>
     );
   }
@@ -322,6 +327,7 @@ export default function App() {
     return (
       <LanguageProvider>
         <DraVictoriaCaseStudy />
+        <VoiceWidget />
       </LanguageProvider>
     );
   }
@@ -330,6 +336,7 @@ export default function App() {
     return (
       <LanguageProvider>
         <CommonGroundCaseStudy />
+        <VoiceWidget />
       </LanguageProvider>
     );
   }
@@ -338,6 +345,7 @@ export default function App() {
     return (
       <LanguageProvider>
         <TalentShowcaseCaseStudy />
+        <VoiceWidget />
       </LanguageProvider>
     );
   }
@@ -345,6 +353,7 @@ export default function App() {
   return (
     <LanguageProvider>
       <AppContent />
+      <VoiceWidget />
     </LanguageProvider>
   );
 }
