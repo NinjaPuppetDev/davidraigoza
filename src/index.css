@@ -638,8 +638,9 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     padding: 0 !important;
   }
   #us-hero-pricing-tile .bauhaus-num {
-    font-size: 1.85rem !important;
+    font-size: clamp(1.3rem, 5vw, 1.55rem) !important;
     line-height: 1.15 !important;
+    white-space: nowrap !important;
   }
   #hero-pricing-tile .bauhaus-num {
     font-size: clamp(1.35rem, 5.5vw, 1.85rem) !important;

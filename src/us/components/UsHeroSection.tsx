@@ -159,8 +159,9 @@ export default function UsHeroSection({ isVisible }: UsHeroSectionProps) {
             <span
               className="bauhaus-num"
               style={{
-                fontSize: '1.95rem',
+                fontSize: 'clamp(1.35rem, 2.2vw, 1.6rem)',
                 fontWeight: 600,
+                lineHeight: 1.15,
                 color: '#121210',
                 letterSpacing: '-0.02em',
               }}
