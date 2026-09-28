@@ -419,17 +419,22 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     overflow: visible !important;
   }
 
-  /* Three.js Mobile Background Canvas Restored & Centered */
+  /* Three.js Mobile Background Canvas & Stage Anchor */
+  #negocios-hero-visual-canvas {
+    top: -3rem !important;
+    bottom: -3rem !important;
+    opacity: 0.65 !important;
+    display: block !important;
+  }
+
   .hero-threejs-stage,
   #hero-browser-mockup {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 100% !important;
-    height: 100% !important;
-    max-height: 380px !important;
-    opacity: 0.45 !important;
+    width: min(640px, 84vw) !important;
+    height: 320px !important;
     pointer-events: none !important;
     z-index: 1 !important;
     display: block !important;

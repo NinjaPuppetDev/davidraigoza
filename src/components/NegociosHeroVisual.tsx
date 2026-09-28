@@ -14,12 +14,6 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
 
     // 1. Accessibility & Viewport Check
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = window.innerWidth < 768;
-
-    // On mobile viewports (<768px), disable WebGL rendering to prioritize touch latency and typography clarity
-    if (isMobile) {
-      return;
-    }
 
     // 2. Scene, Perspective Camera, and WebGL Renderer
     const scene = new THREE.Scene();
@@ -31,19 +25,27 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
     };
 
     const { w: initialWidth, h: initialHeight } = getDimensions();
+    const isInitialMobile = initialWidth < 768;
 
     const camera = new THREE.PerspectiveCamera(38, initialWidth / initialHeight, 0.1, 50);
-    camera.position.set(0, 0, 11);
+    camera.position.set(0, 0, isInitialMobile ? 13.5 : 11);
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: true,
-      powerPreference: 'low-power',
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true,
+        powerPreference: 'low-power',
+      });
+    } catch {
+      return;
+    }
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    renderer.setPixelRatio(dpr);
+    const getTargetDpr = (width: number) =>
+      Math.min(window.devicePixelRatio || 1, width < 768 ? 1.5 : 2);
+
+    renderer.setPixelRatio(getTargetDpr(initialWidth));
     renderer.setSize(initialWidth, initialHeight);
     renderer.setClearColor(0x000000, 0);
 
@@ -71,24 +73,37 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
     masterGroup.add(foregroundGuidesGroup);
     masterGroup.add(dynamicScannerGroup);
 
-    // 3. Dynamic Mockup Projection in 3D Space
+    // 3. Dynamic Centered Stage Projection in 3D Space
+    const getCenteredFallbackBounds = (widthPx: number) => {
+      const mobile = widthPx < 768;
+      const halfW = mobile ? 1.15 : 1.9;
+      const halfH = mobile ? 1.25 : 1.45;
+      return {
+        left: -halfW,
+        right: halfW,
+        top: halfH,
+        bottom: -halfH,
+        centerX: 0,
+        centerY: 0,
+        width: halfW * 2,
+        height: halfH * 2,
+      };
+    };
+
     const getMockupWorldBounds = () => {
       const mockupEl = document.getElementById(mockupId);
+      const widthPx = container.clientWidth || window.innerWidth || 1000;
+
       if (!mockupEl || !container) {
-        return {
-          left: 1.0,
-          right: 4.8,
-          top: 1.45,
-          bottom: -1.45,
-          centerX: 2.9,
-          centerY: 0,
-          width: 3.8,
-          height: 2.9,
-        };
+        return getCenteredFallbackBounds(widthPx);
       }
 
       const mRect = mockupEl.getBoundingClientRect();
       const cRect = container.getBoundingClientRect();
+
+      if (cRect.width < 10 || cRect.height < 10) {
+        return getCenteredFallbackBounds(widthPx);
+      }
 
       const normLeft = ((mRect.left - cRect.left) / cRect.width) * 2 - 1;
       const normRight = ((mRect.right - cRect.left) / cRect.width) * 2 - 1;
@@ -99,33 +114,34 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       const visibleHalfHeight = Math.tan(halfFovRad) * camera.position.z;
       const visibleHalfWidth = visibleHalfHeight * camera.aspect;
 
-      const left = normLeft * visibleHalfWidth;
-      const right = normRight * visibleHalfWidth;
-      const top = normTop * visibleHalfHeight;
-      const bottom = normBottom * visibleHalfHeight;
+      const rawLeft = normLeft * visibleHalfWidth;
+      const rawRight = normRight * visibleHalfWidth;
+      const rawTop = normTop * visibleHalfHeight;
+      const rawBottom = normBottom * visibleHalfHeight;
 
-      if (Math.abs(right - left) < 0.5 || Math.abs(top - bottom) < 0.5) {
-        return {
-          left: 1.0,
-          right: 4.8,
-          top: 1.45,
-          bottom: -1.45,
-          centerX: 2.9,
-          centerY: 0,
-          width: 3.8,
-          height: 2.9,
-        };
+      const rawWidth = rawRight - rawLeft;
+      const rawHeight = rawTop - rawBottom;
+
+      if (Math.abs(rawWidth) < 0.5 || Math.abs(rawHeight) < 0.5) {
+        return getCenteredFallbackBounds(widthPx);
       }
 
+      // On mobile viewports, constrain the world width so flanking cubes and datum lines stay inside the screen
+      const isMobileView = widthPx < 768;
+      const maxAllowedWidth = isMobileView ? visibleHalfWidth * 1.18 : visibleHalfWidth * 1.35;
+      const clampedWidth = Math.min(rawWidth, maxAllowedWidth);
+      const centerX = (rawLeft + rawRight) / 2;
+      const centerY = (rawTop + rawBottom) / 2;
+
       return {
-        left,
-        right,
-        top,
-        bottom,
-        centerX: (left + right) / 2,
-        centerY: (top + bottom) / 2,
-        width: right - left,
-        height: top - bottom,
+        left: centerX - clampedWidth / 2,
+        right: centerX + clampedWidth / 2,
+        top: rawTop,
+        bottom: rawBottom,
+        centerX,
+        centerY,
+        width: clampedWidth,
+        height: rawHeight,
       };
     };
 
@@ -223,9 +239,9 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       });
       disposables.length = 0;
 
-      // 1. 55% BLUE
-      const sledWidth = b.width * 1.30;
-      const sledHeight = b.height * 1.16;
+      // 1. 55% BLUE (Centered Primary Sled + Balanced Right Architectural Column)
+      const sledWidth = b.width * 1.18;
+      const sledHeight = b.height * 1.14;
       const sledDepth = 0.75;
       primarySledCube = createArchitecturalCube(
         sledWidth,
@@ -244,8 +260,8 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
 
       const sledSubGeom = new THREE.BufferGeometry();
       const sledSubVerts = new Float32Array([
-        -sledWidth * 0.18, -sledHeight / 2, 0, -sledWidth * 0.18, sledHeight / 2, 0,
-        sledWidth * 0.22, -sledHeight / 2, 0, sledWidth * 0.22, sledHeight / 2, 0,
+        -sledWidth * 0.2, -sledHeight / 2, 0, -sledWidth * 0.2, sledHeight / 2, 0,
+        sledWidth * 0.2, -sledHeight / 2, 0, sledWidth * 0.2, sledHeight / 2, 0,
       ]);
       sledSubGeom.setAttribute('position', new THREE.BufferAttribute(sledSubVerts, 3));
       const sledSubMat = new THREE.LineBasicMaterial({
@@ -258,8 +274,8 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       primarySledCube.add(sledSubLines);
       disposables.push({ geometry: sledSubGeom, material: sledSubMat });
 
-      const colWidth = Math.max(1.8, b.width * 0.38);
-      const colHeight = b.height * 1.22;
+      const colWidth = b.width * 0.32;
+      const colHeight = b.height * 1.18;
       const colDepth = 0.85;
       rightColumnCube = createArchitecturalCube(
         colWidth,
@@ -273,7 +289,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
         -0.09,
         0.15
       );
-      rightColumnCube.position.set(b.right + colWidth * 0.65, b.centerY, -0.6);
+      rightColumnCube.position.set(b.right + colWidth * 0.32, b.centerY, -0.6);
       midgroundPlanesGroup.add(rightColumnCube);
 
       const colGridGeom = new THREE.BufferGeometry();
@@ -292,9 +308,9 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       rightColumnCube.add(colGridLines);
       disposables.push({ geometry: colGridGeom, material: colGridMat });
 
-      // 2. 30% YELLOW
-      const subWidth = b.width * 0.34;
-      const subHeight = b.height * 0.52;
+      // 2. 30% YELLOW (Balanced Left Flank + Centered Baseline Track)
+      const subWidth = b.width * 0.32;
+      const subHeight = b.height * 0.54;
       const subDepth = 0.65;
       leftFlankCube = createArchitecturalCube(
         subWidth,
@@ -308,7 +324,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
         -0.09,
         0.14
       );
-      leftFlankCube.position.set(b.left - subWidth * 0.45, b.bottom + subHeight * 0.45, -0.85);
+      leftFlankCube.position.set(b.left - subWidth * 0.32, b.bottom + subHeight * 0.48, -0.85);
       backgroundPlanesGroup.add(leftFlankCube);
 
       const subRatioGeom = new THREE.BufferGeometry();
@@ -326,8 +342,8 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       leftFlankCube.add(subRatioLines);
       disposables.push({ geometry: subRatioGeom, material: subRatioMat });
 
-      const ribbonWidth = b.width * 1.15;
-      const ribbonHeight = 0.42;
+      const ribbonWidth = b.width * 1.12;
+      const ribbonHeight = 0.40;
       const ribbonDepth = 0.60;
       baselineTrackCube = createArchitecturalCube(
         ribbonWidth,
@@ -341,7 +357,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
         -0.08,
         0.12
       );
-      baselineTrackCube.position.set(b.centerX + 0.3, b.bottom - 0.28, -0.45);
+      baselineTrackCube.position.set(b.centerX, b.bottom - 0.26, -0.45);
       midgroundPlanesGroup.add(baselineTrackCube);
 
       const trackAxisGeom = new THREE.BufferGeometry();
@@ -360,7 +376,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       disposables.push({ geometry: trackAxisGeom, material: trackAxisMat });
 
       // 3. 10% RED
-      const scanCubeSize = 0.30;
+      const scanCubeSize = 0.28;
       scannerRedCube = createArchitecturalCube(
         scanCubeSize,
         scanCubeSize,
@@ -376,9 +392,9 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       scannerRedCube.position.set(b.centerX, b.top + 0.12, 0.15);
       dynamicScannerGroup.add(scannerRedCube);
 
-      const caliperCubeW = 0.34;
-      const caliperCubeH = 0.24;
-      const caliperCubeD = 0.30;
+      const caliperCubeW = 0.30;
+      const caliperCubeH = 0.22;
+      const caliperCubeD = 0.28;
       caliperRedCube = createArchitecturalCube(
         caliperCubeW,
         caliperCubeH,
@@ -391,11 +407,11 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
         -0.08,
         0.16
       );
-      caliperRedCube.position.set(b.right + 0.6, b.centerY, 0.05);
+      caliperRedCube.position.set(b.right + colWidth * 0.16, b.centerY, 0.05);
       foregroundGuidesGroup.add(caliperRedCube);
 
-      // 4. 5% BLACK
-      const datumCubeSize = 0.20;
+      // 4. 5% BLACK (Symmetrically anchored datum & registration cubes)
+      const datumCubeSize = 0.18;
       datumBlackCube = createArchitecturalCube(
         datumCubeSize,
         datumCubeSize,
@@ -408,7 +424,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
         -0.10,
         0.15
       );
-      datumBlackCube.position.set(b.left - 0.15, b.bottom, 0.22);
+      datumBlackCube.position.set(b.left - 0.35, b.bottom, 0.22);
       foregroundGuidesGroup.add(datumBlackCube);
 
       const regCubeSize = 0.16;
@@ -424,10 +440,10 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
         -0.08,
         0.14
       );
-      registrationBlackCube.position.set(b.right + 1.1, b.bottom, 0.18);
+      registrationBlackCube.position.set(b.right + 0.35, b.bottom, 0.18);
       foregroundGuidesGroup.add(registrationBlackCube);
 
-      // 5. GUIDES
+      // 5. GUIDES (Symmetrically balanced around b.left and b.right)
       scannerAxisGroup = new THREE.Group();
       scannerAxisGroup.position.set(b.centerX, 0, 0.08);
 
@@ -452,10 +468,11 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       dynamicScannerGroup.add(scannerAxisGroup);
       disposables.push({ geometry: scanGeom, material: scanMat });
 
+      const topOverhang = b.width * 0.22;
       telescopingTopLineArray = new Float32Array([
-        b.left - 0.6, b.top, 0, b.right + 1.2, b.top, 0,
-        b.left - 0.6, b.top - 0.07, 0, b.left - 0.6, b.top + 0.07, 0,
-        b.right + 1.2, b.top - 0.07, 0, b.right + 1.2, b.top + 0.07, 0,
+        b.left - topOverhang, b.top, 0, b.right + topOverhang, b.top, 0,
+        b.left - topOverhang, b.top - 0.07, 0, b.left - topOverhang, b.top + 0.07, 0,
+        b.right + topOverhang, b.top - 0.07, 0, b.right + topOverhang, b.top + 0.07, 0,
       ]);
       telescopingTopLineGeom = new THREE.BufferGeometry();
       telescopingTopLineGeom.setAttribute('position', new THREE.BufferAttribute(telescopingTopLineArray, 3));
@@ -469,13 +486,15 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       foregroundGuidesGroup.add(topLineMesh);
       disposables.push({ geometry: telescopingTopLineGeom, material: topLineMat });
 
+      const baseOverhang = b.width * 0.34;
+      const midTick = b.width * 0.18;
       telescopingBaseLineArray = new Float32Array([
-        b.left - 1.2, b.bottom, 0, b.right + 2.6, b.bottom, 0,
+        b.left - baseOverhang, b.bottom, 0, b.right + baseOverhang, b.bottom, 0,
         b.left, b.bottom - 0.09, 0, b.left, b.bottom + 0.09, 0,
         b.right, b.bottom - 0.09, 0, b.right, b.bottom + 0.09, 0,
-        b.right + 1.1, b.bottom - 0.06, 0, b.right + 1.1, b.bottom + 0.06, 0,
-        b.right + 2.0, b.bottom - 0.06, 0, b.right + 2.0, b.bottom + 0.06, 0,
-        b.right + 2.6, b.bottom - 0.09, 0, b.right + 2.6, b.bottom + 0.09, 0,
+        b.left - midTick, b.bottom - 0.06, 0, b.left - midTick, b.bottom + 0.06, 0,
+        b.right + midTick, b.bottom - 0.06, 0, b.right + midTick, b.bottom + 0.06, 0,
+        b.right + baseOverhang, b.bottom - 0.09, 0, b.right + baseOverhang, b.bottom + 0.09, 0,
       ]);
       telescopingBaseLineGeom = new THREE.BufferGeometry();
       telescopingBaseLineGeom.setAttribute('position', new THREE.BufferAttribute(telescopingBaseLineArray, 3));
@@ -489,10 +508,11 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       foregroundGuidesGroup.add(baseLineMesh);
       disposables.push({ geometry: telescopingBaseLineGeom, material: baseLineMat });
 
+      const caliperSpan = colWidth * 0.65;
       caliperLineArray = new Float32Array([
-        b.right, b.centerY, 0.05, b.right + 1.2, b.centerY, 0.05,
+        b.right, b.centerY, 0.05, b.right + caliperSpan, b.centerY, 0.05,
         b.right, b.centerY - 0.1, 0.05, b.right, b.centerY + 0.1, 0.05,
-        b.right + 1.2, b.centerY - 0.1, 0.05, b.right + 1.2, b.centerY + 0.1, 0.05,
+        b.right + caliperSpan, b.centerY - 0.1, 0.05, b.right + caliperSpan, b.centerY + 0.1, 0.05,
       ]);
       caliperLineGeom = new THREE.BufferGeometry();
       caliperLineGeom.setAttribute('position', new THREE.BufferAttribute(caliperLineArray, 3));
@@ -534,9 +554,9 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
 
       const leftAxisGeom = new THREE.BufferGeometry();
       const leftAxisVerts = new Float32Array([
-        b.left, b.bottom - 0.7, 0, b.left, b.top + 0.7, 0,
-        b.left - 0.08, b.top + 0.7, 0, b.left + 0.08, b.top + 0.7, 0,
-        b.left - 0.08, b.bottom - 0.7, 0, b.left + 0.08, b.bottom - 0.7, 0,
+        b.left, b.bottom - 0.6, 0, b.left, b.top + 0.6, 0,
+        b.left - 0.08, b.top + 0.6, 0, b.left + 0.08, b.top + 0.6, 0,
+        b.left - 0.08, b.bottom - 0.6, 0, b.left + 0.08, b.bottom - 0.6, 0,
       ]);
       leftAxisGeom.setAttribute('position', new THREE.BufferAttribute(leftAxisVerts, 3));
       const leftAxisMat = new THREE.LineBasicMaterial({
@@ -566,6 +586,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
     const handleMouseMove = (e: MouseEvent) => {
       mouseActive = true;
       const rect = container.getBoundingClientRect();
+      if (rect.width <= 0 || rect.height <= 0) return;
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
       mouseTargetX = THREE.MathUtils.clamp(x, -1, 1);
@@ -594,7 +615,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       mockupEl.addEventListener('mouseleave', onMockupLeave);
     }
 
-    // 5. Visibility and Window Resize Handlers
+    // 5. Visibility and Throttled Window/Element Resize Handlers
     let isVisibleOnScreen = true;
     const observer = new IntersectionObserver(
       (entries) => {
@@ -606,27 +627,53 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
     );
     observer.observe(container);
 
-    const handleResize = () => {
-      if (!container) return;
-      const newWidth = container.clientWidth || window.innerWidth || 1000;
-      const newHeight = container.clientHeight || 650;
+    let lastWidth = initialWidth;
+    let lastHeight = initialHeight;
+    let resizeRafId: number | null = null;
 
+    const performResize = () => {
+      resizeRafId = null;
+      if (!container) return;
+      const { w: newWidth, h: newHeight } = getDimensions();
+
+      // Ignore tiny mobile URL-bar vertical jitters if width hasn't changed
+      if (Math.abs(newWidth - lastWidth) < 2 && Math.abs(newHeight - lastHeight) < 24) {
+        return;
+      }
+      lastWidth = newWidth;
+      lastHeight = newHeight;
+
+      camera.position.z = newWidth < 768 ? 13.5 : 11;
       camera.aspect = newWidth / newHeight;
       camera.updateProjectionMatrix();
+
+      renderer.setPixelRatio(getTargetDpr(newWidth));
       renderer.setSize(newWidth, newHeight);
 
       currentBounds = getMockupWorldBounds();
       buildSystem(currentBounds);
+
+      if (prefersReducedMotion) {
+        renderer.render(scene, camera);
+      }
     };
 
-    window.addEventListener('resize', handleResize);
+    const scheduleResize = () => {
+      if (resizeRafId !== null) return;
+      resizeRafId = requestAnimationFrame(performResize);
+    };
+
+    window.addEventListener('resize', scheduleResize, { passive: true });
 
     let resizeObserver: ResizeObserver | null = null;
     if (typeof ResizeObserver !== 'undefined') {
       resizeObserver = new ResizeObserver(() => {
-        handleResize();
+        scheduleResize();
       });
       resizeObserver.observe(container);
+      if (mockupEl) {
+        resizeObserver.observe(mockupEl);
+      }
     }
 
     // 6. Deliberate Architectural Motion Loop
@@ -667,11 +714,14 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       foregroundGuidesGroup.position.y = mouseCurrentY * 0.005;
 
       const b = currentBounds;
+      const colW = b.width * 0.32;
+      const subW = b.width * 0.32;
+      const subH = b.height * 0.54;
 
       // 1. Primary Blue Foundation Sled (Slow Ambient Drift)
       if (primarySledCube) {
         const sledCycle = Math.sin(t * 0.16);
-        const sledTravel = b.width * 0.05 * (1 - hoverProgress * 0.35);
+        const sledTravel = b.width * 0.045 * (1 - hoverProgress * 0.35);
         primarySledCube.position.x = b.centerX + sledCycle * sledTravel + mouseCurrentX * 0.05;
         primarySledCube.position.y = b.centerY + Math.cos(t * 0.12) * 0.025;
         primarySledCube.rotation.y = 0.12 + Math.sin(t * 0.10) * 0.008;
@@ -679,11 +729,11 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       }
 
       // 2. Right Modular Blue Column (Gentle Vertical Sub-Harmonic)
-      let currentColX = b.right + (b.width * 0.38) * 0.65;
+      let currentColX = b.right + colW * 0.32;
       if (rightColumnCube) {
         const colVerticalCycle = Math.sin(t * 0.18 + 0.8);
         const colTravel = b.height * 0.05 * (1 - hoverProgress * 0.3);
-        currentColX = b.right + (b.width * 0.38) * 0.65 + Math.cos(t * 0.12) * 0.03;
+        currentColX = b.right + colW * 0.32 + Math.cos(t * 0.12) * 0.03;
         rightColumnCube.position.x = currentColX;
         rightColumnCube.position.y = b.centerY + colVerticalCycle * colTravel;
         rightColumnCube.rotation.y = 0.15 + Math.cos(t * 0.11) * 0.008;
@@ -692,20 +742,18 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
 
       // 3. Left-Flank Yellow Cube (Calm Ambient Floating)
       if (leftFlankCube) {
-        const subW = b.width * 0.34;
-        const subH = b.height * 0.52;
-        const subCycleX = Math.sin(t * 0.14 + 2.2) * 0.05;
-        const subCycleY = Math.cos(t * 0.16 + 1.0) * 0.04;
-        leftFlankCube.position.x = b.left - subW * 0.45 + subCycleX;
-        leftFlankCube.position.y = b.bottom + subH * 0.45 + subCycleY;
+        const subCycleX = Math.sin(t * 0.14 + 2.2) * 0.04;
+        const subCycleY = Math.cos(t * 0.16 + 1.0) * 0.035;
+        leftFlankCube.position.x = b.left - subW * 0.32 + subCycleX;
+        leftFlankCube.position.y = b.bottom + subH * 0.48 + subCycleY;
         leftFlankCube.rotation.y = 0.14 + Math.sin(t * 0.12) * 0.008;
         leftFlankCube.rotation.x = -0.09 + Math.cos(t * 0.10) * 0.005;
       }
 
-      // 4. Baseline Yellow Track Runner Cube (Subtle Gliding)
+      // 4. Baseline Yellow Track Runner Cube (Subtle Centered Gliding)
       if (baselineTrackCube) {
-        const ribbonCycle = Math.cos(t * 0.13) * 0.12;
-        baselineTrackCube.position.x = b.centerX + 0.3 + ribbonCycle;
+        const ribbonCycle = Math.cos(t * 0.13) * 0.10;
+        baselineTrackCube.position.x = b.centerX + ribbonCycle;
         baselineTrackCube.rotation.y = 0.12 + Math.sin(t * 0.11) * 0.008;
         baselineTrackCube.rotation.x = -0.08 + Math.cos(t * 0.09) * 0.005;
       }
@@ -728,17 +776,23 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       }
 
       if (telescopingTopLineGeom && telescopingTopLineArray) {
+        const topOverhang = b.width * 0.22;
         const extendCycle = 0.5 + 0.5 * Math.sin(t * 0.18);
-        const currentExtend = b.right + 0.8 + extendCycle * 0.35;
-        telescopingTopLineArray[3] = currentExtend;
-        telescopingTopLineArray[12] = currentExtend;
-        telescopingTopLineArray[15] = currentExtend;
+        const currentRightExtend = b.right + topOverhang + extendCycle * 0.18;
+        const currentLeftExtend = b.left - topOverhang - extendCycle * 0.18;
+        telescopingTopLineArray[0] = currentLeftExtend;
+        telescopingTopLineArray[3] = currentRightExtend;
+        telescopingTopLineArray[6] = currentLeftExtend;
+        telescopingTopLineArray[9] = currentLeftExtend;
+        telescopingTopLineArray[12] = currentRightExtend;
+        telescopingTopLineArray[15] = currentRightExtend;
         telescopingTopLineGeom.attributes.position.needsUpdate = true;
       }
 
       if (telescopingBaseLineGeom && telescopingBaseLineArray) {
-        const baseLeftExtend = b.left - 1.2 - Math.sin(t * 0.14) * 0.10;
-        const baseRightExtend = b.right + 2.3 + Math.cos(t * 0.14) * 0.15;
+        const baseOverhang = b.width * 0.34;
+        const baseLeftExtend = b.left - baseOverhang - Math.sin(t * 0.14) * 0.08;
+        const baseRightExtend = b.right + baseOverhang + Math.cos(t * 0.14) * 0.08;
         telescopingBaseLineArray[0] = baseLeftExtend;
         telescopingBaseLineArray[3] = baseRightExtend;
         telescopingBaseLineArray[30] = baseRightExtend;
@@ -747,28 +801,28 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       }
 
       if (datumBlackCube) {
-        datumBlackCube.position.x = b.left - 0.15 + Math.sin(t * 0.12) * 0.015;
+        datumBlackCube.position.x = b.left - 0.35 + Math.sin(t * 0.12) * 0.015;
         datumBlackCube.position.y = b.bottom;
         datumBlackCube.rotation.y = 0.15 + Math.sin(t * 0.1) * 0.005;
         datumBlackCube.rotation.x = -0.10;
       }
       if (registrationBlackCube) {
-        registrationBlackCube.position.x = b.right + 1.1 + Math.cos(t * 0.11) * 0.015;
+        registrationBlackCube.position.x = b.right + 0.35 + Math.cos(t * 0.11) * 0.015;
         registrationBlackCube.position.y = b.bottom;
         registrationBlackCube.rotation.y = 0.14 + Math.cos(t * 0.1) * 0.005;
         registrationBlackCube.rotation.x = -0.08;
       }
 
-      const colEdge = currentColX - (b.width * 0.38) * 0.5;
+      const colOuterEdge = currentColX + colW * 0.32;
       if (caliperLineGeom && caliperLineArray) {
-        caliperLineArray[3] = colEdge;
-        caliperLineArray[12] = colEdge;
-        caliperLineArray[15] = colEdge;
+        caliperLineArray[3] = colOuterEdge;
+        caliperLineArray[12] = colOuterEdge;
+        caliperLineArray[15] = colOuterEdge;
         caliperLineGeom.attributes.position.needsUpdate = true;
       }
 
       if (caliperRedCube) {
-        caliperRedCube.position.x = (b.right + colEdge) * 0.5;
+        caliperRedCube.position.x = (b.right + colOuterEdge) * 0.5;
         caliperRedCube.position.y = b.centerY + Math.sin(t * 0.18 + 0.8) * 0.04;
         caliperRedCube.rotation.y = 0.16 + Math.sin(t * 0.14) * 0.012;
         caliperRedCube.rotation.x = -0.08 + Math.cos(t * 0.12) * 0.007;
@@ -787,9 +841,10 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      if (resizeRafId !== null) cancelAnimationFrame(resizeRafId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', scheduleResize);
       observer.disconnect();
       if (resizeObserver) resizeObserver.disconnect();
 
