@@ -49,24 +49,28 @@ export default function RespaldoSection() {
               }}
             >
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', minWidth: 0 }}>
                   <span
                     style={{
-                      fontSize: '0.68rem',
+                      fontSize: 'clamp(0.56rem, 1.9vw, 0.68rem)',
                       fontFamily: 'ui-monospace, monospace',
                       color: melissa.accentColor,
                       fontWeight: 600,
-                      letterSpacing: '0.08em',
+                      letterSpacing: '0.04em',
                       textTransform: 'uppercase',
                       display: 'inline-flex',
                       alignItems: 'center',
-                      gap: '0.4rem',
+                      gap: '0.35rem',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      minWidth: 0,
                     }}
                   >
-                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: melissa.accentColor }} />
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: melissa.accentColor, flexShrink: 0 }} />
                     {melissa.tag}
                   </span>
-                  <span style={{ fontSize: '0.75rem', fontFamily: 'ui-monospace, monospace', color: '#888880' }}>
+                  <span style={{ fontSize: 'clamp(0.58rem, 1.9vw, 0.72rem)', fontFamily: 'ui-monospace, monospace', color: '#888880', whiteSpace: 'nowrap', flexShrink: 0 }}>
                     {melissa.category}
                   </span>
                 </div>
@@ -85,12 +89,12 @@ export default function RespaldoSection() {
                   {melissa.quote}
                 </blockquote>
               </div>
-              <div style={{ borderTop: '1px solid #E2E2DE', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                <div>
-                  <div style={{ fontWeight: 600, fontSize: '0.96rem', color: '#121210' }}>{melissa.author}</div>
-                  <div style={{ fontSize: '0.82rem', color: '#666660' }}>{melissa.role}</div>
+              <div style={{ borderTop: '1px solid #E2E2DE', paddingTop: '1rem', display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'baseline', gap: '0.5rem' }}>
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ fontWeight: 600, fontSize: '0.96rem', color: '#121210', whiteSpace: 'nowrap' }}>{melissa.author}</div>
+                  <div style={{ fontSize: '0.82rem', color: '#666660', whiteSpace: 'nowrap' }}>{melissa.role}</div>
                 </div>
-                <span style={{ fontSize: '0.72rem', fontFamily: 'ui-monospace, monospace', color: '#999990' }}>
+                <span style={{ fontSize: 'clamp(0.6rem, 1.9vw, 0.72rem)', fontFamily: 'ui-monospace, monospace', color: '#999990', whiteSpace: 'nowrap', flexShrink: 0 }}>
                   {melissa.status}
                 </span>
               </div>
@@ -113,24 +117,28 @@ export default function RespaldoSection() {
               }}
             >
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', minWidth: 0 }}>
                   <span
                     style={{
-                      fontSize: '0.68rem',
+                      fontSize: 'clamp(0.56rem, 1.9vw, 0.68rem)',
                       fontFamily: 'ui-monospace, monospace',
                       color: carlos.accentColor,
                       fontWeight: 600,
-                      letterSpacing: '0.08em',
+                      letterSpacing: '0.04em',
                       textTransform: 'uppercase',
                       display: 'inline-flex',
                       alignItems: 'center',
-                      gap: '0.4rem',
+                      gap: '0.35rem',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      minWidth: 0,
                     }}
                   >
-                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: carlos.accentColor }} />
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: carlos.accentColor, flexShrink: 0 }} />
                     {carlos.tag}
                   </span>
-                  <span style={{ fontSize: '0.75rem', fontFamily: 'ui-monospace, monospace', color: '#888880' }}>
+                  <span style={{ fontSize: 'clamp(0.58rem, 1.9vw, 0.72rem)', fontFamily: 'ui-monospace, monospace', color: '#888880', whiteSpace: 'nowrap', flexShrink: 0 }}>
                     {carlos.category}
                   </span>
                 </div>
@@ -148,12 +156,12 @@ export default function RespaldoSection() {
                   {carlos.quote}
                 </blockquote>
               </div>
-              <div style={{ borderTop: '1px solid #E2E2DE', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                <div>
-                  <div style={{ fontWeight: 600, fontSize: '0.94rem', color: '#121210' }}>{carlos.author}</div>
-                  <div style={{ fontSize: '0.82rem', color: '#666660' }}>{carlos.role}</div>
+              <div style={{ borderTop: '1px solid #E2E2DE', paddingTop: '1rem', display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'baseline', gap: '0.5rem' }}>
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ fontWeight: 600, fontSize: '0.94rem', color: '#121210', whiteSpace: 'nowrap' }}>{carlos.author}</div>
+                  <div style={{ fontSize: '0.82rem', color: '#666660', whiteSpace: 'nowrap' }}>{carlos.role}</div>
                 </div>
-                <span style={{ fontSize: '0.72rem', fontFamily: 'ui-monospace, monospace', color: '#999990' }}>
+                <span style={{ fontSize: 'clamp(0.6rem, 1.9vw, 0.72rem)', fontFamily: 'ui-monospace, monospace', color: '#999990', whiteSpace: 'nowrap', flexShrink: 0 }}>
                   {carlos.status}
                 </span>
               </div>
@@ -181,24 +189,28 @@ export default function RespaldoSection() {
               }}
             >
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', minWidth: 0 }}>
                   <span
                     style={{
-                      fontSize: '0.68rem',
+                      fontSize: 'clamp(0.56rem, 1.9vw, 0.68rem)',
                       fontFamily: 'ui-monospace, monospace',
                       color: '#121210',
                       fontWeight: 700,
-                      letterSpacing: '0.08em',
+                      letterSpacing: '0.04em',
                       textTransform: 'uppercase',
                       display: 'inline-flex',
                       alignItems: 'center',
-                      gap: '0.4rem',
+                      gap: '0.35rem',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      minWidth: 0,
                     }}
                   >
-                    <span style={{ width: '6px', height: '6px', backgroundColor: '#121210', display: 'inline-block' }} />
+                    <span style={{ width: '6px', height: '6px', backgroundColor: '#121210', display: 'inline-block', flexShrink: 0 }} />
                     {lapizAcero.tag}
                   </span>
-                  <span style={{ fontSize: '0.75rem', fontFamily: 'ui-monospace, monospace', color: '#121210', fontWeight: 700 }}>
+                  <span style={{ fontSize: 'clamp(0.58rem, 1.9vw, 0.72rem)', fontFamily: 'ui-monospace, monospace', color: '#121210', fontWeight: 700, whiteSpace: 'nowrap', flexShrink: 0 }}>
                     {lapizAcero.location}
                   </span>
                 </div>
@@ -213,11 +225,14 @@ export default function RespaldoSection() {
                 style={{
                   borderTop: '1px solid rgba(18, 18, 16, 0.2)',
                   paddingTop: '1rem',
-                  fontSize: '0.78rem',
+                  fontSize: 'clamp(0.56rem, 1.85vw, 0.72rem)',
                   fontFamily: 'ui-monospace, monospace',
                   color: '#121210',
                   fontWeight: 600,
-                  letterSpacing: '0.03em',
+                  letterSpacing: '0.02em',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
                 }}
               >
                 {lapizAcero.institution}
@@ -242,24 +257,28 @@ export default function RespaldoSection() {
               }}
             >
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', minWidth: 0 }}>
                   <span
                     style={{
-                      fontSize: '0.68rem',
+                      fontSize: 'clamp(0.54rem, 1.85vw, 0.66rem)',
                       fontFamily: 'ui-monospace, monospace',
                       color: '#2563EB',
                       fontWeight: 600,
-                      letterSpacing: '0.08em',
+                      letterSpacing: '0.04em',
                       textTransform: 'uppercase',
                       display: 'inline-flex',
                       alignItems: 'center',
-                      gap: '0.4rem',
+                      gap: '0.35rem',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      minWidth: 0,
                     }}
                   >
-                    <span style={{ width: '6px', height: '6px', backgroundColor: '#2563EB', display: 'inline-block' }} />
+                    <span style={{ width: '6px', height: '6px', backgroundColor: '#2563EB', display: 'inline-block', flexShrink: 0 }} />
                     {capitalSemilla.tag}
                   </span>
-                  <span style={{ fontSize: '0.75rem', fontFamily: 'ui-monospace, monospace', color: '#121210', fontWeight: 600 }}>
+                  <span style={{ fontSize: 'clamp(0.58rem, 1.9vw, 0.72rem)', fontFamily: 'ui-monospace, monospace', color: '#121210', fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0 }}>
                     {capitalSemilla.location}
                   </span>
                 </div>
@@ -274,11 +293,14 @@ export default function RespaldoSection() {
                 style={{
                   borderTop: '1px solid #E2E2DE',
                   paddingTop: '1rem',
-                  fontSize: '0.78rem',
+                  fontSize: 'clamp(0.55rem, 1.8vw, 0.7rem)',
                   fontFamily: 'ui-monospace, monospace',
                   color: '#121210',
                   fontWeight: 500,
-                  letterSpacing: '0.03em',
+                  letterSpacing: '0.015em',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
                 }}
               >
                 {capitalSemilla.institution}

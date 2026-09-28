@@ -724,7 +724,7 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
       },
     },
     caseStudies: {
-      tag: '[ 06.5 // PROYECTOS & EVIDENCIA — SCROLL HORIZONTAL ↔ ]',
+      tag: '[ 06.5 // PROYECTOS & EVIDENCIA ]',
       title: 'Del concepto a la producción.',
       subtitle: 'Sistemas digitales construidos con rigor de ingeniería: donde el boceto manual, la estructura modular y la implementación en producción reducen fricción y maximizan conversión.',
       project1: {
@@ -1366,7 +1366,7 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
       },
     },
     caseStudies: {
-      tag: '[ 06.5 // PROJECTS & EVIDENCE — HORIZONTAL SCROLL ↔ ]',
+      tag: '[ 06.5 // PROJECTS & EVIDENCE ]',
       title: 'From concept to production.',
       subtitle: 'Real-world digital systems engineered with technical discipline: where hand sketching, modular architecture, and edge production minimize friction and maximize conversion.',
       project1: {

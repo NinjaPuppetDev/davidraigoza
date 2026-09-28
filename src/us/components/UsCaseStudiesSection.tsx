@@ -110,21 +110,22 @@ export default function UsCaseStudiesSection() {
             <span
               id="us-case-studies-tag-cue"
               style={{
-                fontSize: '0.72rem',
+                fontSize: 'clamp(0.62rem, 2.2vw, 0.72rem)',
                 fontFamily: 'ui-monospace, monospace',
                 color: '#121210',
                 fontWeight: 700,
                 textTransform: 'uppercase',
-                letterSpacing: '0.08em',
+                letterSpacing: '0.06em',
                 backgroundColor: '#EFEFEA',
                 padding: '0.22rem 0.6rem',
                 border: '1px solid #E2E2DE',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.35rem',
+                whiteSpace: 'nowrap',
               }}
             >
-              [ 06.5 // PROJECTS &amp; EVIDENCE — HORIZONTAL SCROLL ↔ ]
+              [ 06.5 // PROJECTS &amp; EVIDENCE ]
             </span>
             <span
               style={{

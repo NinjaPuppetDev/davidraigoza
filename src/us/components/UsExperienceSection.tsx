@@ -40,24 +40,28 @@ export default function UsExperienceSection() {
             }}
           >
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', minWidth: 0 }}>
                 <span
                   style={{
-                    fontSize: '0.68rem',
+                    fontSize: 'clamp(0.54rem, 1.85vw, 0.66rem)',
                     fontFamily: 'ui-monospace, monospace',
                     color: '#2563EB',
                     fontWeight: 600,
-                    letterSpacing: '0.08em',
+                    letterSpacing: '0.04em',
                     textTransform: 'uppercase',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.4rem',
+                    gap: '0.35rem',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    minWidth: 0,
                   }}
                 >
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#2563EB' }} />
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#2563EB', flexShrink: 0 }} />
                   [01 / PROFESSIONAL EXPERIENCE]
                 </span>
-                <span style={{ fontSize: '0.75rem', fontFamily: 'ui-monospace, monospace', color: '#888880' }}>
+                <span style={{ fontSize: 'clamp(0.56rem, 1.85vw, 0.7rem)', fontFamily: 'ui-monospace, monospace', color: '#888880', whiteSpace: 'nowrap', flexShrink: 0 }}>
                   EXPERTISE-DRIVEN
                 </span>
               </div>
@@ -87,11 +91,11 @@ export default function UsExperienceSection() {
                 His professional experience includes working with <strong>Bloominari, the parent company behind Virtual Latinos</strong>, as well as experience with consulting, coaching, and other professional services.
               </p>
             </div>
-            <div style={{ borderTop: '1px solid #E2E2DE', paddingTop: '1rem', marginTop: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.78rem', fontFamily: 'ui-monospace, monospace', color: '#666660' }}>
+            <div style={{ borderTop: '1px solid #E2E2DE', paddingTop: '1rem', marginTop: '1.25rem', display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem' }}>
+              <span style={{ fontSize: 'clamp(0.62rem, 1.9vw, 0.76rem)', fontFamily: 'ui-monospace, monospace', color: '#666660', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>
                 Bloominari · Virtual Latinos
               </span>
-              <span style={{ fontSize: '0.72rem', fontFamily: 'ui-monospace, monospace', color: '#2563EB', fontWeight: 600 }}>
+              <span style={{ fontSize: 'clamp(0.58rem, 1.85vw, 0.7rem)', fontFamily: 'ui-monospace, monospace', color: '#2563EB', fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0 }}>
                 VERIFIED RELATIONSHIP
               </span>
             </div>
@@ -112,24 +116,28 @@ export default function UsExperienceSection() {
             }}
           >
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', minWidth: 0 }}>
                 <span
                   style={{
-                    fontSize: '0.68rem',
+                    fontSize: 'clamp(0.56rem, 1.9vw, 0.68rem)',
                     fontFamily: 'ui-monospace, monospace',
                     color: '#16A34A',
                     fontWeight: 600,
-                    letterSpacing: '0.08em',
+                    letterSpacing: '0.04em',
                     textTransform: 'uppercase',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.4rem',
+                    gap: '0.35rem',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    minWidth: 0,
                   }}
                 >
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#16A34A' }} />
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#16A34A', flexShrink: 0 }} />
                   [02 / TECHNICAL VALIDATION]
                 </span>
-                <span style={{ fontSize: '0.75rem', fontFamily: 'ui-monospace, monospace', color: '#888880' }}>
+                <span style={{ fontSize: 'clamp(0.58rem, 1.9vw, 0.72rem)', fontFamily: 'ui-monospace, monospace', color: '#888880', whiteSpace: 'nowrap', flexShrink: 0 }}>
                   PEER REVIEW
                 </span>
               </div>
@@ -147,12 +155,12 @@ export default function UsExperienceSection() {
                 “Hey man, this is flawless. How did you do it?”
               </blockquote>
             </div>
-            <div style={{ borderTop: '1px solid #E2E2DE', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-              <div>
-                <div style={{ fontWeight: 600, fontSize: '0.94rem', color: '#121210' }}>Carlos Mariño</div>
-                <div style={{ fontSize: '0.82rem', color: '#666660' }}>Virtual Latinos</div>
+            <div style={{ borderTop: '1px solid #E2E2DE', paddingTop: '1rem', display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'baseline', gap: '0.5rem' }}>
+              <div style={{ minWidth: 0 }}>
+                <div style={{ fontWeight: 600, fontSize: '0.94rem', color: '#121210', whiteSpace: 'nowrap' }}>Carlos Mariño</div>
+                <div style={{ fontSize: '0.82rem', color: '#666660', whiteSpace: 'nowrap' }}>Virtual Latinos</div>
               </div>
-              <span style={{ fontSize: '0.72rem', fontFamily: 'ui-monospace, monospace', color: '#16A34A', fontWeight: 600 }}>
+              <span style={{ fontSize: 'clamp(0.6rem, 1.9vw, 0.72rem)', fontFamily: 'ui-monospace, monospace', color: '#16A34A', fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0 }}>
                 VERIFIED PEER
               </span>
             </div>
@@ -173,24 +181,28 @@ export default function UsExperienceSection() {
             }}
           >
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', minWidth: 0 }}>
                 <span
                   style={{
-                    fontSize: '0.68rem',
+                    fontSize: 'clamp(0.56rem, 1.9vw, 0.68rem)',
                     fontFamily: 'ui-monospace, monospace',
                     color: '#16A34A',
                     fontWeight: 600,
-                    letterSpacing: '0.08em',
+                    letterSpacing: '0.04em',
                     textTransform: 'uppercase',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.4rem',
+                    gap: '0.35rem',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    minWidth: 0,
                   }}
                 >
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#16A34A' }} />
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#16A34A', flexShrink: 0 }} />
                   [03 / CLIENT TESTIMONIAL]
                 </span>
-                <span style={{ fontSize: '0.75rem', fontFamily: 'ui-monospace, monospace', color: '#888880' }}>
+                <span style={{ fontSize: 'clamp(0.58rem, 1.9vw, 0.72rem)', fontFamily: 'ui-monospace, monospace', color: '#888880', whiteSpace: 'nowrap', flexShrink: 0 }}>
                   REAL CASE
                 </span>
               </div>
@@ -209,12 +221,12 @@ export default function UsExperienceSection() {
                 “It was a seamless process: David delivered a website completely aligned with my brand and artistic identity.”
               </blockquote>
             </div>
-            <div style={{ borderTop: '1px solid #E2E2DE', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-              <div>
-                <div style={{ fontWeight: 600, fontSize: '0.96rem', color: '#121210' }}>Melissa Rendón</div>
-                <div style={{ fontSize: '0.82rem', color: '#666660' }}>Reborn Artist</div>
+            <div style={{ borderTop: '1px solid #E2E2DE', paddingTop: '1rem', display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'baseline', gap: '0.5rem' }}>
+              <div style={{ minWidth: 0 }}>
+                <div style={{ fontWeight: 600, fontSize: '0.96rem', color: '#121210', whiteSpace: 'nowrap' }}>Melissa Rendón</div>
+                <div style={{ fontSize: '0.82rem', color: '#666660', whiteSpace: 'nowrap' }}>Reborn Artist</div>
               </div>
-              <span style={{ fontSize: '0.72rem', fontFamily: 'ui-monospace, monospace', color: '#16A34A', fontWeight: 600 }}>
+              <span style={{ fontSize: 'clamp(0.6rem, 1.9vw, 0.72rem)', fontFamily: 'ui-monospace, monospace', color: '#16A34A', fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0 }}>
                 ACTIVE PROJECT
               </span>
             </div>
@@ -238,24 +250,28 @@ export default function UsExperienceSection() {
             }}
           >
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', minWidth: 0 }}>
                 <span
                   style={{
-                    fontSize: '0.68rem',
+                    fontSize: 'clamp(0.54rem, 1.85vw, 0.66rem)',
                     fontFamily: 'ui-monospace, monospace',
                     color: '#93C5FD',
                     fontWeight: 600,
-                    letterSpacing: '0.08em',
+                    letterSpacing: '0.04em',
                     textTransform: 'uppercase',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.4rem',
+                    gap: '0.35rem',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    minWidth: 0,
                   }}
                 >
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#60A5FA' }} />
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#60A5FA', flexShrink: 0 }} />
                   [04 / PROFESSIONAL BACKGROUND]
                 </span>
-                <span style={{ fontSize: '0.75rem', fontFamily: 'ui-monospace, monospace', color: '#A3A39E' }}>
+                <span style={{ fontSize: 'clamp(0.58rem, 1.9vw, 0.72rem)', fontFamily: 'ui-monospace, monospace', color: '#A3A39E', whiteSpace: 'nowrap', flexShrink: 0 }}>
                   EXPERTISE
                 </span>
               </div>
@@ -270,11 +286,14 @@ export default function UsExperienceSection() {
               style={{
                 borderTop: '1px solid #282824',
                 paddingTop: '1rem',
-                fontSize: '0.78rem',
+                fontSize: 'clamp(0.55rem, 1.8vw, 0.72rem)',
                 fontFamily: 'ui-monospace, monospace',
                 color: '#93C5FD',
                 fontWeight: 600,
-                letterSpacing: '0.03em',
+                letterSpacing: '0.02em',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
               }}
             >
               DUAL DISCIPLINE: DESIGN + DEVELOPMENT EXECUTION
@@ -297,24 +316,28 @@ export default function UsExperienceSection() {
             }}
           >
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', minWidth: 0 }}>
                 <span
                   style={{
-                    fontSize: '0.68rem',
+                    fontSize: 'clamp(0.56rem, 1.9vw, 0.68rem)',
                     fontFamily: 'ui-monospace, monospace',
                     color: '#121210',
                     fontWeight: 700,
-                    letterSpacing: '0.08em',
+                    letterSpacing: '0.04em',
                     textTransform: 'uppercase',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.4rem',
+                    gap: '0.35rem',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    minWidth: 0,
                   }}
                 >
-                  <span style={{ width: '6px', height: '6px', backgroundColor: '#121210', display: 'inline-block' }} />
+                  <span style={{ width: '6px', height: '6px', backgroundColor: '#121210', display: 'inline-block', flexShrink: 0 }} />
                   [05 / DESIGN HERITAGE]
                 </span>
-                <span style={{ fontSize: '0.75rem', fontFamily: 'ui-monospace, monospace', color: '#121210', fontWeight: 700 }}>
+                <span style={{ fontSize: 'clamp(0.58rem, 1.9vw, 0.72rem)', fontFamily: 'ui-monospace, monospace', color: '#121210', fontWeight: 700, whiteSpace: 'nowrap', flexShrink: 0 }}>
                   COLOMBIA
                 </span>
               </div>
@@ -329,11 +352,14 @@ export default function UsExperienceSection() {
               style={{
                 borderTop: '1px solid rgba(18, 18, 16, 0.2)',
                 paddingTop: '1rem',
-                fontSize: '0.78rem',
+                fontSize: 'clamp(0.56rem, 1.85vw, 0.72rem)',
                 fontFamily: 'ui-monospace, monospace',
                 color: '#121210',
                 fontWeight: 600,
-                letterSpacing: '0.03em',
+                letterSpacing: '0.02em',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
               }}
             >
               PREMIO NACIONAL DE DISEÑO · COLOMBIA
@@ -355,24 +381,28 @@ export default function UsExperienceSection() {
             }}
           >
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', minWidth: 0 }}>
                 <span
                   style={{
-                    fontSize: '0.68rem',
+                    fontSize: 'clamp(0.52rem, 1.8vw, 0.65rem)',
                     fontFamily: 'ui-monospace, monospace',
                     color: '#2563EB',
                     fontWeight: 600,
-                    letterSpacing: '0.08em',
+                    letterSpacing: '0.03em',
                     textTransform: 'uppercase',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.4rem',
+                    gap: '0.35rem',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    minWidth: 0,
                   }}
                 >
-                  <span style={{ width: '6px', height: '6px', backgroundColor: '#2563EB', display: 'inline-block' }} />
+                  <span style={{ width: '6px', height: '6px', backgroundColor: '#2563EB', display: 'inline-block', flexShrink: 0 }} />
                   [06 / ENTREPRENEURIAL HERITAGE]
                 </span>
-                <span style={{ fontSize: '0.75rem', fontFamily: 'ui-monospace, monospace', color: '#121210', fontWeight: 600 }}>
+                <span style={{ fontSize: 'clamp(0.58rem, 1.9vw, 0.72rem)', fontFamily: 'ui-monospace, monospace', color: '#121210', fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0 }}>
                   MEDELLÍN
                 </span>
               </div>
@@ -387,11 +417,14 @@ export default function UsExperienceSection() {
               style={{
                 borderTop: '1px solid #E2E2DE',
                 paddingTop: '1rem',
-                fontSize: '0.78rem',
+                fontSize: 'clamp(0.55rem, 1.8vw, 0.7rem)',
                 fontFamily: 'ui-monospace, monospace',
                 color: '#121210',
                 fontWeight: 500,
-                letterSpacing: '0.03em',
+                letterSpacing: '0.015em',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
               }}
             >
               MAYOR’S OFFICE OF MEDELLÍN · INNOVATION FUND
