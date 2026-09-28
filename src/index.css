@@ -457,9 +457,6 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
   .header-btn-text {
     display: none !important;
   }
-  .instagram-header-btn {
-    padding: 0.45rem 0.65rem !important;
-  }
   .whatsapp-header-btn,
   .us-discovery-header-btn {
     display: none !important;

@@ -194,36 +194,61 @@ export default function ProfileSection() {
             borderTop: '1px solid #E2E2DE',
             paddingTop: '1.25rem',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
             gap: '1rem',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
-            <span style={{ color: '#121210', fontSize: '0.75rem', fontWeight: 600, fontFamily: 'ui-monospace, monospace', marginTop: '0.1rem' }}>
-              01 //
-            </span>
-            <span style={{ fontSize: '0.88rem', color: '#444440', fontWeight: 500, lineHeight: 1.45 }}>
-              {p.pillar1}
-            </span>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
-            <span style={{ color: '#121210', fontSize: '0.75rem', fontWeight: 600, fontFamily: 'ui-monospace, monospace', marginTop: '0.1rem' }}>
-              02 //
-            </span>
-            <span style={{ fontSize: '0.88rem', color: '#444440', fontWeight: 500, lineHeight: 1.45 }}>
-              {p.pillar2}
-            </span>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
-            <span style={{ color: '#121210', fontSize: '0.75rem', fontWeight: 600, fontFamily: 'ui-monospace, monospace', marginTop: '0.1rem' }}>
-              03 //
-            </span>
-            <span style={{ fontSize: '0.88rem', color: '#444440', fontWeight: 500, lineHeight: 1.45 }}>
-              {p.pillar3}
-            </span>
-          </div>
+          {[
+            { num: '01', text: p.pillar1 },
+            { num: '02', text: p.pillar2 },
+            { num: '03', text: p.pillar3 },
+          ].map((item) => (
+            <div
+              key={item.num}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '2.2ch 2.2ch 1fr',
+                alignItems: 'baseline',
+                columnGap: '0.35rem',
+              }}
+            >
+              <span
+                style={{
+                  color: '#121210',
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  fontFamily: 'ui-monospace, monospace',
+                  whiteSpace: 'nowrap',
+                  lineHeight: 1.45,
+                }}
+              >
+                {item.num}
+              </span>
+              <span
+                aria-hidden="true"
+                style={{
+                  color: '#121210',
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  fontFamily: 'ui-monospace, monospace',
+                  whiteSpace: 'nowrap',
+                  lineHeight: 1.45,
+                }}
+              >
+                //
+              </span>
+              <span
+                style={{
+                  fontSize: '0.88rem',
+                  color: '#444440',
+                  fontWeight: 500,
+                  lineHeight: 1.45,
+                }}
+              >
+                {item.text}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

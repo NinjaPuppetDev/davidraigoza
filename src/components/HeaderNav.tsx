@@ -372,47 +372,7 @@ export default function HeaderNav() {
                 display: 'inline-block',
               }}
             />
-            <span>WhatsApp (+57 320 869 4945)</span>
-          </a>
-
-          <a
-            id="mobile-drawer-instagram-btn"
-            href="https://www.instagram.com/raigoza_david_design/"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setMobileMenuOpen(false)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '0.6rem',
-              padding: '0.85rem 1rem',
-              backgroundColor: '#FFFFFF',
-              color: '#121210',
-              border: '1px solid #121210',
-              textDecoration: 'none',
-              fontFamily: 'ui-monospace, monospace',
-              fontSize: '0.85rem',
-              fontWeight: 600,
-              letterSpacing: '0.02em',
-            }}
-          >
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{ display: 'inline-block' }}
-            >
-              <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-            </svg>
-            <span>Instagram (@raigoza_david_design)</span>
+            <span>WhatsApp (+57 300 774 7638)</span>
           </a>
 
           {/* Architectural Language Switcher at bottom of menu */}
