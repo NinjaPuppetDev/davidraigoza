@@ -519,8 +519,8 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
     },
     hero: {
       tag: 'Ingeniería de diseño de producto · Medellín, Colombia',
-      title: 'Diseñamos productos digitales para médicos, arquitectos, profesionales, marcas y especialistas.',
-      titleLine1: 'Diseñamos productos digitales',
+      title: 'Diseñamos websites para médicos, arquitectos, profesionales, marcas y especialistas.',
+      titleLine1: 'Diseñamos websites',
       preposition: 'para',
       rotatingPhrases: [
         'para médicos.',
@@ -1161,8 +1161,8 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
     },
     hero: {
       tag: 'Product Design Engineering · Medellín, Colombia',
-      title: 'We design digital products for doctors, architects, professionals, brands, and specialists.',
-      titleLine1: 'We design digital products',
+      title: 'We design websites for doctors, architects, professionals, brands, and specialists.',
+      titleLine1: 'We design websites',
       preposition: 'for',
       rotatingPhrases: [
         'for doctors.',

@@ -161,17 +161,42 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
   white-space: nowrap;
 }
 
-/* Reserved container width for the rotating word to ensure rock-solid stability */
+/* Rotating word container: auto-sized so both / and /us stay truly centered */
 .hero-rotating-word-container {
   display: inline-block;
   vertical-align: baseline;
-  text-align: left;
-  min-width: 15ch;
-  width: 15ch;
+  text-align: center;
+  min-width: 0;
+  width: auto;
   position: relative;
   line-height: inherit;
   white-space: nowrap;
   box-sizing: border-box;
+}
+
+#hero-heading .hero-heading-line-1,
+#us-hero-heading .hero-heading-line-1 {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  text-align: center;
+}
+
+#hero-heading .hero-heading-line-2,
+#us-hero-heading .hero-heading-line-2 {
+  display: flex;
+  width: 100%;
+  align-items: baseline;
+  justify-content: center;
+  white-space: nowrap;
+  text-align: center;
+}
+
+#hero-heading .hero-rotating-word-container,
+#us-hero-heading .hero-rotating-word-container {
+  min-width: 0;
+  width: auto;
+  text-align: center;
 }
 
 /* Bauhaus Editorial Layout Frameworks */
@@ -349,6 +374,11 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
 }
 
 @media (max-width: 768px) {
+  #nav-brand-link img,
+  #us-nav-brand-link img {
+    height: 34px !important;
+    width: auto !important;
+  }
   .negocios-header {
     padding: 0.75rem 1rem !important;
   }
@@ -445,10 +475,10 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
   #hero-heading {
     position: relative !important;
     z-index: 2 !important;
-    font-size: clamp(1.22rem, 5.75vw, 2.45rem) !important;
+    font-size: clamp(1.95rem, 7.5vw, 2.85rem) !important;
     font-weight: 800 !important;
-    line-height: 1.2 !important;
-    letter-spacing: -0.04em !important;
+    line-height: 1.18 !important;
+    letter-spacing: -0.035em !important;
     margin-bottom: 2rem !important;
     text-align: center !important;
     width: 100% !important;
@@ -483,7 +513,8 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     max-width: 100% !important;
   }
 
-  #hero-heading .hero-heading-line-2 {
+  #hero-heading .hero-heading-line-2,
+  #us-hero-heading .hero-heading-line-2 {
     display: flex !important;
     align-items: baseline !important;
     justify-content: center !important;
@@ -498,12 +529,14 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     flex-shrink: 0 !important;
   }
   
-  #us-hero-heading .hero-rotating-word-container {
+  #us-hero-heading .hero-rotating-word-container,
+  #us-hero-heading .hero-rotating-word-container > span {
     display: inline-block !important;
     vertical-align: baseline !important;
-    text-align: left !important;
-    min-width: 11ch !important;
-    max-width: 100% !important;
+    text-align: center !important;
+    min-width: 0 !important;
+    width: auto !important;
+    max-width: none !important;
     font-weight: 800 !important;
     white-space: nowrap !important;
     box-sizing: border-box !important;
@@ -558,9 +591,13 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     font-size: 0.92rem !important;
     font-weight: 500 !important;
   }
-  #hero-primary-cta {
-    padding: 0.9rem 1.1rem !important;
-    font-size: clamp(0.78rem, 3.7vw, 0.92rem) !important;
+  #hero-primary-cta,
+  #us-hero-primary-cta {
+    width: auto !important;
+    max-width: fit-content !important;
+    min-height: 40px !important;
+    padding: 0.65rem 1.25rem !important;
+    font-size: 0.82rem !important;
     white-space: nowrap !important;
   }
   #hero-bottom-deck {

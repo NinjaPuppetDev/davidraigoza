@@ -85,7 +85,7 @@ export default function UsHeroSection({ isVisible }: UsHeroSectionProps) {
               textAlign: 'center',
             }}
           >
-            <span className="hero-heading-line-1" style={{ fontWeight: 800 }}>We design digital products</span>{' '}
+            <span className="hero-heading-line-1" style={{ fontWeight: 800 }}>We design digital products</span>
             <span className="hero-heading-line-2">
               <span className="hero-static-preposition" style={{ fontWeight: 800 }}>for&nbsp;</span>
               <span className="hero-rotating-word-container">
@@ -98,7 +98,7 @@ export default function UsHeroSection({ isVisible }: UsHeroSectionProps) {
                     transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                     style={{
                       display: 'inline-block',
-                      textAlign: 'left',
+                      textAlign: 'center',
                       color: '#121210',
                       fontWeight: 800,
                     }}
@@ -194,7 +194,7 @@ export default function UsHeroSection({ isVisible }: UsHeroSectionProps) {
                 e.currentTarget.style.backgroundColor = '#121210';
               }}
             >
-              Schedule a 15-minute discovery call <span>→</span>
+              Schedule a discovery call <span>→</span>
             </a>
           </div>
         </div>

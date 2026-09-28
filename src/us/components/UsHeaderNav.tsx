@@ -66,7 +66,7 @@ export default function UsHeaderNav() {
           <img
             src="/logo/logo.svg"
             alt="David Raigoza Logo"
-            style={{ height: '48px', width: 'auto', display: 'block' }}
+            style={{ height: '38px', width: 'auto', display: 'block' }}
           />
         </a>
       </div>
