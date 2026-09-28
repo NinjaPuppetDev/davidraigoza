@@ -248,9 +248,9 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
         sledHeight,
         sledDepth,
         colBrandBlue,
-        0.18,
+        0.09,
         colBrandBlue,
-        0.80,
+        0.46,
         -1.5,
         -0.08,
         0.12
@@ -267,7 +267,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       const sledSubMat = new THREE.LineBasicMaterial({
         color: colBrandLight,
         transparent: true,
-        opacity: 0.35,
+        opacity: 0.24,
         depthWrite: false,
       });
       const sledSubLines = new THREE.LineSegments(sledSubGeom, sledSubMat);
@@ -282,9 +282,9 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
         colHeight,
         colDepth,
         colBrandBlue,
-        0.26,
+        0.12,
         colBrandBlue,
-        0.90,
+        0.52,
         -0.6,
         -0.09,
         0.15
@@ -301,7 +301,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       const colGridMat = new THREE.LineBasicMaterial({
         color: colBrandLight,
         transparent: true,
-        opacity: 0.45,
+        opacity: 0.28,
         depthWrite: false,
       });
       const colGridLines = new THREE.LineSegments(colGridGeom, colGridMat);
@@ -317,9 +317,9 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
         subHeight,
         subDepth,
         colBauhausYellow,
-        0.32,
+        0.15,
         colBauhausYellowBorder,
-        0.95,
+        0.55,
         -0.85,
         -0.09,
         0.14
@@ -335,7 +335,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       const subRatioMat = new THREE.LineBasicMaterial({
         color: colBauhausYellowBorder,
         transparent: true,
-        opacity: 0.55,
+        opacity: 0.32,
         depthWrite: false,
       });
       const subRatioLines = new THREE.LineSegments(subRatioGeom, subRatioMat);
@@ -350,9 +350,9 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
         ribbonHeight,
         ribbonDepth,
         colBauhausYellow,
-        0.30,
+        0.14,
         colBauhausYellowBorder,
-        0.95,
+        0.52,
         -0.45,
         -0.08,
         0.12
@@ -368,7 +368,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       const trackAxisMat = new THREE.LineBasicMaterial({
         color: colBauhausYellowBorder,
         transparent: true,
-        opacity: 0.50,
+        opacity: 0.30,
         depthWrite: false,
       });
       const trackAxisLines = new THREE.LineSegments(trackAxisGeom, trackAxisMat);
@@ -382,9 +382,9 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
         scanCubeSize,
         scanCubeSize,
         colBauhausRed,
-        0.65,
+        0.38,
         colBauhausRedBorder,
-        0.95,
+        0.65,
         0.15,
         -0.10,
         0.18
@@ -400,9 +400,9 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
         caliperCubeH,
         caliperCubeD,
         colBauhausRed,
-        0.60,
+        0.34,
         colBauhausRedBorder,
-        0.95,
+        0.62,
         0.05,
         -0.08,
         0.16
@@ -417,9 +417,9 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
         datumCubeSize,
         datumCubeSize,
         colBauhausInk,
-        0.85,
+        0.45,
         colBauhausInk,
-        1.0,
+        0.68,
         0.22,
         -0.10,
         0.15
@@ -433,9 +433,9 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
         regCubeSize,
         regCubeSize,
         colBauhausInk,
-        0.85,
+        0.45,
         colBauhausInk,
-        1.0,
+        0.68,
         0.18,
         -0.08,
         0.14
@@ -460,7 +460,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       const scanMat = new THREE.LineBasicMaterial({
         color: colBrandLight,
         transparent: true,
-        opacity: 0.75,
+        opacity: 0.48,
         depthWrite: false,
       });
       const scanMesh = new THREE.LineSegments(scanGeom, scanMat);
@@ -479,7 +479,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       const topLineMat = new THREE.LineBasicMaterial({
         color: colBauhausInk,
         transparent: true,
-        opacity: 0.50,
+        opacity: 0.32,
         depthWrite: false,
       });
       const topLineMesh = new THREE.LineSegments(telescopingTopLineGeom, topLineMat);
@@ -501,7 +501,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       const baseLineMat = new THREE.LineBasicMaterial({
         color: colBauhausInk,
         transparent: true,
-        opacity: 0.55,
+        opacity: 0.36,
         depthWrite: false,
       });
       const baseLineMesh = new THREE.LineSegments(telescopingBaseLineGeom, baseLineMat);
@@ -519,7 +519,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       const caliperMat = new THREE.LineBasicMaterial({
         color: colBrandBlue,
         transparent: true,
-        opacity: 0.65,
+        opacity: 0.44,
         depthWrite: false,
       });
       const caliperMesh = new THREE.LineSegments(caliperLineGeom, caliperMat);
@@ -544,7 +544,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       const cornerMat = new THREE.LineBasicMaterial({
         color: colBauhausInk,
         transparent: true,
-        opacity: 0.65,
+        opacity: 0.42,
         depthWrite: false,
       });
       const cornerMesh = new THREE.LineSegments(cornerGeom, cornerMat);
@@ -562,7 +562,7 @@ export default function NegociosHeroVisual({ mockupId = 'hero-browser-mockup' }:
       const leftAxisMat = new THREE.LineBasicMaterial({
         color: colSlate,
         transparent: true,
-        opacity: 0.35,
+        opacity: 0.24,
         depthWrite: false,
       });
       const leftAxisMesh = new THREE.LineSegments(leftAxisGeom, leftAxisMat);

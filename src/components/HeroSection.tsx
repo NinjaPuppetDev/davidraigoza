@@ -115,10 +115,10 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.span
                       key={currentWord}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
-                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      initial={{ opacity: 0, y: 5, scale: 0.985 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -5, scale: 0.985 }}
+                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                       className="hero-pill-word-text"
                       style={{ fontWeight: 400, color: '#FFFFFF' }}
                     >
