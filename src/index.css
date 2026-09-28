@@ -146,38 +146,98 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
   display: block;
   white-space: nowrap;
   text-align: center;
+  font-weight: 900;
+  margin-bottom: 0.16em;
 }
 
 .hero-heading-line-2 {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
+  gap: 0.24em;
   white-space: nowrap;
   text-align: center;
 }
 
 .hero-static-preposition {
-  display: inline;
+  display: inline-block;
+  white-space: nowrap;
+  font-weight: 900;
+  line-height: 1.04;
+}
+
+/* Sleek, compact dark charcoal inline pill housing the blue indicator dot + changing target audience word */
+.hero-rotating-word-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62em;
+  gap: 0.3em;
+  padding: 0.13em 0.5em 0.17em 0.42em;
+  background-color: #161614;
+  border: 1px solid #2C2C28;
+  border-radius: 9999px;
+  box-shadow: 0 4px 12px rgba(18, 18, 16, 0.12);
+  color: #FFFFFF;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  vertical-align: middle;
+  text-align: center;
+  min-width: 12ch;
+  width: auto;
+  position: relative;
+  line-height: 1.08;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.hero-pill-indicator-dot {
+  display: inline-block;
+  width: 0.24em;
+  height: 0.24em;
+  min-width: 7px;
+  min-height: 7px;
+  border-radius: 9999px;
+  background-color: #2563EB;
+  box-shadow: 0 0 0 2.5px rgba(37, 99, 235, 0.24);
+  flex-shrink: 0;
+}
+
+.hero-pill-word-slot {
+  display: inline-grid;
+  align-items: center;
+  justify-items: center;
+  overflow: hidden;
+  line-height: 1.08;
+}
+
+.hero-pill-word-sizer {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
   white-space: nowrap;
 }
 
-/* Rotating word container: auto-sized so both / and /us stay truly centered */
-.hero-rotating-word-container {
+.hero-pill-word-text {
+  grid-area: 1 / 1;
   display: inline-block;
-  vertical-align: baseline;
   text-align: center;
-  min-width: 0;
-  width: auto;
-  position: relative;
-  line-height: inherit;
+  color: #FFFFFF !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
   white-space: nowrap;
-  box-sizing: border-box;
 }
 
 #hero-heading .hero-heading-line-1,
 #us-hero-heading .hero-heading-line-1 {
   display: block;
   width: 100%;
+  font-weight: 900;
   white-space: nowrap;
   text-align: center;
 }
@@ -186,16 +246,22 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
 #us-hero-heading .hero-heading-line-2 {
   display: flex;
   width: 100%;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
+  gap: 0.24em;
   white-space: nowrap;
   text-align: center;
 }
 
 #hero-heading .hero-rotating-word-container,
 #us-hero-heading .hero-rotating-word-container {
-  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62em;
+  min-width: 12ch;
   width: auto;
+  font-weight: 400;
   text-align: center;
 }
 
@@ -460,14 +526,14 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     padding-right: 0 !important;
   }
   
-  /* US Hero Heading on Mobile (unchanged) */
+  /* US Hero Heading on Mobile */
   #us-hero-heading {
     position: relative !important;
     z-index: 2 !important;
-    font-size: clamp(2.20rem, 7.75vw, 2.85rem) !important;
-    font-weight: 800 !important;
-    line-height: 1.18 !important;
-    letter-spacing: -0.035em !important;
+    font-size: clamp(2.15rem, 8.2vw, 3.1rem) !important;
+    font-weight: 900 !important;
+    line-height: 1.12 !important;
+    letter-spacing: -0.04em !important;
     margin-bottom: 2rem !important;
     text-align: center !important;
     width: 100% !important;
@@ -480,10 +546,10 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
   #hero-heading {
     position: relative !important;
     z-index: 2 !important;
-    font-size: clamp(1.95rem, 7.5vw, 2.85rem) !important;
-    font-weight: 800 !important;
-    line-height: 1.18 !important;
-    letter-spacing: -0.035em !important;
+    font-size: clamp(2.12rem, 8.1vw, 3.1rem) !important;
+    font-weight: 900 !important;
+    line-height: 1.12 !important;
+    letter-spacing: -0.04em !important;
     margin-bottom: 2rem !important;
     text-align: center !important;
     width: 100% !important;
@@ -493,27 +559,28 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
   
   #us-hero-heading .hero-heading-line-1 {
     display: block !important;
-    font-weight: 800 !important;
+    font-weight: 900 !important;
     text-align: center !important;
-    margin-bottom: 0.25rem !important;
+    margin-bottom: 0.24rem !important;
     white-space: normal !important;
     text-wrap: balance !important;
   }
 
   #hero-heading .hero-heading-line-1 {
     display: block !important;
-    font-weight: 800 !important;
+    font-weight: 900 !important;
     text-align: center !important;
-    margin-bottom: 0.2rem !important;
+    margin-bottom: 0.22rem !important;
     white-space: nowrap !important;
   }
   
   .hero-heading-line-2 {
     display: inline-flex !important;
-    align-items: baseline !important;
+    align-items: center !important;
     justify-content: center !important;
+    gap: 0.22em !important;
     text-align: center !important;
-    font-weight: 800 !important;
+    font-weight: 900 !important;
     white-space: nowrap !important;
     max-width: 100% !important;
   }
@@ -521,43 +588,44 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
   #hero-heading .hero-heading-line-2,
   #us-hero-heading .hero-heading-line-2 {
     display: flex !important;
-    align-items: baseline !important;
+    align-items: center !important;
     justify-content: center !important;
+    gap: 0.22em !important;
     width: 100% !important;
     white-space: nowrap !important;
   }
   
   .hero-static-preposition {
-    display: inline !important;
-    font-weight: 800 !important;
+    display: inline-block !important;
+    font-weight: 900 !important;
     white-space: nowrap !important;
     flex-shrink: 0 !important;
   }
   
   #us-hero-heading .hero-rotating-word-container,
-  #us-hero-heading .hero-rotating-word-container > span {
-    display: inline-block !important;
-    vertical-align: baseline !important;
-    text-align: center !important;
-    min-width: 0 !important;
+  #hero-heading .hero-rotating-word-container {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.65em !important;
+    gap: 0.28em !important;
+    padding: 0.13em 0.48em 0.17em 0.4em !important;
+    min-width: 12ch !important;
     width: auto !important;
     max-width: none !important;
-    font-weight: 800 !important;
+    font-weight: 400 !important;
     white-space: nowrap !important;
     box-sizing: border-box !important;
-    overflow: visible !important;
   }
 
-  #hero-heading .hero-rotating-word-container,
-  #hero-heading .hero-rotating-word-container > span {
-    display: inline-block !important;
-    vertical-align: baseline !important;
-    text-align: left !important;
-    min-width: 0 !important;
-    width: auto !important;
-    max-width: none !important;
-    font-weight: 800 !important;
-    white-space: nowrap !important;
+  .hero-pill-word-sizer,
+  .hero-pill-word-text {
+    font-weight: 400 !important;
+  }
+
+  .hero-pill-indicator-dot {
+    min-width: 6px !important;
+    min-height: 6px !important;
   }
 
   #hero-pricing-tile,
@@ -715,8 +783,8 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
 
 @media (max-width: 360px) {
   #us-hero-heading {
-    font-size: 1.65rem !important;
-    font-weight: 800 !important;
+    font-size: 1.85rem !important;
+    font-weight: 900 !important;
   }
   .us-hero-tag-box {
     padding: 0.26rem 0.42rem !important;

@@ -66,7 +66,7 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
             transition: 'all 0.9s cubic-bezier(0.16, 1, 0.3, 1)',
-            maxWidth: '1000px',
+            maxWidth: '1080px',
             width: '100%',
             margin: '0 auto',
             display: 'flex',
@@ -78,37 +78,54 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
           <h1
             id="hero-heading"
             style={{
-              fontSize: 'clamp(2.35rem, 4.8vw, 3.85rem)',
-              fontWeight: 800,
-              lineHeight: 1.08,
+              fontSize: 'clamp(2.75rem, 5.8vw, 4.75rem)',
+              fontWeight: 900,
+              lineHeight: 1.05,
               color: '#121210',
               marginBottom: '2.25rem',
-              letterSpacing: '-0.038em',
+              letterSpacing: '-0.042em',
               maxWidth: '100%',
               textAlign: 'center',
             }}
           >
-            <span className="hero-heading-line-1" style={{ fontWeight: 800 }}>{titleLine1}</span>
+            <span className="hero-heading-line-1" style={{ fontWeight: 900 }}>{titleLine1}</span>
             <span className="hero-heading-line-2">
-              <span className="hero-static-preposition" style={{ fontWeight: 800 }}>{preposition}&nbsp;</span>
-              <span className="hero-rotating-word-container">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={currentWord}
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -6 }}
-                    transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                    style={{
-                      display: 'inline-block',
-                      textAlign: 'center',
-                      color: '#121210',
-                      fontWeight: 800,
-                    }}
-                  >
-                    {currentWord}.
-                  </motion.span>
-                </AnimatePresence>
+              <span className="hero-static-preposition" style={{ fontWeight: 900 }}>{preposition}</span>
+              <span
+                className="hero-rotating-word-container"
+                style={{
+                  fontSize: '0.62em',
+                  fontWeight: 400,
+                  padding: '0.13em 0.5em 0.17em 0.42em',
+                  minWidth: '12ch',
+                }}
+              >
+                <span className="hero-pill-indicator-dot" aria-hidden="true" />
+                <span className="hero-pill-word-slot">
+                  {rotatingWords.map((word) => (
+                    <span
+                      key={`sizer-${word}`}
+                      aria-hidden="true"
+                      className="hero-pill-word-sizer"
+                      style={{ fontWeight: 400 }}
+                    >
+                      {word}.
+                    </span>
+                  ))}
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.span
+                      key={currentWord}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="hero-pill-word-text"
+                      style={{ fontWeight: 400, color: '#FFFFFF' }}
+                    >
+                      {currentWord}.
+                    </motion.span>
+                  </AnimatePresence>
+                </span>
               </span>
             </span>
           </h1>
