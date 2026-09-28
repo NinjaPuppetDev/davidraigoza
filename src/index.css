@@ -707,6 +707,38 @@ body.has-negocios-cursor .negocios-page [data-cursor="pointer"] {
     width: 100% !important;
     text-align: center !important;
   }
+
+  /* Compact, low-profile mobile telemetry footprint for Cookie Banner */
+  #dr-compliance-bar {
+    bottom: 0.65rem !important;
+    padding: 0 0.6rem !important;
+  }
+  .dr-cookie-aside {
+    max-width: 400px !important;
+    padding: 0.58rem 0.75rem !important;
+    box-shadow: 4px 4px 0px 0px #080808 !important;
+  }
+  .dr-cookie-header {
+    margin-bottom: 0.32rem !important;
+    padding-bottom: 0.28rem !important;
+  }
+  .dr-cookie-tag {
+    font-size: 0.6rem !important;
+  }
+  .dr-cookie-body {
+    margin-bottom: 0.42rem !important;
+  }
+  .dr-cookie-message {
+    font-size: 0.72rem !important;
+    line-height: 1.3 !important;
+  }
+  .dr-cookie-actions {
+    gap: 0.4rem !important;
+  }
+  .dr-cookie-btn {
+    padding: 0.34rem 0.6rem !important;
+    font-size: 0.64rem !important;
+  }
 }
 
 @media (max-width: 640px) {

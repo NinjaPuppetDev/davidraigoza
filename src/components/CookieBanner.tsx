@@ -51,25 +51,26 @@ export default function CookieBanner() {
       aria-label="Preferencias del sitio"
       style={{
         position: 'fixed',
-        bottom: '1.5rem',
+        bottom: '1rem',
         left: 0,
         right: 0,
         zIndex: 999999,
         display: 'flex',
         justifyContent: 'center',
-        padding: '0 1rem',
+        padding: '0 0.75rem',
         pointerEvents: 'none',
         fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
       }}
     >
       <aside
+        className="dr-cookie-aside"
         style={{
-          maxWidth: '560px',
+          maxWidth: '460px',
           width: '100%',
-          padding: '1.4rem',
+          padding: '0.8rem 0.95rem',
           backgroundColor: '#FFFFFF',
           border: '2px solid #080808',
-          boxShadow: '8px 8px 0px 0px #080808',
+          boxShadow: '5px 5px 0px 0px #080808',
           pointerEvents: 'auto',
           color: '#080808',
           opacity: 1,
@@ -79,20 +80,21 @@ export default function CookieBanner() {
       >
         {/* Geometric Bauhaus Chrome */}
         <div
+          className="dr-cookie-header"
           style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            marginBottom: '0.85rem',
-            paddingBottom: '0.75rem',
+            marginBottom: '0.45rem',
+            paddingBottom: '0.38rem',
             borderBottom: '1px solid #E5E5E5',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.38rem' }}>
             <span
               style={{
-                width: '12px',
-                height: '12px',
+                width: '9px',
+                height: '9px',
                 backgroundColor: '#C8F04A',
                 border: '1px solid #080808',
                 borderRadius: '50%',
@@ -101,8 +103,8 @@ export default function CookieBanner() {
             />
             <span
               style={{
-                width: '12px',
-                height: '12px',
+                width: '9px',
+                height: '9px',
                 backgroundColor: '#F0A020',
                 border: '1px solid #080808',
                 display: 'inline-block',
@@ -112,20 +114,22 @@ export default function CookieBanner() {
               style={{
                 width: 0,
                 height: 0,
-                borderLeft: '6px solid transparent',
-                borderRight: '6px solid transparent',
-                borderBottom: '11px solid #080808',
+                borderLeft: '4.5px solid transparent',
+                borderRight: '4.5px solid transparent',
+                borderBottom: '8.5px solid #080808',
                 display: 'inline-block',
               }}
             />
             <span
+              className="dr-cookie-tag"
               style={{
-                fontSize: '0.7rem',
+                fontSize: '0.64rem',
                 textTransform: 'uppercase',
-                letterSpacing: '0.12em',
+                letterSpacing: '0.11em',
                 color: '#666660',
-                marginLeft: '0.4rem',
+                marginLeft: '0.25rem',
                 fontFamily: 'ui-monospace, monospace',
+                lineHeight: 1,
               }}
             >
               {cb.sysTag}
@@ -139,10 +143,11 @@ export default function CookieBanner() {
               background: 'transparent',
               border: 'none',
               color: '#666660',
-              fontSize: '0.82rem',
+              fontSize: '0.72rem',
               fontWeight: 700,
               cursor: 'pointer',
-              padding: '0.2rem 0.4rem',
+              padding: '0.1rem 0.25rem',
+              lineHeight: 1,
               fontFamily: 'ui-monospace, monospace',
               transition: 'color 0.15s ease',
             }}
@@ -158,12 +163,13 @@ export default function CookieBanner() {
         </div>
 
         {/* Content - Pure One-Liner */}
-        <div style={{ marginBottom: '1.25rem' }}>
+        <div className="dr-cookie-body" style={{ marginBottom: '0.55rem' }}>
           <p
+            className="dr-cookie-message"
             style={{
-              fontSize: '0.85rem',
+              fontSize: '0.76rem',
               color: '#333330',
-              lineHeight: 1.55,
+              lineHeight: 1.38,
               margin: 0,
               fontFamily: 'system-ui, -apple-system, sans-serif',
               fontWeight: 400,
@@ -175,19 +181,21 @@ export default function CookieBanner() {
 
         {/* Controls */}
         <div
+          className="dr-cookie-actions"
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
-            gap: '0.75rem',
+            gap: '0.5rem',
           }}
         >
           <button
             type="button"
             onClick={handleDecline}
+            className="dr-cookie-btn"
             style={{
               width: '100%',
-              padding: '0.65rem 1rem',
-              fontSize: '0.75rem',
+              padding: '0.4rem 0.75rem',
+              fontSize: '0.68rem',
               fontWeight: 700,
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
@@ -212,10 +220,11 @@ export default function CookieBanner() {
           <button
             type="button"
             onClick={handleAccept}
+            className="dr-cookie-btn"
             style={{
               width: '100%',
-              padding: '0.65rem 1rem',
-              fontSize: '0.75rem',
+              padding: '0.4rem 0.75rem',
+              fontSize: '0.68rem',
               fontWeight: 700,
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
@@ -224,7 +233,7 @@ export default function CookieBanner() {
               color: '#FFFFFF',
               cursor: 'pointer',
               fontFamily: 'ui-monospace, monospace',
-              boxShadow: '3px 3px 0px 0px #C8F04A',
+              boxShadow: '2.5px 2.5px 0px 0px #C8F04A',
               transition: 'all 0.15s ease',
             }}
             onMouseEnter={(e) => {
@@ -234,12 +243,12 @@ export default function CookieBanner() {
               e.currentTarget.style.backgroundColor = '#080808';
             }}
             onMouseDown={(e) => {
-              e.currentTarget.style.transform = 'translate(2px, 2px)';
+              e.currentTarget.style.transform = 'translate(1.5px, 1.5px)';
               e.currentTarget.style.boxShadow = '1px 1px 0px 0px #C8F04A';
             }}
             onMouseUp={(e) => {
               e.currentTarget.style.transform = 'translate(0, 0)';
-              e.currentTarget.style.boxShadow = '3px 3px 0px 0px #C8F04A';
+              e.currentTarget.style.boxShadow = '2.5px 2.5px 0px 0px #C8F04A';
             }}
           >
             {cb.accept}
