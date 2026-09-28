@@ -532,7 +532,7 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
       rotatingWords: ['médicos', 'arquitectos', 'profesionales', 'marcas', 'especialistas'],
       categoryLabel: 'Especialidad',
       rotatingCategories: ['médicos', 'arquitectos', 'profesionales', 'marcas', 'especialistas'],
-      pricingLabel: 'Inversión inicial',
+      pricingLabel: 'Atrae clientes en automático',
       price: 'Desde $1.300.000 COP',
       cta: 'Cuéntame sobre tu negocio',
       mockup: {
@@ -1174,7 +1174,7 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
       rotatingWords: ['doctors', 'architects', 'professionals', 'brands', 'specialists'],
       categoryLabel: 'Specialty',
       rotatingCategories: ['doctors', 'architects', 'professionals', 'brands', 'specialists'],
-      pricingLabel: 'Initial investment',
+      pricingLabel: 'Your brand running on autopilot',
       price: 'From $1,300,000 COP',
       cta: 'Tell me what your business needs',
       mockup: {
@@ -1432,7 +1432,7 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
       step1: {
         num: '01',
         tag: 'STEP 01 // THE ANALOG SKETCH',
-        title: 'The Sketch (Analog Blueprint)',
+        title: 'The Sketch (Analog Draft)',
         desc: 'Design does not begin in software: it starts on millimeter grid paper, dissecting patient anxiety, decision triggers, and interaction friction.',
         notesTitle: 'ENGINEERING ANNOTATIONS & MOBILE HIERARCHY',
         notes: [
@@ -1446,7 +1446,7 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
       step2: {
         num: '02',
         tag: 'STEP 02 // MODULAR STRUCTURE',
-        title: 'The Wireframe (Modular Figma Architecture)',
+        title: 'The Wireframe (Figma Structure)',
         desc: 'Mathematical translation into modular interface components in Figma governed by a strict 8px spatial grid.',
         specsTitle: 'COMPONENT LOGIC & DESIGN SYSTEM TOKENS',
         specs: [
@@ -1460,7 +1460,7 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
       step3: {
         num: '03',
         tag: 'STEP 03 // PRODUCTION INTERFACE',
-        title: 'The Interface (Vercel Edge Deployment)',
+        title: 'The Interface (Vercel Deployment)',
         desc: 'Production-ready codebase served globally via high-performance Vercel Edge infrastructure.',
         featuresTitle: 'PRODUCTION ARCHITECTURE & CONVERSION FUNNEL',
         features: [
@@ -1476,7 +1476,7 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
         tag: 'PERFORMANCE & CONTINUITY',
         title: 'Architecture that works for business.',
         description: 'Dra. Victoria’s digital presence proves that a professional web platform does not require endless agency delays or bloated templates. We engineered exactly what her medical practice needed to convert visitors into booked patients.',
-        ctaConsultation: 'COMMENCE PROJECT WITH DAVID RAIGOZA →',
+        ctaConsultation: 'START PROJECT WITH DAVID RAIGOZA →',
         ctaWhatsApp: 'DIRECT WHATSAPP CONSULTATION',
       },
     },

@@ -168,17 +168,6 @@ export default function UsHeroSection({ isVisible }: UsHeroSectionProps) {
             >
               From {INTERNATIONAL_CONFIG.startingPrice}
             </span>
-            <span
-              style={{
-                fontSize: '0.78rem',
-                color: '#666660',
-                fontFamily: 'ui-monospace, monospace',
-                display: 'block',
-                marginTop: '0.2rem',
-              }}
-            >
-              {INTERNATIONAL_CONFIG.pricingSubtext}
-            </span>
           </div>
 
           {/* Action CTAs (Centered) */}

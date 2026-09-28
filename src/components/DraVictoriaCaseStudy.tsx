@@ -202,16 +202,20 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
           >
             <span
               style={{
-                fontSize: '0.72rem',
+                fontSize: 'clamp(0.56rem, 2.25vw, 0.72rem)',
                 fontFamily: 'ui-monospace, monospace',
                 color: '#121210',
                 backgroundColor: '#EAEAE6',
                 border: '1px solid #D4D4CE',
-                padding: '0.3rem 0.75rem',
+                padding: '0.3rem clamp(0.45rem, 2vw, 0.75rem)',
                 fontWeight: 700,
-                letterSpacing: '0.06em',
+                letterSpacing: '0.03em',
+                whiteSpace: 'nowrap',
                 display: 'inline-flex',
                 alignItems: 'center',
+                maxWidth: '100%',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
               }}
             >
               {cs.caseNumberTag}
@@ -351,15 +355,18 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
           >
             <span
               style={{
-                fontSize: '0.68rem',
+                fontSize: 'clamp(0.58rem, 2.3vw, 0.68rem)',
                 fontFamily: 'ui-monospace, monospace',
                 color: '#999990',
-                letterSpacing: '0.1em',
+                letterSpacing: '0.06em',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
                 display: 'block',
                 marginBottom: '1rem',
               }}
             >
-              {isEs ? '// PRINCIPIO DE INGENIERÍA Y OFICIO (BAUHAUS METRICS)' : '// ARCHITECTURAL & CRAFT PRINCIPLE (BAUHAUS METRICS)'}
+              {isEs ? '// PRINCIPIO DE INGENIERÍA Y OFICIO' : '// ARCHITECTURAL & CRAFT PRINCIPLE'}
             </span>
             <blockquote
               style={{
@@ -402,69 +409,62 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
               {/* Step Header */}
               <div
                 style={{
-                  padding: '1rem clamp(1rem, 3vw, 1.75rem)',
+                  padding: '0.85rem clamp(0.85rem, 3vw, 1.75rem)',
                   backgroundColor: '#FAFAF8',
                   borderBottom: '1px solid #E2E2DE',
                   display: 'flex',
-                  flexWrap: 'wrap',
+                  flexWrap: 'nowrap',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  gap: '0.85rem',
+                  gap: '0.65rem',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(0.5rem, 2vw, 0.75rem)', flexWrap: 'nowrap', minWidth: 0, width: '100%' }}>
                   <span
                     className="bauhaus-num"
                     style={{
-                      fontSize: '1.25rem',
+                      fontSize: 'clamp(1.05rem, 3.5vw, 1.25rem)',
                       fontWeight: 800,
                       color: '#121210',
                       letterSpacing: '-0.02em',
                       borderRight: '1px solid #E2E2DE',
-                      paddingRight: '0.75rem',
+                      paddingRight: 'clamp(0.5rem, 2vw, 0.75rem)',
+                      whiteSpace: 'nowrap',
+                      flexShrink: 0,
                     }}
                   >
                     {cs.step1.num}
                   </span>
                   <span
                     style={{
-                      fontSize: '0.75rem',
+                      fontSize: 'clamp(0.62rem, 2.35vw, 0.75rem)',
                       fontFamily: 'ui-monospace, monospace',
                       color: '#121210',
                       fontWeight: 700,
-                      letterSpacing: '0.04em',
+                      letterSpacing: '0.03em',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      minWidth: 0,
                     }}
                   >
                     {cs.step1.tag}
                   </span>
                 </div>
-
-                <span
-                  style={{
-                    fontSize: '0.68rem',
-                    fontFamily: 'ui-monospace, monospace',
-                    color: '#2563EB',
-                    fontWeight: 700,
-                    backgroundColor: '#EFF6FF',
-                    border: '1px solid #BFDBFE',
-                    padding: '0.25rem 0.65rem',
-                    letterSpacing: '0.04em',
-                  }}
-                >
-                  {cs.step1.frictionBadge}
-                </span>
               </div>
 
               {/* Step Narrative Text */}
               <div style={{ padding: 'clamp(1.15rem, 3vw, 2rem)' }}>
                 <h2
                   style={{
-                    fontSize: 'clamp(1.35rem, 2.5vw, 1.85rem)',
+                    fontSize: 'clamp(1.08rem, 4.2vw, 1.85rem)',
                     fontWeight: 600,
                     color: '#121210',
                     letterSpacing: '-0.02em',
                     marginBottom: '0.75rem',
-                    textWrap: 'balance',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
                   }}
                 >
                   {cs.step1.title}
@@ -493,18 +493,21 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
                 >
                   <div
                     style={{
-                      padding: '0.45rem 0.85rem',
+                      padding: '0.45rem clamp(0.65rem, 2.5vw, 0.85rem)',
                       backgroundColor: '#121210',
                       color: '#FFFFFF',
-                      fontSize: '0.65rem',
+                      fontSize: 'clamp(0.56rem, 2.1vw, 0.65rem)',
                       fontFamily: 'ui-monospace, monospace',
                       display: 'flex',
+                      flexWrap: 'nowrap',
                       justifyContent: 'space-between',
                       alignItems: 'center',
+                      gap: '0.5rem',
+                      whiteSpace: 'nowrap',
                     }}
                   >
-                    <span>SOURCE ASSET: /public/dra-victoria/sketch-wireframe.png</span>
-                    <span>RESOLUTION: VECTOR DRAFTING</span>
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>SKETCH WIREFRAME</span>
+                    <span style={{ flexShrink: 0, color: '#A0A09A' }}>VECTOR DRAFT</span>
                   </div>
                   <img
                     src="/dra-victoria/sketch-wireframe.png"
@@ -541,13 +544,16 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
                 >
                   <h3
                     style={{
-                      fontSize: '0.78rem',
+                      fontSize: 'clamp(0.58rem, 2.15vw, 0.78rem)',
                       fontFamily: 'ui-monospace, monospace',
                       color: '#121210',
                       fontWeight: 700,
-                      letterSpacing: '0.06em',
+                      letterSpacing: '0.03em',
                       marginBottom: '1rem',
                       textTransform: 'uppercase',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
                     }}
                   >
                     {cs.step1.notesTitle}
@@ -590,69 +596,62 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
               {/* Step Header */}
               <div
                 style={{
-                  padding: '1rem clamp(1rem, 3vw, 1.75rem)',
+                  padding: '0.85rem clamp(0.85rem, 3vw, 1.75rem)',
                   backgroundColor: '#FAFAF8',
                   borderBottom: '1px solid #E2E2DE',
                   display: 'flex',
-                  flexWrap: 'wrap',
+                  flexWrap: 'nowrap',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  gap: '0.85rem',
+                  gap: '0.65rem',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(0.5rem, 2vw, 0.75rem)', flexWrap: 'nowrap', minWidth: 0, width: '100%' }}>
                   <span
                     className="bauhaus-num"
                     style={{
-                      fontSize: '1.25rem',
+                      fontSize: 'clamp(1.05rem, 3.5vw, 1.25rem)',
                       fontWeight: 800,
                       color: '#121210',
                       letterSpacing: '-0.02em',
                       borderRight: '1px solid #E2E2DE',
-                      paddingRight: '0.75rem',
+                      paddingRight: 'clamp(0.5rem, 2vw, 0.75rem)',
+                      whiteSpace: 'nowrap',
+                      flexShrink: 0,
                     }}
                   >
                     {cs.step2.num}
                   </span>
                   <span
                     style={{
-                      fontSize: '0.75rem',
+                      fontSize: 'clamp(0.62rem, 2.35vw, 0.75rem)',
                       fontFamily: 'ui-monospace, monospace',
                       color: '#121210',
                       fontWeight: 700,
-                      letterSpacing: '0.04em',
+                      letterSpacing: '0.03em',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      minWidth: 0,
                     }}
                   >
                     {cs.step2.tag}
                   </span>
                 </div>
-
-                <span
-                  style={{
-                    fontSize: '0.68rem',
-                    fontFamily: 'ui-monospace, monospace',
-                    color: '#121210',
-                    fontWeight: 700,
-                    backgroundColor: '#F3F3F0',
-                    border: '1px solid #D4D4CE',
-                    padding: '0.25rem 0.65rem',
-                    letterSpacing: '0.04em',
-                  }}
-                >
-                  {cs.step2.gridBadge}
-                </span>
               </div>
 
               {/* Step Narrative Text */}
               <div style={{ padding: 'clamp(1.15rem, 3vw, 2rem)' }}>
                 <h2
                   style={{
-                    fontSize: 'clamp(1.35rem, 2.5vw, 1.85rem)',
+                    fontSize: 'clamp(1.08rem, 4.2vw, 1.85rem)',
                     fontWeight: 600,
                     color: '#121210',
                     letterSpacing: '-0.02em',
                     marginBottom: '0.75rem',
-                    textWrap: 'balance',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
                   }}
                 >
                   {cs.step2.title}
@@ -681,18 +680,21 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
                 >
                   <div
                     style={{
-                      padding: '0.45rem 0.85rem',
+                      padding: '0.45rem clamp(0.65rem, 2.5vw, 0.85rem)',
                       backgroundColor: '#121210',
                       color: '#FFFFFF',
-                      fontSize: '0.65rem',
+                      fontSize: 'clamp(0.56rem, 2.1vw, 0.65rem)',
                       fontFamily: 'ui-monospace, monospace',
                       display: 'flex',
+                      flexWrap: 'nowrap',
                       justifyContent: 'space-between',
                       alignItems: 'center',
+                      gap: '0.5rem',
+                      whiteSpace: 'nowrap',
                     }}
                   >
-                    <span>SOURCE ASSET: /public/dra-victoria/figma-structure.png</span>
-                    <span>ATOMIC DESIGN TOKENS</span>
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>FIGMA STRUCTURE</span>
+                    <span style={{ flexShrink: 0, color: '#A0A09A' }}>DESIGN TOKENS</span>
                   </div>
                   <img
                     src="/dra-victoria/figma-structure.png"
@@ -729,13 +731,16 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
                 >
                   <h3
                     style={{
-                      fontSize: '0.78rem',
+                      fontSize: 'clamp(0.58rem, 2.15vw, 0.78rem)',
                       fontFamily: 'ui-monospace, monospace',
                       color: '#121210',
                       fontWeight: 700,
-                      letterSpacing: '0.06em',
+                      letterSpacing: '0.03em',
                       marginBottom: '1rem',
                       textTransform: 'uppercase',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
                     }}
                   >
                     {cs.step2.specsTitle}
@@ -778,86 +783,62 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
               {/* Step Header with Refined High-Contrast Link */}
               <div
                 style={{
-                  padding: '1rem clamp(1rem, 3vw, 1.75rem)',
+                  padding: '0.85rem clamp(0.85rem, 3vw, 1.75rem)',
                   backgroundColor: '#FAFAF8',
                   borderBottom: '1px solid #E2E2DE',
                   display: 'flex',
-                  flexWrap: 'wrap',
+                  flexWrap: 'nowrap',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  gap: '0.85rem',
+                  gap: '0.65rem',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(0.5rem, 2vw, 0.75rem)', flexWrap: 'nowrap', minWidth: 0, width: '100%' }}>
                   <span
                     className="bauhaus-num"
                     style={{
-                      fontSize: '1.25rem',
+                      fontSize: 'clamp(1.05rem, 3.5vw, 1.25rem)',
                       fontWeight: 800,
                       color: '#121210',
                       letterSpacing: '-0.02em',
                       borderRight: '1px solid #E2E2DE',
-                      paddingRight: '0.75rem',
+                      paddingRight: 'clamp(0.5rem, 2vw, 0.75rem)',
+                      whiteSpace: 'nowrap',
+                      flexShrink: 0,
                     }}
                   >
                     {cs.step3.num}
                   </span>
                   <span
                     style={{
-                      fontSize: '0.75rem',
+                      fontSize: 'clamp(0.62rem, 2.35vw, 0.75rem)',
                       fontFamily: 'ui-monospace, monospace',
                       color: '#121210',
                       fontWeight: 700,
-                      letterSpacing: '0.04em',
+                      letterSpacing: '0.03em',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      minWidth: 0,
                     }}
                   >
                     {cs.step3.tag}
                   </span>
                 </div>
-
-                <a
-                  href={cs.step3.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    fontSize: '0.72rem',
-                    fontFamily: 'ui-monospace, monospace',
-                    color: '#121210',
-                    fontWeight: 700,
-                    backgroundColor: '#FFFFFF',
-                    border: '1px solid #121210',
-                    padding: '0.35rem 0.8rem',
-                    textDecoration: 'none',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.4rem',
-                    minHeight: '36px',
-                    transition: 'all 0.15s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#121210';
-                    e.currentTarget.style.color = '#FFFFFF';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '#FFFFFF';
-                    e.currentTarget.style.color = '#121210';
-                  }}
-                >
-                  <span>{cs.step3.liveUrlLabel}</span>
-                  <span style={{ fontWeight: 800 }}>↗</span>
-                </a>
               </div>
 
               {/* Step Narrative Text */}
               <div style={{ padding: 'clamp(1.15rem, 3vw, 2rem)' }}>
                 <h2
                   style={{
-                    fontSize: 'clamp(1.35rem, 2.5vw, 1.85rem)',
+                    fontSize: 'clamp(1.08rem, 4.2vw, 1.85rem)',
                     fontWeight: 600,
                     color: '#121210',
                     letterSpacing: '-0.02em',
                     marginBottom: '0.75rem',
-                    textWrap: 'balance',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
                   }}
                 >
                   {cs.step3.title}
@@ -894,97 +875,9 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
                       flexWrap: 'wrap',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      gap: '0.75rem',
-                      paddingBottom: '0.85rem',
-                      borderBottom: '1px solid #E2E2DE',
-                    }}
-                  >
-                    <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.65rem' }}>
-                      <span
-                        style={{
-                          fontSize: '0.7rem',
-                          fontFamily: 'ui-monospace, monospace',
-                          color: '#121210',
-                          backgroundColor: '#EAEAE6',
-                          border: '1px solid #D4D4CE',
-                          padding: '0.3rem 0.65rem',
-                          fontWeight: 700,
-                          letterSpacing: '0.04em',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '0.45rem',
-                        }}
-                      >
-                        <span
-                          style={{
-                            width: '6px',
-                            height: '6px',
-                            borderRadius: '50%',
-                            backgroundColor: '#121210',
-                            display: 'inline-block',
-                          }}
-                        />
-                        STATUS: 200 OK · PRODUCTION
-                      </span>
-                      <span
-                        style={{
-                          fontSize: '0.68rem',
-                          fontFamily: 'ui-monospace, monospace',
-                          color: '#666660',
-                          letterSpacing: '0.04em',
-                        }}
-                      >
-                        PROTOCOL: HTTPS // EDGE RUNTIME
-                      </span>
-                    </div>
-
-                    <span
-                      style={{
-                        fontSize: '0.7rem',
-                        fontFamily: 'ui-monospace, monospace',
-                        color: '#444440',
-                        letterSpacing: '0.03em',
-                      }}
-                    >
-                      LATENCY: 42MS · ZERO BLOAT
-                    </span>
-                  </div>
-
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
                       gap: '1rem',
                     }}
                   >
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', minWidth: '220px', flex: '1 1 auto' }}>
-                      <span
-                        style={{
-                          fontSize: '0.66rem',
-                          fontFamily: 'ui-monospace, monospace',
-                          color: '#666660',
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.06em',
-                          fontWeight: 600,
-                        }}
-                      >
-                        {isEs ? 'ENDPOINT DE PRODUCCIÓN ACTIVO' : 'ACTIVE PRODUCTION ENDPOINT'}
-                      </span>
-                      <code
-                        style={{
-                          fontSize: 'clamp(0.82rem, 2vw, 0.95rem)',
-                          fontFamily: 'ui-monospace, monospace',
-                          color: '#121210',
-                          fontWeight: 700,
-                          wordBreak: 'break-all',
-                        }}
-                      >
-                        https://dra-victoria-mockup.vercel.app/
-                      </code>
-                    </div>
-
                     <a
                       id="btn-live-dra-victoria"
                       href="https://dra-victoria-mockup.vercel.app/"
@@ -1037,38 +930,40 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
                   {/* Banner Sub-Header with Viewport Controls */}
                   <div
                     style={{
-                      padding: '0.55rem 0.85rem',
+                      padding: '0.45rem clamp(0.65rem, 2.5vw, 0.85rem)',
                       backgroundColor: '#121210',
                       color: '#FFFFFF',
-                      fontSize: '0.68rem',
+                      fontSize: 'clamp(0.56rem, 2vw, 0.68rem)',
                       fontFamily: 'ui-monospace, monospace',
                       display: 'flex',
-                      flexWrap: 'wrap',
+                      flexWrap: 'nowrap',
                       justifyContent: 'space-between',
                       alignItems: 'center',
                       gap: '0.5rem',
+                      whiteSpace: 'nowrap',
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <span>SOURCE: dra-victoria-mockup.vercel.app</span>
-                      <span style={{ color: '#888880' }}>|</span>
-                      <span>STATUS: 200 OK</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', minWidth: 0, overflow: 'hidden' }}>
+                      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>LIVE PREVIEW</span>
+                      <span style={{ color: '#888880', flexShrink: 0 }}>|</span>
+                      <span style={{ color: '#A0A09A', flexShrink: 0 }}>200 OK</span>
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', flexShrink: 0 }}>
                       <button
                         type="button"
                         onClick={() => setPreviewMode('screenshot')}
                         style={{
-                          padding: '0.3rem 0.65rem',
-                          fontSize: '0.68rem',
+                          padding: '0.25rem clamp(0.45rem, 1.8vw, 0.65rem)',
+                          fontSize: 'clamp(0.56rem, 2vw, 0.68rem)',
                           fontFamily: 'ui-monospace, monospace',
                           backgroundColor: previewMode === 'screenshot' ? '#FFFFFF' : '#262624',
                           color: previewMode === 'screenshot' ? '#121210' : '#CCCCCC',
                           border: '1px solid #444440',
                           cursor: 'pointer',
                           fontWeight: previewMode === 'screenshot' ? 700 : 500,
-                          minHeight: '34px',
+                          minHeight: '30px',
+                          whiteSpace: 'nowrap',
                         }}
                       >
                         {isEs ? '◉ CAPTURA' : '◉ CAPTURE'}
@@ -1077,18 +972,19 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
                         type="button"
                         onClick={() => setPreviewMode('interactive')}
                         style={{
-                          padding: '0.3rem 0.65rem',
-                          fontSize: '0.68rem',
+                          padding: '0.25rem clamp(0.45rem, 1.8vw, 0.65rem)',
+                          fontSize: 'clamp(0.56rem, 2vw, 0.68rem)',
                           fontFamily: 'ui-monospace, monospace',
                           backgroundColor: previewMode === 'interactive' ? '#FFFFFF' : '#262624',
                           color: previewMode === 'interactive' ? '#121210' : '#CCCCCC',
                           border: previewMode === 'interactive' ? '1px solid #FFFFFF' : '1px solid #444440',
                           cursor: 'pointer',
                           fontWeight: previewMode === 'interactive' ? 700 : 500,
-                          minHeight: '34px',
+                          minHeight: '30px',
+                          whiteSpace: 'nowrap',
                         }}
                       >
-                        {isEs ? '▷ VISTA INTERACTIVA' : '▷ LIVE EMBED'}
+                        {isEs ? '▷ INTERACTIVA' : '▷ LIVE EMBED'}
                       </button>
                     </div>
                   </div>
@@ -1207,13 +1103,16 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
                 >
                   <h3
                     style={{
-                      fontSize: '0.78rem',
+                      fontSize: 'clamp(0.58rem, 2.15vw, 0.78rem)',
                       fontFamily: 'ui-monospace, monospace',
                       color: '#121210',
                       fontWeight: 700,
-                      letterSpacing: '0.06em',
+                      letterSpacing: '0.03em',
                       marginBottom: '1rem',
                       textTransform: 'uppercase',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
                     }}
                   >
                     {cs.step3.featuresTitle}
@@ -1309,26 +1208,31 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
               {/* Direct Link Back to Studio Offer & Contact */}
               <a
                 id="cta-return-studio-consultation"
-                href="/#contacto"
-                onClick={(e) => navigateTo(e, '/#contacto')}
+                href={isUsMode ? '/us/#contact' : '/#contacto'}
+                onClick={(e) => navigateTo(e, isUsMode ? '/us/#contact' : '/#contacto')}
                 style={{
                   display: 'inline-flex',
+                  flexWrap: 'nowrap',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '0.5rem',
-                  padding: '0.95rem 1.6rem',
+                  gap: '0.4rem',
+                  padding: '0.85rem clamp(0.7rem, 2.5vw, 1.5rem)',
                   backgroundColor: '#FFFFFF',
                   color: '#121210',
                   textDecoration: 'none',
                   fontFamily: 'ui-monospace, monospace',
-                  fontSize: '0.84rem',
+                  fontSize: 'clamp(0.62rem, 2.3vw, 0.82rem)',
                   fontWeight: 700,
-                  letterSpacing: '0.04em',
+                  letterSpacing: '0.02em',
+                  whiteSpace: 'nowrap',
                   border: '1px solid #FFFFFF',
                   transition: 'all 0.18s ease',
-                  minHeight: '48px',
+                  minHeight: '46px',
                   flex: '1 1 auto',
                   textAlign: 'center',
+                  maxWidth: '100%',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = '#EAEAE6';
@@ -1337,7 +1241,9 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
                   e.currentTarget.style.backgroundColor = '#FFFFFF';
                 }}
               >
-                {cs.summary.ctaConsultation}
+                <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {cs.summary.ctaConsultation}
+                </span>
               </a>
 
               {/* Instant WhatsApp Consultation */}
@@ -1348,22 +1254,25 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
                 rel="noopener noreferrer"
                 style={{
                   display: 'inline-flex',
+                  flexWrap: 'nowrap',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '0.5rem',
-                  padding: '0.95rem 1.6rem',
+                  gap: '0.4rem',
+                  padding: '0.85rem clamp(0.7rem, 2.5vw, 1.5rem)',
                   backgroundColor: 'transparent',
                   color: '#FFFFFF',
                   textDecoration: 'none',
                   fontFamily: 'ui-monospace, monospace',
-                  fontSize: '0.84rem',
+                  fontSize: 'clamp(0.62rem, 2.3vw, 0.82rem)',
                   fontWeight: 600,
-                  letterSpacing: '0.04em',
+                  letterSpacing: '0.02em',
+                  whiteSpace: 'nowrap',
                   border: '1px solid #555550',
                   transition: 'all 0.18s ease',
-                  minHeight: '48px',
+                  minHeight: '46px',
                   flex: '1 1 auto',
                   textAlign: 'center',
+                  maxWidth: '100%',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = '#FFFFFF';
@@ -1374,8 +1283,8 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
                   e.currentTarget.style.backgroundColor = 'transparent';
                 }}
               >
-                <span>{cs.summary.ctaWhatsApp}</span>
-                <span>↗</span>
+                <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{cs.summary.ctaWhatsApp}</span>
+                <span style={{ flexShrink: 0 }}>↗</span>
               </a>
             </div>
           </section>
@@ -1405,8 +1314,8 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
             <a
-              href="/"
-              onClick={(e) => navigateTo(e, '/')}
+              href={backLinkPath}
+              onClick={(e) => navigateTo(e, backLinkPath)}
               style={{
                 fontSize: '0.75rem',
                 fontFamily: 'ui-monospace, monospace',
@@ -1417,7 +1326,7 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
                 alignItems: 'center',
               }}
             >
-              ESTUDIO / INICIO
+              {isEs ? 'ESTUDIO / INICIO' : 'STUDIO / HOME'}
             </a>
             <a
               href="/us"

@@ -38,7 +38,7 @@ export const INTERNATIONAL_CONFIG: InternationalConfig = {
 
   // International starting price in USD (USD only throughout /us/)
   startingPrice: '$499 USD',
-  pricingLabel: 'Initial investment',
+  pricingLabel: 'Your brand running on autopilot',
   pricingSubtext: 'Starting price is visible · Scope defined before work begins',
 
   // Domain cost benchmark in USD

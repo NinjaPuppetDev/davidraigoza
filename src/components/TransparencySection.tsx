@@ -47,13 +47,13 @@ export default function TransparencySection() {
           }}
         >
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-              <span style={{ fontSize: '0.7rem', fontFamily: 'ui-monospace, monospace', color: '#999990', fontWeight: 600, textTransform: 'uppercase' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'nowrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
+              <span style={{ fontSize: 'clamp(0.58rem, 2vw, 0.7rem)', fontFamily: 'ui-monospace, monospace', color: '#999990', fontWeight: 600, textTransform: 'uppercase', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>
                 {tr.baseCost.concept}
               </span>
               <span
                 style={{
-                  fontSize: '0.65rem',
+                  fontSize: 'clamp(0.56rem, 1.9vw, 0.65rem)',
                   fontFamily: 'ui-monospace, monospace',
                   padding: '0.15rem 0.5rem',
                   backgroundColor: 'rgba(255, 255, 255, 0.15)',
@@ -63,9 +63,11 @@ export default function TransparencySection() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.35rem',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
                 }}
               >
-                <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#10B981' }} />
+                <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#10B981', flexShrink: 0 }} />
                 {tr.baseCost.badge}
               </span>
             </div>
@@ -97,7 +99,7 @@ export default function TransparencySection() {
             }}
           >
             <div>
-              <span style={{ fontSize: '0.68rem', fontFamily: 'ui-monospace, monospace', color: '#666660', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem' }}>
+              <span style={{ fontSize: '0.68rem', fontFamily: 'ui-monospace, monospace', color: '#666660', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem', whiteSpace: 'nowrap' }}>
                 {tr.domain.concept}
               </span>
               <h3 style={{ fontSize: '1.15rem', fontWeight: 600, color: '#121210', marginBottom: '0.4rem', textWrap: 'balance' }}>
@@ -127,25 +129,28 @@ export default function TransparencySection() {
             }}
           >
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-                <span style={{ fontSize: '0.68rem', fontFamily: 'ui-monospace, monospace', color: '#666660', textTransform: 'uppercase' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'nowrap', gap: '0.35rem', marginBottom: '0.4rem', width: '100%', minWidth: 0 }}>
+                <span style={{ fontSize: 'clamp(0.48rem, 1.45vw, 0.62rem)', fontFamily: 'ui-monospace, monospace', color: '#666660', textTransform: 'uppercase', letterSpacing: '-0.01em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>
                   {tr.hosting.concept}
                 </span>
                 <span
                   style={{
-                    fontSize: '0.62rem',
+                    fontSize: 'clamp(0.48rem, 1.4vw, 0.58rem)',
                     fontFamily: 'ui-monospace, monospace',
                     color: '#B91C1C',
                     backgroundColor: '#FEF2F2',
                     border: '1px solid #FECACA',
-                    padding: '0.1rem 0.4rem',
+                    padding: '0.1rem 0.32rem',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.3rem',
+                    gap: '0.22rem',
                     fontWeight: 600,
+                    letterSpacing: '-0.01em',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0,
                   }}
                 >
-                  <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#EF4444' }} />
+                  <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#EF4444', flexShrink: 0 }} />
                   {t.header.badge}
                 </span>
               </div>

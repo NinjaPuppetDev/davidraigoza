@@ -4,15 +4,31 @@ import { useLanguage } from '../context/LanguageContext';
 declare global {
   interface Window {
     __openCookieBanner?: () => void;
+    __cookieConsentDismissed?: boolean;
   }
+}
+
+function hasStoredConsent(): boolean {
+  if (typeof window === 'undefined') return false;
+  if (window.__cookieConsentDismissed) return true;
+  try {
+    const savedChoice = localStorage.getItem('davidraigoza_cookie_consent_choice');
+    if (savedChoice === 'accepted' || savedChoice === 'declined') {
+      window.__cookieConsentDismissed = true;
+      return true;
+    }
+  } catch {
+    // Storage unavailable
+  }
+  return false;
 }
 
 export default function CookieBanner() {
   const { t } = useLanguage();
   const cb = t.cookieBanner;
 
-  // Always show banner on fresh page visits so users can review and interact with it
-  const [isVisible, setIsVisible] = useState<boolean>(true);
+  // Only show banner if the user has not already accepted or declined
+  const [isVisible, setIsVisible] = useState<boolean>(() => !hasStoredConsent());
 
   // Expose global method to reopen the banner anytime (e.g. from the footer link)
   useEffect(() => {
@@ -25,6 +41,7 @@ export default function CookieBanner() {
   }, []);
 
   const handleAccept = () => {
+    window.__cookieConsentDismissed = true;
     try {
       localStorage.setItem('davidraigoza_cookie_consent_choice', 'accepted');
     } catch {
@@ -34,6 +51,7 @@ export default function CookieBanner() {
   };
 
   const handleDecline = () => {
+    window.__cookieConsentDismissed = true;
     try {
       localStorage.setItem('davidraigoza_cookie_consent_choice', 'declined');
     } catch {

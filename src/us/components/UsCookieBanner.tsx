@@ -3,11 +3,27 @@ import { useState, useEffect } from 'react';
 declare global {
   interface Window {
     __openCookieBanner?: () => void;
+    __cookieConsentDismissed?: boolean;
   }
 }
 
+function hasStoredConsent(): boolean {
+  if (typeof window === 'undefined') return false;
+  if (window.__cookieConsentDismissed) return true;
+  try {
+    const savedChoice = localStorage.getItem('davidraigoza_cookie_consent_choice');
+    if (savedChoice === 'accepted' || savedChoice === 'declined') {
+      window.__cookieConsentDismissed = true;
+      return true;
+    }
+  } catch {
+    // Storage unavailable
+  }
+  return false;
+}
+
 export default function UsCookieBanner() {
-  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [isVisible, setIsVisible] = useState<boolean>(() => !hasStoredConsent());
 
   useEffect(() => {
     window.__openCookieBanner = () => {
@@ -19,6 +35,7 @@ export default function UsCookieBanner() {
   }, []);
 
   const handleAccept = () => {
+    window.__cookieConsentDismissed = true;
     try {
       localStorage.setItem('davidraigoza_cookie_consent_choice', 'accepted');
     } catch {
@@ -28,6 +45,7 @@ export default function UsCookieBanner() {
   };
 
   const handleDecline = () => {
+    window.__cookieConsentDismissed = true;
     try {
       localStorage.setItem('davidraigoza_cookie_consent_choice', 'declined');
     } catch {

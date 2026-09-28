@@ -271,7 +271,7 @@ export default function UsCaseStudiesSection() {
             {/* Top Card Metadata Ledger - Minimal, Monochrome, Sharp */}
             <div
               style={{
-                padding: 'clamp(0.9rem, 2.5vw, 1.15rem) clamp(1rem, 3vw, 1.5rem)',
+                padding: 'clamp(0.75rem, 2.5vw, 1.15rem) clamp(0.75rem, 3vw, 1.5rem)',
                 borderBottom: '1px solid #E2E2DE',
                 backgroundColor: '#FAFAF8',
                 display: 'flex',
@@ -279,29 +279,45 @@ export default function UsCaseStudiesSection() {
                 justifyContent: 'space-between',
               }}
             >
-              <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.65rem' }}>
+              <div
+                className="case-study-card-header-row"
+                style={{
+                  display: 'flex',
+                  flexWrap: 'nowrap',
+                  alignItems: 'center',
+                  gap: 'clamp(0.35rem, 1.5vw, 0.65rem)',
+                  width: '100%',
+                  minWidth: 0,
+                }}
+              >
                 <span
                   className="bauhaus-num"
                   style={{
-                    fontSize: '0.92rem',
+                    fontSize: 'clamp(0.78rem, 2.6vw, 0.92rem)',
                     fontWeight: 700,
                     color: '#121210',
                     letterSpacing: '-0.02em',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0,
                   }}
                 >
                   {project.number}
                 </span>
                 <span
+                  className="case-study-card-tag"
                   style={{
-                    fontSize: '0.68rem',
+                    fontSize: 'clamp(0.54rem, 2.15vw, 0.68rem)',
                     fontFamily: 'ui-monospace, monospace',
-                    padding: '0.15rem 0.5rem',
+                    padding: '0.15rem clamp(0.35rem, 1.2vw, 0.5rem)',
                     backgroundColor: '#FFFFFF',
                     border: '1px solid #E2E2DE',
                     color: '#121210',
                     fontWeight: 700,
-                    letterSpacing: '0.04em',
+                    letterSpacing: '0.02em',
                     whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    minWidth: 0,
                   }}
                 >
                   {project.tag}
@@ -454,7 +470,7 @@ export default function UsCaseStudiesSection() {
             {/* Action Link Footer: Direct Live Site + Case Study Deep Dive */}
             <div
               style={{
-                padding: 'clamp(0.9rem, 2.5vw, 1.15rem) clamp(1rem, 3vw, 1.5rem)',
+                padding: 'clamp(0.85rem, 2.5vw, 1.15rem) clamp(0.75rem, 3vw, 1.5rem)',
                 borderTop: '1px solid #E2E2DE',
                 backgroundColor: '#FAFAF8',
                 display: 'flex',
@@ -469,22 +485,26 @@ export default function UsCaseStudiesSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${project.client} - View live production deployment`}
+                className="case-study-action-btn"
                 style={{
                   display: 'inline-flex',
+                  flexWrap: 'nowrap',
                   alignItems: 'center',
                   justifyContent: 'space-between',
+                  gap: '0.4rem',
                   width: '100%',
-                  padding: '0.8rem 1.15rem',
+                  padding: '0.75rem clamp(0.65rem, 2.5vw, 1.15rem)',
                   backgroundColor: '#111111',
                   color: '#FFFFFF',
                   textDecoration: 'none',
                   fontFamily: 'ui-monospace, monospace',
-                  fontSize: '0.78rem',
+                  fontSize: 'clamp(0.64rem, 2.4vw, 0.78rem)',
                   fontWeight: 700,
-                  letterSpacing: '0.05em',
+                  letterSpacing: '0.03em',
+                  whiteSpace: 'nowrap',
                   border: '1px solid #111111',
                   transition: 'all 0.18s cubic-bezier(0.16, 1, 0.3, 1)',
-                  minHeight: '44px',
+                  minHeight: '42px',
                   boxShadow: '0 2px 4px rgba(0,0,0,0.08)',
                 }}
                 onMouseEnter={(e) => {
@@ -498,7 +518,7 @@ export default function UsCaseStudiesSection() {
                   e.currentTarget.style.color = '#FFFFFF';
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', minWidth: 0, whiteSpace: 'nowrap' }}>
                   <span
                     style={{
                       width: '7px',
@@ -507,11 +527,12 @@ export default function UsCaseStudiesSection() {
                       backgroundColor: '#4ADE80',
                       boxShadow: '0 0 6px rgba(74, 222, 128, 0.8)',
                       display: 'inline-block',
+                      flexShrink: 0,
                     }}
                   />
-                  <span>{project.liveAction}</span>
+                  <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{project.liveAction}</span>
                 </div>
-                <span style={{ fontSize: '0.88rem', color: '#4ADE80', fontWeight: 800 }}>↗</span>
+                <span style={{ fontSize: '0.88rem', color: '#4ADE80', fontWeight: 800, flexShrink: 0 }}>↗</span>
               </a>
 
               {/* Dedicated Case Study In-Depth Analysis Link */}
@@ -519,19 +540,23 @@ export default function UsCaseStudiesSection() {
                 id={`action-${project.id}`}
                 href={project.url}
                 onClick={(e) => navigateTo(e, project.url)}
+                className="case-study-action-btn"
                 style={{
                   display: 'inline-flex',
+                  flexWrap: 'nowrap',
                   alignItems: 'center',
                   justifyContent: 'space-between',
+                  gap: '0.4rem',
                   width: '100%',
-                  padding: '0.75rem 1.15rem',
+                  padding: '0.7rem clamp(0.65rem, 2.5vw, 1.15rem)',
                   backgroundColor: '#FFFFFF',
                   color: '#121210',
                   textDecoration: 'none',
                   fontFamily: 'ui-monospace, monospace',
-                  fontSize: '0.76rem',
+                  fontSize: 'clamp(0.6rem, 2.3vw, 0.76rem)',
                   fontWeight: 600,
-                  letterSpacing: '0.04em',
+                  letterSpacing: '0.02em',
+                  whiteSpace: 'nowrap',
                   transition: 'all 0.18s ease',
                   border: '1px solid #121210',
                   minHeight: '42px',
@@ -545,8 +570,8 @@ export default function UsCaseStudiesSection() {
                   e.currentTarget.style.color = '#121210';
                 }}
               >
-                <span>{project.action}</span>
-                <span style={{ fontSize: '0.9rem' }}>→</span>
+                <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{project.action}</span>
+                <span style={{ fontSize: '0.85rem', flexShrink: 0 }}>→</span>
               </a>
             </div>
           </article>

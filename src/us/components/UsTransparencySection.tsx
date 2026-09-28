@@ -42,13 +42,13 @@ export default function UsTransparencySection() {
           }}
         >
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-              <span style={{ fontSize: '0.7rem', fontFamily: 'ui-monospace, monospace', color: '#999990', fontWeight: 600, textTransform: 'uppercase' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'nowrap', gap: '0.5rem', marginBottom: '1.25rem' }}>
+              <span style={{ fontSize: 'clamp(0.58rem, 2vw, 0.7rem)', fontFamily: 'ui-monospace, monospace', color: '#999990', fontWeight: 600, textTransform: 'uppercase', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>
                 CONCEPT 01 · BASE FEE
               </span>
               <span
                 style={{
-                  fontSize: '0.65rem',
+                  fontSize: 'clamp(0.56rem, 1.9vw, 0.65rem)',
                   fontFamily: 'ui-monospace, monospace',
                   padding: '0.15rem 0.5rem',
                   backgroundColor: 'rgba(255, 255, 255, 0.15)',
@@ -58,9 +58,11 @@ export default function UsTransparencySection() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.35rem',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
                 }}
               >
-                <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#10B981' }} />
+                <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#10B981', flexShrink: 0 }} />
                 ONE-TIME PAYMENT
               </span>
             </div>
@@ -132,13 +134,36 @@ export default function UsTransparencySection() {
               flexDirection: 'column',
               justifyContent: 'space-between',
               border: '1px solid #E2E2DE',
+              borderTop: '3px solid #EF4444',
               transitionDelay: '80ms',
             }}
           >
             <div>
-              <span style={{ fontSize: '0.68rem', fontFamily: 'ui-monospace, monospace', color: '#666660', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem' }}>
-                CONCEPT 03 · INFRASTRUCTURE
-              </span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'nowrap', gap: '0.35rem', marginBottom: '0.4rem', width: '100%', minWidth: 0 }}>
+                <span style={{ fontSize: 'clamp(0.48rem, 1.45vw, 0.62rem)', fontFamily: 'ui-monospace, monospace', color: '#666660', textTransform: 'uppercase', letterSpacing: '-0.01em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>
+                  CONCEPT 03 · INFRASTRUCTURE
+                </span>
+                <span
+                  style={{
+                    fontSize: 'clamp(0.48rem, 1.4vw, 0.58rem)',
+                    fontFamily: 'ui-monospace, monospace',
+                    color: '#B91C1C',
+                    backgroundColor: '#FEF2F2',
+                    border: '1px solid #FECACA',
+                    padding: '0.1rem 0.32rem',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.22rem',
+                    fontWeight: 600,
+                    letterSpacing: '-0.01em',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0,
+                  }}
+                >
+                  <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#EF4444', flexShrink: 0 }} />
+                  No mandatory monthly fees
+                </span>
+              </div>
               <h3 style={{ fontSize: '1.15rem', fontWeight: 600, color: '#121210', marginBottom: '0.4rem', textWrap: 'balance' }}>
                 Web hosting & cloud services
               </h3>
@@ -167,19 +192,21 @@ export default function UsTransparencySection() {
             }}
           >
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-                <span style={{ fontSize: '0.68rem', fontFamily: 'ui-monospace, monospace', color: '#2563EB', textTransform: 'uppercase', fontWeight: 600 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'nowrap', gap: '0.4rem', marginBottom: '0.4rem' }}>
+                <span style={{ fontSize: 'clamp(0.55rem, 1.85vw, 0.68rem)', fontFamily: 'ui-monospace, monospace', color: '#2563EB', textTransform: 'uppercase', fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>
                   OPTIONAL PAYMENT METHOD
                 </span>
                 <span
                   style={{
-                    fontSize: '0.62rem',
+                    fontSize: 'clamp(0.54rem, 1.8vw, 0.62rem)',
                     fontFamily: 'ui-monospace, monospace',
                     color: '#2563EB',
                     backgroundColor: '#EFF6FF',
                     border: '1px solid #DBEAFE',
                     padding: '0.1rem 0.4rem',
                     fontWeight: 600,
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0,
                   }}
                 >
                   FLEXIBLE
