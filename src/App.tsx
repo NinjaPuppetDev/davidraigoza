@@ -23,6 +23,8 @@ import FloatingWhatsApp from './components/FloatingWhatsApp';
 import DraVictoriaCaseStudy from './components/DraVictoriaCaseStudy';
 import CommonGroundCaseStudy from './components/CommonGroundCaseStudy';
 import TalentShowcaseCaseStudy from './components/TalentShowcaseCaseStudy';
+import NewsletterPage from './components/NewsletterPage';
+import NewsletterThankYouPage from './components/NewsletterThankYouPage';
 import UsApp from './us/UsApp';
 
 function AppContent() {
@@ -125,6 +127,10 @@ function AppContent() {
 type AppRoute =
   | 'main'
   | 'us'
+  | 'newsletter'
+  | 'us-newsletter'
+  | 'newsletter-thank-you'
+  | 'us-newsletter-thank-you'
   | 'case-study-dra-victoria'
   | 'case-study-commonground'
   | 'case-study-talent-showcase'
@@ -136,6 +142,17 @@ function parseRoute(pathname: string): AppRoute {
   // Validación directa del subdominio de EE. UU.
   if (typeof window !== 'undefined' && window.location.hostname.toLowerCase() === 'us.davidraigoza.online') {
     const normalizedPath = (pathname || '/').toLowerCase().replace(/\/+$/, '') || '/';
+    if (
+      normalizedPath === '/newsletter/thank-you' ||
+      normalizedPath.startsWith('/newsletter/thank-you/') ||
+      normalizedPath === '/newsletter/gracias' ||
+      normalizedPath.startsWith('/newsletter/gracias/')
+    ) {
+      return 'us-newsletter-thank-you';
+    }
+    if (normalizedPath === '/newsletter' || normalizedPath.startsWith('/newsletter/')) {
+      return 'us-newsletter';
+    }
     if (normalizedPath === '/case-studies/dra-victoria' || normalizedPath.startsWith('/case-studies/dra-victoria/')) {
       return 'us-case-study-dra-victoria';
     }
@@ -154,6 +171,32 @@ function parseRoute(pathname: string): AppRoute {
   }
 
   const normalized = (pathname || '/').toLowerCase().replace(/\/+$/, '') || '/';
+
+  // Newsletter Thank You routes (/newsletter/gracias and /us/newsletter/thank-you)
+  if (
+    normalized === '/us/newsletter/thank-you' ||
+    normalized.startsWith('/us/newsletter/thank-you/') ||
+    normalized === '/us/newsletter/gracias' ||
+    normalized.startsWith('/us/newsletter/gracias/')
+  ) {
+    return 'us-newsletter-thank-you';
+  }
+  if (
+    normalized === '/newsletter/gracias' ||
+    normalized.startsWith('/newsletter/gracias/') ||
+    normalized === '/newsletter/thank-you' ||
+    normalized.startsWith('/newsletter/thank-you/')
+  ) {
+    return 'newsletter-thank-you';
+  }
+
+  // Newsletter routes (/newsletter and /us/newsletter)
+  if (normalized === '/us/newsletter' || normalized.startsWith('/us/newsletter/')) {
+    return 'us-newsletter';
+  }
+  if (normalized === '/newsletter' || normalized.startsWith('/newsletter/')) {
+    return 'newsletter';
+  }
 
   // Specific /us case study routes (strictly in English, no translation toggle)
   if (normalized === '/us/case-studies/dra-victoria' || normalized.startsWith('/us/case-studies/dra-victoria/')) {
@@ -286,6 +329,38 @@ export default function App() {
       document.removeEventListener('click', handleLinkClick);
     };
   }, [route]);
+
+  if (route === 'us-newsletter-thank-you') {
+    return (
+      <LanguageProvider forcedLanguage="en">
+        <NewsletterThankYouPage locale="en" />
+      </LanguageProvider>
+    );
+  }
+
+  if (route === 'newsletter-thank-you') {
+    return (
+      <LanguageProvider forcedLanguage="es">
+        <NewsletterThankYouPage locale="es" />
+      </LanguageProvider>
+    );
+  }
+
+  if (route === 'us-newsletter') {
+    return (
+      <LanguageProvider forcedLanguage="en">
+        <NewsletterPage locale="en" />
+      </LanguageProvider>
+    );
+  }
+
+  if (route === 'newsletter') {
+    return (
+      <LanguageProvider forcedLanguage="es">
+        <NewsletterPage locale="es" />
+      </LanguageProvider>
+    );
+  }
 
   if (route === 'us') {
     return (

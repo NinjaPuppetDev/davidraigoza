@@ -4,6 +4,7 @@ import http from 'http';
 import path from 'path';
 import { WebSocketServer, WebSocket } from 'ws';
 import { GoogleGenAI, LiveServerMessage, Modality } from '@google/genai';
+import { submitNewsletterToZoho } from './api/newsletter';
 
 const PORT = 3000;
 
@@ -38,6 +39,18 @@ function getGreetingPrompt(lang: string, isUsOnly: boolean): string {
 
 async function startServer() {
   const app = express();
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+
+  app.post('/api/newsletter', async (req, res) => {
+    try {
+      const result = await submitNewsletterToZoho(req.body || {});
+      res.status(result.status).json(result.data);
+    } catch {
+      res.status(400).json({ ok: false, message: 'Invalid request body.' });
+    }
+  });
+
   const server = http.createServer(app);
   const wss = new WebSocketServer({ server, path: '/live' });
 
