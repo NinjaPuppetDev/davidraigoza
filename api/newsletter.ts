@@ -8,6 +8,7 @@ export interface NewsletterApiResponse {
   ok: boolean;
   message: string;
   redirectTo?: string;
+  zohoDebug?: string;
 }
 
 const ZOHO_ACTION_URL = 'https://zcvf-zcmp.maillist-manage.com/weboptin.zc';
@@ -94,7 +95,10 @@ export async function submitNewsletterToZoho(
       redirect: 'manual',
     });
 
-    // Zoho responds with 200 OK or a 301/302 redirect to redirectURL upon successful registration
+    const responseText = await zohoResponse.text();
+    console.log('[API /api/newsletter] Zoho response status:', zohoResponse.status);
+    console.log('[API /api/newsletter] Zoho response body:', responseText);
+
     const isSuccess =
       (zohoResponse.status >= 200 && zohoResponse.status < 400) ||
       zohoResponse.type === 'opaqueredirect';
@@ -108,6 +112,7 @@ export async function submitNewsletterToZoho(
             locale === 'es'
               ? 'No se pudo completar el registro en Zoho Campaigns.'
               : 'Could not complete registration with Zoho Campaigns.',
+          zohoDebug: responseText.slice(0, 200),
         },
       };
     }
@@ -138,9 +143,6 @@ export async function submitNewsletterToZoho(
   }
 }
 
-/**
- * Web Standard / Next.js Route Handler (POST)
- */
 export async function POST(request: Request): Promise<Response> {
   try {
     const body = (await request.json()) as NewsletterRequestBody;
@@ -160,9 +162,6 @@ export async function POST(request: Request): Promise<Response> {
   }
 }
 
-/**
- * Vercel / Node Serverless Function default handler (req, res)
- */
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     res.status(405).json({ ok: false, message: 'Method Not Allowed' });
