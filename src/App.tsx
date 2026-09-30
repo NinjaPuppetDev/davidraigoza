@@ -25,6 +25,7 @@ import CommonGroundCaseStudy from './components/CommonGroundCaseStudy';
 import TalentShowcaseCaseStudy from './components/TalentShowcaseCaseStudy';
 import NewsletterPage from './components/NewsletterPage';
 import NewsletterThankYouPage from './components/NewsletterThankYouPage';
+import UsNewsletterPage from './us/components/UsNewsletterPage';
 import UsApp from './us/UsApp';
 
 function AppContent() {
@@ -367,7 +368,7 @@ export default function App() {
   if (route === 'us-newsletter') {
     return (
       <LanguageProvider forcedLanguage="en">
-        <NewsletterPage locale="en" />
+        <UsNewsletterPage />
       </LanguageProvider>
     );
   }
