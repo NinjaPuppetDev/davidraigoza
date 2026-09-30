@@ -4,24 +4,29 @@ export interface NewsletterSignupFormProps {
   locale: 'es' | 'en';
 }
 
-const ZOHO_SF_ID = 'sf3z7745abead796b0932a399faecbb22f0b5c703f467f9e582712c4f3b572614c67';
-const ZOHO_FORM_IX = '3z7745abead796b0932a399faecbb22f0b5c703f467f9e582712c4f3b572614c67';
-
-const ZOHO_EMBED_COPY = {
+const ZOHO_EMBED_CONFIG = {
   es: {
-    heading: 'Suscríbete al boletín',
+    sfId: 'sf3z7745abead796b0932a399faecbb22f0bec271edcb24e53fe8d049c215d384dc3',
+    formIx: '3z7745abead796b0932a399faecbb22f0bec271edcb24e53fe8d049c215d384dc3',
+    recapThemeOptin: '0',
+    zcld: '117db3e22581c805f',
+    heading: 'Únete al boletín',
     emailPlaceholder: 'Correo electrónico',
     submitValue: 'Suscribirme',
-    thankYouUrl: 'https://davidraigoza.online/newsletter/gracias',
-    localThankYouPath: '/newsletter/gracias',
+    thankYouUrl: 'https://davidraigoza.online/gracias',
+    localThankYouPath: '/gracias',
     unsubscribeNote: 'Puedes darte de baja cuando quieras.',
   },
   en: {
+    sfId: 'sf3z7745abead796b0932a399faecbb22f0b5c703f467f9e582712c4f3b572614c67',
+    formIx: '3z7745abead796b0932a399faecbb22f0b5c703f467f9e582712c4f3b572614c67',
+    recapThemeOptin: '2',
+    zcld: '117db3e22581c8057',
     heading: 'Join Our Newsletter',
     emailPlaceholder: 'Email',
     submitValue: 'Join Now',
-    thankYouUrl: 'https://davidraigoza.online/us/newsletter/thankyou',
-    localThankYouPath: '/us/newsletter/thankyou',
+    thankYouUrl: 'https://davidraigoza.online/us/thank-you',
+    localThankYouPath: '/us/thank-you',
     unsubscribeNote: 'You can unsubscribe at any time.',
   },
 } as const;
@@ -39,11 +44,14 @@ declare global {
     runOnFormSubmit_sf3z7745abead796b0932a399faecbb22f0b5c703f467f9e582712c4f3b572614c67?: (
       th: unknown
     ) => void;
+    runOnFormSubmit_sf3z7745abead796b0932a399faecbb22f0bec271edcb24e53fe8d049c215d384dc3?: (
+      th: unknown
+    ) => void;
   }
 }
 
 export default function NewsletterSignupForm({ locale }: NewsletterSignupFormProps) {
-  const copy = ZOHO_EMBED_COPY[locale];
+  const config = ZOHO_EMBED_CONFIG[locale];
   const isSubmittingRef = useRef(false);
   const hasRedirectedRef = useRef(false);
   const redirectTimerRef = useRef<number | null>(null);
@@ -58,9 +66,9 @@ export default function NewsletterSignupForm({ locale }: NewsletterSignupFormPro
     }
 
     if (window.location.hostname.endsWith('davidraigoza.online')) {
-      window.location.href = copy.thankYouUrl;
+      window.location.href = config.thankYouUrl;
     } else {
-      window.history.pushState(null, '', copy.localThankYouPath);
+      window.history.pushState(null, '', config.localThankYouPath);
       window.dispatchEvent(new PopStateEvent('popstate'));
       window.scrollTo(0, 0);
     }
@@ -74,31 +82,33 @@ export default function NewsletterSignupForm({ locale }: NewsletterSignupFormPro
     isSubmittingRef.current = false;
     hasRedirectedRef.current = false;
 
-    // 1. Define global submit callback required by Zoho Embedded Form:
-    // function runOnFormSubmit_sf3z7745abead796b0932a399faecbb22f0b5c703f467f9e582712c4f3b572614c67(th){};
+    const handleZohoSubmitCallback = (_th: unknown) => {
+      isSubmittingRef.current = true;
+      if (redirectTimerRef.current !== null) {
+        window.clearTimeout(redirectTimerRef.current);
+      }
+      redirectTimerRef.current = window.setTimeout(() => {
+        redirectToThankYou();
+      }, 1100);
+    };
+
+    // 1. Define global submit callbacks required by Zoho Embedded Forms (EN & ES):
     window.runOnFormSubmit_sf3z7745abead796b0932a399faecbb22f0b5c703f467f9e582712c4f3b572614c67 =
-      function (_th: unknown) {
-        isSubmittingRef.current = true;
-        if (redirectTimerRef.current !== null) {
-          window.clearTimeout(redirectTimerRef.current);
-        }
-        redirectTimerRef.current = window.setTimeout(() => {
-          redirectToThankYou();
-        }, 1100);
-      };
+      handleZohoSubmitCallback;
+    window.runOnFormSubmit_sf3z7745abead796b0932a399faecbb22f0bec271edcb24e53fe8d049c215d384dc3 =
+      handleZohoSubmitCallback;
 
     const initZohoSetupSF = () => {
       if (typeof window.setupSF === 'function') {
         try {
-          window.setupSF(ZOHO_SF_ID, 'ZCFORMVIEW', false, 'light', false, 'undefined');
+          window.setupSF(config.sfId, 'ZCFORMVIEW', false, 'light', false, 'undefined');
         } catch {
           // Ignore non-fatal Zoho setup warnings
         }
       }
     };
 
-    // 2. Inject Zoho Embedded script in <head>:
-    // <script type="text/javascript" src="https://ma.zoho.com/js/optin.min.js" onload="setupSF('sf3z7745abead796b0932a399faecbb22f0b5c703f467f9e582712c4f3b572614c67','ZCFORMVIEW',false,'light',false,'undefined')"></script>
+    // 2. Inject Zoho Embedded script in <head> with corresponding setupSF call:
     const scriptId = 'zoho-ma-optin-embed-script';
     let scriptEl = document.getElementById(scriptId) as HTMLScriptElement | null;
 
@@ -132,7 +142,6 @@ export default function NewsletterSignupForm({ locale }: NewsletterSignupFormPro
 
       isSubmittingRef.current = true;
 
-      // If Zoho's setupSF did not already submit the form, submit it natively to target="_zcSignup"
       if (typeof window.setupSF !== 'function') {
         formEl.submit();
       }
@@ -172,7 +181,7 @@ export default function NewsletterSignupForm({ locale }: NewsletterSignupFormPro
         window.clearTimeout(redirectTimerRef.current);
       }
     };
-  }, [locale]);
+  }, [locale, config.sfId]);
 
   const handleTargetIframeLoad = () => {
     if (!isSubmittingRef.current) return;
@@ -183,14 +192,14 @@ export default function NewsletterSignupForm({ locale }: NewsletterSignupFormPro
     <div className="w-full mt-8 pt-6 border-t border-[#E2E2DE]">
       <style>{`
         /* Bauhaus responsive layout overrides for Zoho Campaigns embedded form */
-        #${ZOHO_SF_ID} .quick_form_8_css {
+        #${config.sfId} .quick_form_8_css {
           width: 100% !important;
           max-width: 100% !important;
           background-color: #FFFFFF !important;
           border: none !important;
           padding: 0 !important;
         }
-        #${ZOHO_SF_ID} #SIGNUP_HEADING {
+        #${config.sfId} #SIGNUP_HEADING {
           font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
           font-size: 0.74rem !important;
           font-weight: 700 !important;
@@ -199,7 +208,7 @@ export default function NewsletterSignupForm({ locale }: NewsletterSignupFormPro
           color: #666660 !important;
           padding: 0 0 12px 0 !important;
         }
-        #${ZOHO_SF_ID} #zcampaignOptinForm {
+        #${config.sfId} #zcampaignOptinForm {
           display: flex !important;
           flex-direction: column !important;
           gap: 12px !important;
@@ -207,27 +216,27 @@ export default function NewsletterSignupForm({ locale }: NewsletterSignupFormPro
           margin: 0 !important;
         }
         @media (min-width: 640px) {
-          #${ZOHO_SF_ID} #zcampaignOptinForm {
+          #${config.sfId} #zcampaignOptinForm {
             flex-direction: row !important;
             align-items: stretch !important;
           }
         }
-        #${ZOHO_SF_ID} .SIGNUP_FLD {
+        #${config.sfId} .SIGNUP_FLD {
           display: block !important;
           margin: 0 !important;
           width: 100% !important;
         }
         @media (min-width: 640px) {
-          #${ZOHO_SF_ID} .SIGNUP_FLD:first-of-type {
+          #${config.sfId} .SIGNUP_FLD:first-of-type {
             flex: 1 1 auto !important;
             width: auto !important;
           }
-          #${ZOHO_SF_ID} .SIGNUP_FLD:nth-of-type(2) {
+          #${config.sfId} .SIGNUP_FLD:nth-of-type(2) {
             flex: 0 0 auto !important;
             width: auto !important;
           }
         }
-        #${ZOHO_SF_ID} #EMBED_FORM_EMAIL_LABEL {
+        #${config.sfId} #EMBED_FORM_EMAIL_LABEL {
           width: 100% !important;
           height: 48px !important;
           min-height: 48px !important;
@@ -240,10 +249,10 @@ export default function NewsletterSignupForm({ locale }: NewsletterSignupFormPro
           outline: none !important;
           box-sizing: border-box !important;
         }
-        #${ZOHO_SF_ID} #EMBED_FORM_EMAIL_LABEL::placeholder {
+        #${config.sfId} #EMBED_FORM_EMAIL_LABEL::placeholder {
           color: #888880 !important;
         }
-        #${ZOHO_SF_ID} #zcWebOptin {
+        #${config.sfId} #zcWebOptin {
           width: 100% !important;
           height: 48px !important;
           min-height: 48px !important;
@@ -258,12 +267,12 @@ export default function NewsletterSignupForm({ locale }: NewsletterSignupFormPro
           cursor: pointer !important;
           transition: background-color 0.15s ease, border-color 0.15s ease !important;
         }
-        #${ZOHO_SF_ID} #zcWebOptin:hover {
+        #${config.sfId} #zcWebOptin:hover {
           background-color: #262622 !important;
           border-color: #262622 !important;
         }
         @media (min-width: 640px) {
-          #${ZOHO_SF_ID} #zcWebOptin {
+          #${config.sfId} #zcWebOptin {
             width: auto !important;
             min-width: 160px !important;
           }
@@ -281,21 +290,21 @@ export default function NewsletterSignupForm({ locale }: NewsletterSignupFormPro
         tabIndex={-1}
       />
 
-      {/* Official Zoho Campaigns Embedded Form Markup (/newsletter and /us/newsletter) */}
+      {/*Zoho Campaigns Web-Optin Form Starts Here*/}
       <div key={locale} {...({ name: 'signupFormContainer' } as Record<string, string>)}>
         <input type="hidden" id="signupTmplName" value="quick_form_8" />
-        <input type="hidden" value="2" id="recapThemeOptin" />
+        <input type="hidden" value={config.recapThemeOptin} id="recapThemeOptin" />
         <input type="hidden" id="orgNameFull" value="David Raigoza" />
-        <div id={ZOHO_SF_ID} data-type="signupform">
+        <div id={config.sfId} data-type="signupform">
           <div id="customForm">
             <div
               className="quick_form_8_css"
               style={{
                 backgroundColor: 'rgb(255, 255, 255)',
                 width: '100%',
-                maxWidth: '100%',
+                maxWidth: '350px',
                 zIndex: 2,
-                fontFamily: 'inherit',
+                fontFamily: 'Arial',
                 border: 'none',
                 overflow: 'hidden',
               }}
@@ -313,7 +322,7 @@ export default function NewsletterSignupForm({ locale }: NewsletterSignupFormPro
                   }}
                   id="SIGNUP_HEADING"
                 >
-                  {copy.heading}
+                  {config.heading}
                 </div>
                 <form
                   method="POST"
@@ -345,7 +354,7 @@ export default function NewsletterSignupForm({ locale }: NewsletterSignupFormPro
                         backgroundColor: 'rgb(255, 255, 255)',
                         boxSizing: 'border-box',
                       }}
-                      placeholder={copy.emailPlaceholder}
+                      placeholder={config.emailPlaceholder}
                       name="CONTACT_EMAIL"
                       id="EMBED_FORM_EMAIL_LABEL"
                     />
@@ -373,11 +382,11 @@ export default function NewsletterSignupForm({ locale }: NewsletterSignupFormPro
                       }}
                       name="SIGNUP_SUBMIT_BUTTON"
                       id="zcWebOptin"
-                      defaultValue={copy.submitValue}
+                      defaultValue={config.submitValue}
                     />
                   </div>
 
-                  {/* Campos ocultos requeridos por Zoho */}
+                  {/* Campos ocultos requeridos */}
                   <input type="hidden" id="fieldBorder" value="" />
                   <input type="hidden" id="submitType" name="submitType" value="optinCustomView" />
                   <input type="hidden" id="emailReportId" name="emailReportId" value="" />
@@ -386,25 +395,26 @@ export default function NewsletterSignupForm({ locale }: NewsletterSignupFormPro
                   <input type="hidden" name="zcvers" value="3.0" />
                   <input type="hidden" name="oldListIds" id="allCheckedListIds" value="" />
                   <input type="hidden" id="mode" name="mode" value="OptinCreateView" />
-                  <input type="hidden" id="zcld" name="zcld" value="117db3e22581c8057" />
+                  <input type="hidden" id="zcld" name="zcld" value={config.zcld} />
                   <input type="hidden" id="zctd" name="zctd" value="" />
                   <input type="hidden" id="document_domain" value="" />
                   <input type="hidden" id="zc_Url" value="zgnp-zngp.maillist-manage.com" />
                   <input type="hidden" id="new_optin_response_in" value="0" />
                   <input type="hidden" id="duplicate_optin_response_in" value="0" />
                   <input type="hidden" name="zc_trackCode" id="zc_trackCode" value="ZCFORMVIEW" />
-                  <input type="hidden" id="zc_formIx" name="zc_formIx" value={ZOHO_FORM_IX} />
+                  <input type="hidden" id="zc_formIx" name="zc_formIx" value={config.formIx} />
                   <input type="hidden" id="viewFrom" value="URL_ACTION" />
-                  <input type="hidden" id="redirectURL" name="redirectURL" value={copy.thankYouUrl} />
+                  <input type="hidden" name="redirectURL" value={config.thankYouUrl} />
                 </form>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {/*Zoho Campaigns Web-Optin Form Ends Here*/}
 
       <p className="mt-4 mb-0 text-[0.82rem] text-[#666660] leading-[1.5]">
-        {copy.unsubscribeNote}
+        {config.unsubscribeNote}
       </p>
     </div>
   );
