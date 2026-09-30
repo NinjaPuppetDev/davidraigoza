@@ -81,7 +81,7 @@ export default function NewsletterPage({ locale }: NewsletterPageProps) {
         >
           <section
             aria-labelledby={isUs ? 'us-newsletter-heading' : 'newsletter-heading'}
-            className="w-full max-w-[580px] bg-white border border-[#E2E2DE] p-7 sm:p-12 box-border"
+            className="w-full max-w-[580px] mx-auto bg-white border border-[#121210] p-7 sm:p-12 box-border"
           >
             <h1
               id={isUs ? 'us-newsletter-heading' : 'newsletter-heading'}
@@ -102,6 +102,7 @@ export default function NewsletterPage({ locale }: NewsletterPageProps) {
               {copy.reassurance}
             </p>
 
+            {/* Static inline Zoho Campaigns embed container */}
             <NewsletterSignupForm locale={locale} />
           </section>
         </main>

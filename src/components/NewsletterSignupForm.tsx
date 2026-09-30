@@ -1,188 +1,411 @@
-'use client';
-
-import React, { useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export interface NewsletterSignupFormProps {
-  locale?: 'es' | 'en';
+  locale: 'es' | 'en';
 }
 
-const ZOHO_ACTION_URL = 'https://zcvf-zcmp.maillist-manage.com/weboptin.zc';
+const ZOHO_SF_ID = 'sf3z7745abead796b0932a399faecbb22f0b5c703f467f9e582712c4f3b572614c67';
+const ZOHO_FORM_IX = '3z7745abead796b0932a399faecbb22f0b5c703f467f9e582712c4f3b572614c67';
 
-const ZOHO_FORM_IX_BY_LOCALE: Record<'es' | 'en', string> = {
-  es: '3z7745abead796b0932a399faecbb22f0b9c82980ac70367f5a38e3021a062d034',
-  en: '3z7745abead796b0932a399faecbb22f0befa5b72b47f0dfec53baa06a47e8f4a9',
-};
+const ZOHO_EMBED_COPY = {
+  es: {
+    heading: 'Suscríbete al boletín',
+    emailPlaceholder: 'Correo electrónico',
+    submitValue: 'Suscribirme',
+    thankYouUrl: 'https://davidraigoza.online/newsletter/gracias',
+    localThankYouPath: '/newsletter/gracias',
+    unsubscribeNote: 'Puedes darte de baja cuando quieras.',
+  },
+  en: {
+    heading: 'Join Our Newsletter',
+    emailPlaceholder: 'Email',
+    submitValue: 'Join Now',
+    thankYouUrl: 'https://davidraigoza.online/us/newsletter/thankyou',
+    localThankYouPath: '/us/newsletter/thankyou',
+    unsubscribeNote: 'You can unsubscribe at any time.',
+  },
+} as const;
 
-const THANK_YOU_URL_BY_LOCALE: Record<'es' | 'en', string> = {
-  es: 'https://davidraigoza.online/newsletter/gracias',
-  en: 'https://davidraigoza.online/us/newsletter/thank-you',
-};
+declare global {
+  interface Window {
+    setupSF?: (
+      sfId: string,
+      trackCode: string,
+      isCaptcha: boolean,
+      theme: string,
+      isPopup: boolean,
+      version: string
+    ) => void;
+    runOnFormSubmit_sf3z7745abead796b0932a399faecbb22f0b5c703f467f9e582712c4f3b572614c67?: (
+      th: unknown
+    ) => void;
+  }
+}
 
-const LOCAL_THANK_YOU_PATH_BY_LOCALE: Record<'es' | 'en', string> = {
-  es: '/newsletter/gracias',
-  en: '/us/newsletter/thank-you',
-};
+export default function NewsletterSignupForm({ locale }: NewsletterSignupFormProps) {
+  const copy = ZOHO_EMBED_COPY[locale];
+  const isSubmittingRef = useRef(false);
+  const hasRedirectedRef = useRef(false);
+  const redirectTimerRef = useRef<number | null>(null);
 
-export default function NewsletterSignupForm({ locale = 'es' }: NewsletterSignupFormProps) {
-  const [firstName, setFirstName] = useState('');
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
+  const redirectToThankYou = () => {
+    if (hasRedirectedRef.current || typeof window === 'undefined') return;
+    hasRedirectedRef.current = true;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      setStatus('error');
-      setErrorMessage(
-        locale === 'es'
-          ? 'Por favor ingresa un correo electrónico válido.'
-          : 'Please enter a valid email address.'
-      );
-      return;
+    if (redirectTimerRef.current !== null) {
+      window.clearTimeout(redirectTimerRef.current);
+      redirectTimerRef.current = null;
     }
 
-    setStatus('loading');
-    setErrorMessage('');
-
-    const formIx = ZOHO_FORM_IX_BY_LOCALE[locale];
-    const redirectURL = THANK_YOU_URL_BY_LOCALE[locale];
-
-    const params = new URLSearchParams({
-      CONTACT_EMAIL: email.trim(),
-      FIRSTNAME: firstName.trim(),
-      formIx,
-      zx: '137f810df',
-      zcvers: '3.0',
-      tc_code: 'ZCFORMVIEW',
-      zc_trackCode: 'ZCFORMVIEW',
-      submitType: 'optinCustomView',
-      mode: 'OptinCreateView',
-      formType: 'QuickForm',
-      redirectURL,
-    });
-
-    try {
-      // Usamos no-cors para enviar directamente a Zoho desde el navegador sin bloqueos CORS
-      await fetch(`${ZOHO_ACTION_URL}?${params.toString()}`, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        },
-        body: params.toString(),
-      });
-
-      // Como no-cors devuelve una respuesta opaca, asumimos éxito en el envío del cliente
-      setStatus('success');
-
-      if (typeof window !== 'undefined') {
-        if (window.location.hostname.endsWith('davidraigoza.online')) {
-          window.location.href = redirectURL;
-        } else {
-          const localPath = LOCAL_THANK_YOU_PATH_BY_LOCALE[locale];
-          window.history.pushState(null, '', localPath);
-          window.dispatchEvent(new PopStateEvent('popstate'));
-          window.scrollTo(0, 0);
-        }
-      }
-    } catch (error) {
-      console.error('Error submitting directly to Zoho:', error);
-      setStatus('error');
-      setErrorMessage(
-        locale === 'es'
-          ? 'No se pudo completar el registro. Inténtalo de nuevo.'
-          : 'Could not complete registration. Please try again.'
-      );
+    if (window.location.hostname.endsWith('davidraigoza.online')) {
+      window.location.href = copy.thankYouUrl;
+    } else {
+      window.history.pushState(null, '', copy.localThankYouPath);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      window.scrollTo(0, 0);
     }
   };
 
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
+
+    isSubmittingRef.current = false;
+    hasRedirectedRef.current = false;
+
+    // 1. Define global submit callback required by Zoho Embedded Form:
+    // function runOnFormSubmit_sf3z7745abead796b0932a399faecbb22f0b5c703f467f9e582712c4f3b572614c67(th){};
+    window.runOnFormSubmit_sf3z7745abead796b0932a399faecbb22f0b5c703f467f9e582712c4f3b572614c67 =
+      function (_th: unknown) {
+        isSubmittingRef.current = true;
+        if (redirectTimerRef.current !== null) {
+          window.clearTimeout(redirectTimerRef.current);
+        }
+        redirectTimerRef.current = window.setTimeout(() => {
+          redirectToThankYou();
+        }, 1100);
+      };
+
+    const initZohoSetupSF = () => {
+      if (typeof window.setupSF === 'function') {
+        try {
+          window.setupSF(ZOHO_SF_ID, 'ZCFORMVIEW', false, 'light', false, 'undefined');
+        } catch {
+          // Ignore non-fatal Zoho setup warnings
+        }
+      }
+    };
+
+    // 2. Inject Zoho Embedded script in <head>:
+    // <script type="text/javascript" src="https://ma.zoho.com/js/optin.min.js" onload="setupSF('sf3z7745abead796b0932a399faecbb22f0b5c703f467f9e582712c4f3b572614c67','ZCFORMVIEW',false,'light',false,'undefined')"></script>
+    const scriptId = 'zoho-ma-optin-embed-script';
+    let scriptEl = document.getElementById(scriptId) as HTMLScriptElement | null;
+
+    if (!scriptEl) {
+      scriptEl = document.createElement('script');
+      scriptEl.id = scriptId;
+      scriptEl.type = 'text/javascript';
+      scriptEl.src = 'https://ma.zoho.com/js/optin.min.js';
+      scriptEl.async = true;
+      scriptEl.onload = () => {
+        initZohoSetupSF();
+      };
+      document.head.appendChild(scriptEl);
+    } else {
+      initZohoSetupSF();
+    }
+
+    // Fallback listener on the submit button and form so Enter key or button click
+    // triggers the form submission and thank-you redirect reliably.
+    const formEl = document.getElementById('zcampaignOptinForm') as HTMLFormElement | null;
+    const submitBtn = document.getElementById('zcWebOptin') as HTMLInputElement | null;
+    const emailInput = document.getElementById('EMBED_FORM_EMAIL_LABEL') as HTMLInputElement | null;
+
+    const triggerFormAction = () => {
+      if (!emailInput || !formEl) return;
+      const emailVal = emailInput.value.trim();
+      if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+        emailInput.focus();
+        return;
+      }
+
+      isSubmittingRef.current = true;
+
+      // If Zoho's setupSF did not already submit the form, submit it natively to target="_zcSignup"
+      if (typeof window.setupSF !== 'function') {
+        formEl.submit();
+      }
+
+      if (redirectTimerRef.current !== null) {
+        window.clearTimeout(redirectTimerRef.current);
+      }
+      redirectTimerRef.current = window.setTimeout(() => {
+        redirectToThankYou();
+      }, 1100);
+    };
+
+    const handleFormSubmit = (e: Event) => {
+      if (!emailInput) return;
+      const emailVal = emailInput.value.trim();
+      if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+        e.preventDefault();
+        emailInput.focus();
+        return;
+      }
+      isSubmittingRef.current = true;
+      if (redirectTimerRef.current !== null) {
+        window.clearTimeout(redirectTimerRef.current);
+      }
+      redirectTimerRef.current = window.setTimeout(() => {
+        redirectToThankYou();
+      }, 1100);
+    };
+
+    submitBtn?.addEventListener('click', triggerFormAction);
+    formEl?.addEventListener('submit', handleFormSubmit);
+
+    return () => {
+      submitBtn?.removeEventListener('click', triggerFormAction);
+      formEl?.removeEventListener('submit', handleFormSubmit);
+      if (redirectTimerRef.current !== null) {
+        window.clearTimeout(redirectTimerRef.current);
+      }
+    };
+  }, [locale]);
+
+  const handleTargetIframeLoad = () => {
+    if (!isSubmittingRef.current) return;
+    redirectToThankYou();
+  };
+
   return (
-    <form
-      id={locale === 'en' ? 'us-newsletter-signup-form' : 'newsletter-signup-form'}
-      onSubmit={handleSubmit}
-      className="w-full mt-7"
-    >
-      <div className="flex flex-col gap-3">
-        <div>
-          <label
-            htmlFor={locale === 'en' ? 'us-newsletter-name-input' : 'newsletter-name-input'}
-            className="sr-only"
-          >
-            {locale === 'es' ? 'Nombre' : 'First name'}
-          </label>
-          <input
-            id={locale === 'en' ? 'us-newsletter-name-input' : 'newsletter-name-input'}
-            type="text"
-            name="FIRSTNAME"
-            autoComplete="given-name"
-            placeholder={locale === 'es' ? 'Tu nombre (opcional)' : 'Your name (optional)'}
-            value={firstName}
-            onChange={(e) => {
-              setFirstName(e.target.value);
-              if (status === 'error') {
-                setStatus('idle');
-                setErrorMessage('');
-              }
-            }}
-            disabled={status === 'loading'}
-            className="w-full min-h-[48px] px-4 py-3.5 bg-white text-[#121210] placeholder-[#888880] border border-[#E2E2DE] focus:border-[#121210] rounded-none text-[0.96rem] leading-[1.4] outline-none transition-colors box-border disabled:opacity-60"
-          />
-        </div>
+    <div className="w-full mt-8 pt-6 border-t border-[#E2E2DE]">
+      <style>{`
+        /* Bauhaus responsive layout overrides for Zoho Campaigns embedded form */
+        #${ZOHO_SF_ID} .quick_form_8_css {
+          width: 100% !important;
+          max-width: 100% !important;
+          background-color: #FFFFFF !important;
+          border: none !important;
+          padding: 0 !important;
+        }
+        #${ZOHO_SF_ID} #SIGNUP_HEADING {
+          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+          font-size: 0.74rem !important;
+          font-weight: 700 !important;
+          letter-spacing: 0.06em !important;
+          text-transform: uppercase !important;
+          color: #666660 !important;
+          padding: 0 0 12px 0 !important;
+        }
+        #${ZOHO_SF_ID} #zcampaignOptinForm {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 12px !important;
+          width: 100% !important;
+          margin: 0 !important;
+        }
+        @media (min-width: 640px) {
+          #${ZOHO_SF_ID} #zcampaignOptinForm {
+            flex-direction: row !important;
+            align-items: stretch !important;
+          }
+        }
+        #${ZOHO_SF_ID} .SIGNUP_FLD {
+          display: block !important;
+          margin: 0 !important;
+          width: 100% !important;
+        }
+        @media (min-width: 640px) {
+          #${ZOHO_SF_ID} .SIGNUP_FLD:first-of-type {
+            flex: 1 1 auto !important;
+            width: auto !important;
+          }
+          #${ZOHO_SF_ID} .SIGNUP_FLD:nth-of-type(2) {
+            flex: 0 0 auto !important;
+            width: auto !important;
+          }
+        }
+        #${ZOHO_SF_ID} #EMBED_FORM_EMAIL_LABEL {
+          width: 100% !important;
+          height: 48px !important;
+          min-height: 48px !important;
+          padding: 12px 16px !important;
+          font-size: 0.96rem !important;
+          color: #121210 !important;
+          background-color: #FFFFFF !important;
+          border: 1px solid #121210 !important;
+          border-radius: 0 !important;
+          outline: none !important;
+          box-sizing: border-box !important;
+        }
+        #${ZOHO_SF_ID} #EMBED_FORM_EMAIL_LABEL::placeholder {
+          color: #888880 !important;
+        }
+        #${ZOHO_SF_ID} #zcWebOptin {
+          width: 100% !important;
+          height: 48px !important;
+          min-height: 48px !important;
+          padding: 0 24px !important;
+          font-size: 0.92rem !important;
+          font-weight: 600 !important;
+          letter-spacing: -0.01em !important;
+          color: #FFFFFF !important;
+          background-color: #121210 !important;
+          border: 1px solid #121210 !important;
+          border-radius: 0 !important;
+          cursor: pointer !important;
+          transition: background-color 0.15s ease, border-color 0.15s ease !important;
+        }
+        #${ZOHO_SF_ID} #zcWebOptin:hover {
+          background-color: #262622 !important;
+          border-color: #262622 !important;
+        }
+        @media (min-width: 640px) {
+          #${ZOHO_SF_ID} #zcWebOptin {
+            width: auto !important;
+            min-width: 160px !important;
+          }
+        }
+      `}</style>
 
-        <div className="flex flex-col sm:flex-row gap-3 items-stretch">
-          <label
-            htmlFor={locale === 'en' ? 'us-newsletter-email-input' : 'newsletter-email-input'}
-            className="sr-only"
-          >
-            {locale === 'es' ? 'Correo electrónico' : 'Email address'}
-          </label>
-          <input
-            id={locale === 'en' ? 'us-newsletter-email-input' : 'newsletter-email-input'}
-            type="email"
-            name="CONTACT_EMAIL"
-            required
-            autoComplete="email"
-            placeholder={locale === 'es' ? 'tu@email.com' : 'you@email.com'}
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-              if (status === 'error') {
-                setStatus('idle');
-                setErrorMessage('');
-              }
-            }}
-            disabled={status === 'loading'}
-            className="flex-1 min-h-[48px] px-4 py-3.5 bg-white text-[#121210] placeholder-[#888880] border border-[#121210] rounded-none text-[0.96rem] leading-[1.4] outline-none box-border w-full disabled:opacity-60"
-          />
+      {/* Hidden target iframe so target="_zcSignup" processes in-page and redirects cleanly */}
+      <iframe
+        name="_zcSignup"
+        id="_zcSignup"
+        title="Zoho Campaigns Signup Target"
+        onLoad={handleTargetIframeLoad}
+        className="hidden w-0 h-0 border-0"
+        aria-hidden="true"
+        tabIndex={-1}
+      />
 
-          <button
-            id={locale === 'en' ? 'us-newsletter-submit-btn' : 'newsletter-submit-btn'}
-            type="submit"
-            disabled={status === 'loading'}
-            className="cta-primary-btn min-h-[48px] px-6 py-3.5 bg-[#121210] hover:bg-[#262622] text-white border border-[#121210] hover:border-[#262622] rounded-none text-[0.92rem] font-semibold tracking-[-0.01em] cursor-pointer whitespace-nowrap transition-colors w-full sm:w-auto disabled:opacity-60"
-          >
-            {status === 'loading'
-              ? locale === 'es'
-                ? 'Enviando...'
-                : 'Submitting...'
-              : locale === 'es'
-              ? 'Recibir las ideas'
-              : 'Get the weekly tips'}
-          </button>
+      {/* Official Zoho Campaigns Embedded Form Markup (/newsletter and /us/newsletter) */}
+      <div key={locale} {...({ name: 'signupFormContainer' } as Record<string, string>)}>
+        <input type="hidden" id="signupTmplName" value="quick_form_8" />
+        <input type="hidden" value="2" id="recapThemeOptin" />
+        <input type="hidden" id="orgNameFull" value="David Raigoza" />
+        <div id={ZOHO_SF_ID} data-type="signupform">
+          <div id="customForm">
+            <div
+              className="quick_form_8_css"
+              style={{
+                backgroundColor: 'rgb(255, 255, 255)',
+                width: '100%',
+                maxWidth: '100%',
+                zIndex: 2,
+                fontFamily: 'inherit',
+                border: 'none',
+                overflow: 'hidden',
+              }}
+              {...({ name: 'SIGNUP_BODY' } as Record<string, string>)}
+            >
+              <div>
+                <div
+                  style={{
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    color: 'rgb(136, 136, 136)',
+                    textAlign: 'left',
+                    padding: '0 0 10px 0',
+                    display: 'block',
+                  }}
+                  id="SIGNUP_HEADING"
+                >
+                  {copy.heading}
+                </div>
+                <form
+                  method="POST"
+                  id="zcampaignOptinForm"
+                  style={{ margin: '0px', width: '100%' }}
+                  action="https://zgnp-zngp.maillist-manage.com/weboptin.zc"
+                  target="_zcSignup"
+                >
+                  <div
+                    style={{
+                      display: 'inline-block',
+                      width: 'calc(100% - 110px)',
+                      marginRight: '10px',
+                      verticalAlign: 'middle',
+                    }}
+                    className="SIGNUP_FLD"
+                  >
+                    <input
+                      type="text"
+                      style={{
+                        fontSize: '14px',
+                        border: '1px solid rgb(221, 221, 221)',
+                        borderRadius: 0,
+                        width: '100%',
+                        height: '40px',
+                        outline: 'none',
+                        padding: '5px 10px',
+                        color: 'rgb(136, 136, 136)',
+                        backgroundColor: 'rgb(255, 255, 255)',
+                        boxSizing: 'border-box',
+                      }}
+                      placeholder={copy.emailPlaceholder}
+                      name="CONTACT_EMAIL"
+                      id="EMBED_FORM_EMAIL_LABEL"
+                    />
+                  </div>
+                  <div
+                    style={{
+                      display: 'inline-block',
+                      width: '100px',
+                      verticalAlign: 'middle',
+                    }}
+                    className="SIGNUP_FLD"
+                  >
+                    <input
+                      type="button"
+                      style={{
+                        textAlign: 'center',
+                        borderRadius: '4px',
+                        width: '100%',
+                        height: '40px',
+                        border: '0px',
+                        color: 'rgb(255, 255, 255)',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                        backgroundColor: 'rgb(0, 0, 0)',
+                      }}
+                      name="SIGNUP_SUBMIT_BUTTON"
+                      id="zcWebOptin"
+                      defaultValue={copy.submitValue}
+                    />
+                  </div>
+
+                  {/* Campos ocultos requeridos por Zoho */}
+                  <input type="hidden" id="fieldBorder" value="" />
+                  <input type="hidden" id="submitType" name="submitType" value="optinCustomView" />
+                  <input type="hidden" id="emailReportId" name="emailReportId" value="" />
+                  <input type="hidden" id="formType" name="formType" value="QuickForm" />
+                  <input type="hidden" name="zx" id="cmpZuid" value="137f810df" />
+                  <input type="hidden" name="zcvers" value="3.0" />
+                  <input type="hidden" name="oldListIds" id="allCheckedListIds" value="" />
+                  <input type="hidden" id="mode" name="mode" value="OptinCreateView" />
+                  <input type="hidden" id="zcld" name="zcld" value="117db3e22581c8057" />
+                  <input type="hidden" id="zctd" name="zctd" value="" />
+                  <input type="hidden" id="document_domain" value="" />
+                  <input type="hidden" id="zc_Url" value="zgnp-zngp.maillist-manage.com" />
+                  <input type="hidden" id="new_optin_response_in" value="0" />
+                  <input type="hidden" id="duplicate_optin_response_in" value="0" />
+                  <input type="hidden" name="zc_trackCode" id="zc_trackCode" value="ZCFORMVIEW" />
+                  <input type="hidden" id="zc_formIx" name="zc_formIx" value={ZOHO_FORM_IX} />
+                  <input type="hidden" id="viewFrom" value="URL_ACTION" />
+                  <input type="hidden" id="redirectURL" name="redirectURL" value={copy.thankYouUrl} />
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {status === 'error' && (
-        <p role="alert" className="mt-3 mb-0 text-[0.84rem] font-mono text-[#B91C1C] leading-[1.5]">
-          {errorMessage}
-        </p>
-      )}
-
-      <p className="mt-3.5 mb-0 text-[0.82rem] text-[#666660] leading-[1.5]">
-        {locale === 'es'
-          ? 'Puedes darte de baja cuando quieras.'
-          : 'You can unsubscribe at any time.'}
+      <p className="mt-4 mb-0 text-[0.82rem] text-[#666660] leading-[1.5]">
+        {copy.unsubscribeNote}
       </p>
-    </form>
+    </div>
   );
 }

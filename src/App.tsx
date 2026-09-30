@@ -143,6 +143,8 @@ function parseRoute(pathname: string): AppRoute {
   if (typeof window !== 'undefined' && window.location.hostname.toLowerCase() === 'us.davidraigoza.online') {
     const normalizedPath = (pathname || '/').toLowerCase().replace(/\/+$/, '') || '/';
     if (
+      normalizedPath === '/newsletter/thankyou' ||
+      normalizedPath.startsWith('/newsletter/thankyou/') ||
       normalizedPath === '/newsletter/thank-you' ||
       normalizedPath.startsWith('/newsletter/thank-you/') ||
       normalizedPath === '/newsletter/gracias' ||
@@ -172,8 +174,10 @@ function parseRoute(pathname: string): AppRoute {
 
   const normalized = (pathname || '/').toLowerCase().replace(/\/+$/, '') || '/';
 
-  // Newsletter Thank You routes (/newsletter/gracias and /us/newsletter/thank-you)
+  // Newsletter Thank You routes (/newsletter/gracias, /us/newsletter/thankyou, /us/newsletter/thank-you)
   if (
+    normalized === '/us/newsletter/thankyou' ||
+    normalized.startsWith('/us/newsletter/thankyou/') ||
     normalized === '/us/newsletter/thank-you' ||
     normalized.startsWith('/us/newsletter/thank-you/') ||
     normalized === '/us/newsletter/gracias' ||
@@ -184,6 +188,8 @@ function parseRoute(pathname: string): AppRoute {
   if (
     normalized === '/newsletter/gracias' ||
     normalized.startsWith('/newsletter/gracias/') ||
+    normalized === '/newsletter/thankyou' ||
+    normalized.startsWith('/newsletter/thankyou/') ||
     normalized === '/newsletter/thank-you' ||
     normalized.startsWith('/newsletter/thank-you/')
   ) {
