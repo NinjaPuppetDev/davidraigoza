@@ -153,8 +153,10 @@ export interface TranslationData {
     };
     hosting: {
       concept: string;
+      badge?: string;
       title: string;
       desc: string;
+      cost?: string;
     };
   };
   collaboration: {
@@ -519,19 +521,19 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
     },
     hero: {
       tag: 'Ingeniería de diseño de producto · Medellín, Colombia',
-      title: 'Diseñamos websites para médicos, arquitectos, profesionales, marcas y especialistas.',
-      titleLine1: 'Diseñamos websites',
+      title: 'Sitios Web para médicos, arquitectos, profesionales, abogados y especialistas.',
+      titleLine1: 'Sitios Web',
       preposition: 'para',
       rotatingPhrases: [
         'para médicos.',
         'para arquitectos.',
         'para profesionales.',
-        'para marcas.',
+        'para abogados.',
         'para especialistas.',
       ],
-      rotatingWords: ['médicos', 'arquitectos', 'profesionales', 'marcas', 'especialistas'],
+      rotatingWords: ['médicos', 'arquitectos', 'profesionales', 'abogados', 'especialistas'],
       categoryLabel: 'Especialidad',
-      rotatingCategories: ['médicos', 'arquitectos', 'profesionales', 'marcas', 'especialistas'],
+      rotatingCategories: ['médicos', 'arquitectos', 'profesionales', 'abogados', 'especialistas'],
       pricingLabel: 'Atrae clientes en automático',
       price: 'Desde $1.300.000 COP',
       cta: 'Cuéntame sobre tu negocio',
@@ -678,9 +680,11 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
         desc: 'Es la dirección de tu negocio en internet (ej. tunegocio.com). Lo adquieres directamente a tu nombre, garantizando que siempre sea de tu propiedad.',
       },
       hosting: {
-        concept: 'CONCEPTO 03 · INFRAESTRUCTURA',
-        title: 'Alojamiento web (Hosting)',
-        desc: 'Opciones optimizadas según tu escala: desde infraestructura gratuita de alto rendimiento hasta servidores profesionales según tu volumen.',
+        concept: 'CONCEPTO 03 · MANTENIMIENTO E INFRAESTRUCTURA',
+        badge: '$150.000 COP / MES',
+        title: 'Mantenimiento, copias de seguridad y seguridad',
+        desc: 'Requerido para mantener el sitio web activo, con copias de seguridad (backups), actualizaciones y seguridad continua.',
+        cost: '$150.000 COP / mes · Si decides no tomarlo, conservas el repositorio completo para alojarlo por tu cuenta.',
       },
     },
     collaboration: {
@@ -724,7 +728,7 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
       },
     },
     caseStudies: {
-      tag: '[ 06.5 // PROYECTOS & EVIDENCIA ]',
+      tag: '[ PROYECTOS & EVIDENCIA ]',
       title: 'Del concepto a la producción.',
       subtitle: 'Sistemas digitales construidos con rigor de ingeniería: donde el boceto manual, la estructura modular y la implementación en producción reducen fricción y maximizan conversión.',
       project1: {
@@ -1082,8 +1086,8 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
     investmentSummary: {
       tag: 'SÍNTESIS DE PROPUESTA',
       title: 'Proyectos desde $1.300.000 COP',
-      desc1: 'La inversión base cubre el trabajo de diseño y desarrollo dentro del alcance pactado. Los recursos externos, como dominio o infraestructura según se requiera, se presentan con total independencia.',
-      desc2: 'Sin costos ocultos ni mensualidades forzadas para mantener tu presencia activa.',
+      desc1: 'La inversión base cubre el trabajo de diseño y desarrollo dentro del alcance pactado. El mantenimiento mensual ($150.000 COP / mes) es requerido para mantener el sitio web, copias de seguridad y seguridad activa.',
+      desc2: 'Si decides no tomar el mantenimiento mensual, puedes conservar el repositorio y alojar el sitio por tu cuenta.',
       cta: 'Cuéntame qué necesita tu negocio',
     },
     process: {
@@ -1161,19 +1165,19 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
     },
     hero: {
       tag: 'Product Design Engineering · Medellín, Colombia',
-      title: 'We design websites for doctors, architects, professionals, brands, and specialists.',
+      title: 'We design websites for doctors, architects, professionals, lawyers, and specialists.',
       titleLine1: 'We design websites',
       preposition: 'for',
       rotatingPhrases: [
         'for doctors.',
         'for architects.',
         'for professionals.',
-        'for brands.',
+        'for lawyers.',
         'for specialists.',
       ],
-      rotatingWords: ['doctors', 'architects', 'professionals', 'brands', 'specialists'],
+      rotatingWords: ['doctors', 'architects', 'professionals', 'lawyers', 'specialists'],
       categoryLabel: 'Specialty',
-      rotatingCategories: ['doctors', 'architects', 'professionals', 'brands', 'specialists'],
+      rotatingCategories: ['doctors', 'architects', 'professionals', 'lawyers', 'specialists'],
       pricingLabel: 'Your brand running on autopilot',
       price: 'From $1,300,000 COP',
       cta: 'Tell me what your business needs',
@@ -1320,9 +1324,11 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
         desc: 'Your distinct digital address (e.g. yourbusiness.com). Purchased directly under your personal or company name, guaranteeing you retain permanent ownership.',
       },
       hosting: {
-        concept: 'CONCEPT 03 · INFRASTRUCTURE',
-        title: 'Web hosting & cloud services',
-        desc: 'Calibrated specifically to your scale: from zero-cost ultra-fast edge platforms to dedicated cloud environments as your traffic expands.',
+        concept: 'CONCEPT 03 · MAINTENANCE & INFRASTRUCTURE',
+        badge: '$150,000 COP / MO',
+        title: 'Maintenance, backups & security',
+        desc: 'Required to maintain the website, automated backups, and active security after launch.',
+        cost: '$150,000 COP / month · If you opt out, you can keep the repository and host it on your own.',
       },
     },
     collaboration: {
@@ -1366,7 +1372,7 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
       },
     },
     caseStudies: {
-      tag: '[ 06.5 // PROJECTS & EVIDENCE ]',
+      tag: '[ PROJECTS & EVIDENCE ]',
       title: 'From concept to production.',
       subtitle: 'Real-world digital systems engineered with technical discipline: where hand sketching, modular architecture, and edge production minimize friction and maximize conversion.',
       project1: {
@@ -1724,8 +1730,8 @@ export const TRANSLATIONS: Record<Language, TranslationData> = {
     investmentSummary: {
       tag: 'PROPOSAL SUMMARY',
       title: 'Projects starting at $1,300,000 COP',
-      desc1: 'The base investment covers full design and engineering within the agreed scope. External necessities like domain registration and cloud infrastructure are handled transparently with zero markup.',
-      desc2: 'No hidden recurring retainers or lock-ins required to keep your digital storefront active.',
+      desc1: 'The base investment covers full design and engineering within the agreed scope. Monthly maintenance ($150,000 COP / month) is required to maintain the website, backups, and security.',
+      desc2: 'If you opt out of monthly maintenance, you can keep the repository and host it on your own.',
       cta: 'Tell me what your business needs',
     },
     process: {

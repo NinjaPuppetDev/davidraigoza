@@ -104,13 +104,13 @@ function AppContent() {
         >
           <HeroSection isVisible={isVisible} />
           <ProfileSection />
+          <CaseStudiesSection />
           <EssentialsSection />
           <JourneySection />
           <RespaldoSection />
           <TransparencySection />
           <CollaborationSection />
           <CraftSection />
-          <CaseStudiesSection />
           <PostLaunchSection />
           <ModularFeaturesSection />
           <InvestmentSummarySection />

@@ -12,6 +12,7 @@ export interface InternationalConfig {
   portfolioUrl: string;
   email: string;
   startingPrice: string;
+  maintenancePrice: string;
   pricingLabel: string;
   pricingSubtext: string;
   domainCostEstimate: string;
@@ -38,6 +39,7 @@ export const INTERNATIONAL_CONFIG: InternationalConfig = {
 
   // International starting price in USD (USD only throughout /us/)
   startingPrice: '$499 USD',
+  maintenancePrice: '$40 USD / month',
   pricingLabel: 'Your brand running on autopilot',
   pricingSubtext: 'Starting price is visible · Scope defined before work begins',
 

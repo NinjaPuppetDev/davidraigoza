@@ -14,7 +14,7 @@ export default function UsHeroSection({ isVisible }: UsHeroSectionProps) {
     'consultants',
     'architects',
     'professionals',
-    'brands',
+    'lawyers',
     'specialists',
   ];
 

@@ -151,15 +151,20 @@ export default function TransparencySection() {
                   }}
                 >
                   <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#EF4444', flexShrink: 0 }} />
-                  {t.header.badge}
+                  {tr.hosting.badge || t.header.badge}
                 </span>
               </div>
               <h3 style={{ fontSize: '1.15rem', fontWeight: 600, color: '#121210', marginBottom: '0.4rem', textWrap: 'balance' }}>
                 {tr.hosting.title}
               </h3>
+              {tr.hosting.cost ? (
+                <p style={{ fontSize: '0.88rem', color: '#444440', marginBottom: '0.75rem', lineHeight: 1.5, textWrap: 'pretty' }}>
+                  {tr.hosting.desc}
+                </p>
+              ) : null}
             </div>
             <p style={{ fontSize: '0.82rem', color: '#666660', lineHeight: 1.5, margin: 0, borderTop: '1px solid #E2E2DE', paddingTop: '0.85rem', textWrap: 'pretty' }}>
-              {tr.hosting.desc}
+              {tr.hosting.cost || tr.hosting.desc}
             </p>
           </div>
         </div>

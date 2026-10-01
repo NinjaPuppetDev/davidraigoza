@@ -71,13 +71,13 @@ export default function UsApp() {
         >
           <UsHeroSection isVisible={isVisible} />
           <UsProfileSection />
+          <UsCaseStudiesSection />
           <UsEssentialsSection />
           <UsJourneySection />
           <UsExperienceSection />
           <UsTransparencySection />
           <UsCollaborationSection />
           <UsCraftSection />
-          <UsCaseStudiesSection />
           <UsModularSection />
           <UsProcessSection />
           <UsContactSection />

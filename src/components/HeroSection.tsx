@@ -15,10 +15,10 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
     'médicos',
     'arquitectos',
     'profesionales',
-    'marcas',
+    'abogados',
     'especialistas',
   ];
-  const titleLine1 = t.hero.titleLine1 || 'Diseñamos websites';
+  const titleLine1 = t.hero.titleLine1 || 'Sitios Web';
   const preposition = t.hero.preposition || 'para';
 
   useEffect(() => {

@@ -125,7 +125,7 @@ export default function UsCaseStudiesSection() {
                 whiteSpace: 'nowrap',
               }}
             >
-              [ 06.5 // PROJECTS &amp; EVIDENCE ]
+              [ PROJECTS &amp; EVIDENCE ]
             </span>
             <span
               style={{
@@ -433,38 +433,12 @@ export default function UsCaseStudiesSection() {
                     color: '#444440',
                     fontSize: '0.94rem',
                     lineHeight: 1.6,
-                    marginBottom: '1.25rem',
+                    marginBottom: 0,
                     textWrap: 'pretty',
                   }}
                 >
                   {project.description}
                 </p>
-              </div>
-
-              {/* Architecture Highlights */}
-              <div
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '0.4rem',
-                }}
-              >
-                {project.highlights.map((item, idx) => (
-                  <span
-                    key={idx}
-                    style={{
-                      fontSize: '0.68rem',
-                      fontFamily: 'ui-monospace, monospace',
-                      padding: '0.2rem 0.5rem',
-                      backgroundColor: '#F3F3F0',
-                      border: '1px solid #E2E2DE',
-                      color: '#121210',
-                      fontWeight: 500,
-                    }}
-                  >
-                    + {item}
-                  </span>
-                ))}
               </div>
             </div>
 
