@@ -78,9 +78,22 @@ export default function TransparencySection() {
               {tr.baseCost.amount}
             </p>
           </div>
-          <p style={{ fontSize: '0.94rem', color: '#D4D4D0', lineHeight: 1.6, margin: 0, borderTop: '1px solid #282824', paddingTop: '1.25rem', textWrap: 'pretty' }}>
-            {tr.baseCost.desc}
-          </p>
+          <div>
+            <p style={{ fontSize: '0.94rem', color: '#D4D4D0', lineHeight: 1.6, margin: '0 0 1rem 0', borderTop: '1px solid #282824', paddingTop: '1.25rem', textWrap: 'pretty' }}>
+              {tr.baseCost.desc}
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+              <span style={{ fontSize: '0.72rem', fontFamily: 'ui-monospace, monospace', color: '#A3A39E', backgroundColor: '#1F1F1C', padding: '0.2rem 0.55rem', border: '1px solid #333330' }}>
+                • 7 Días Hábiles
+              </span>
+              <span style={{ fontSize: '0.72rem', fontFamily: 'ui-monospace, monospace', color: '#A3A39E', backgroundColor: '#1F1F1C', padding: '0.2rem 0.55rem', border: '1px solid #333330' }}>
+                • 2 Puertas de Revisión
+              </span>
+              <span style={{ fontSize: '0.72rem', fontFamily: 'ui-monospace, monospace', color: '#A3A39E', backgroundColor: '#1F1F1C', padding: '0.2rem 0.55rem', border: '1px solid #333330' }}>
+                • Repositorio 100% Tuyo
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* Ancillary External Costs Ledger: Dominio & Hosting */}
@@ -157,14 +170,12 @@ export default function TransparencySection() {
               <h3 style={{ fontSize: '1.15rem', fontWeight: 600, color: '#121210', marginBottom: '0.4rem', textWrap: 'balance' }}>
                 {tr.hosting.title}
               </h3>
-              {tr.hosting.cost ? (
-                <p style={{ fontSize: '0.88rem', color: '#444440', marginBottom: '0.75rem', lineHeight: 1.5, textWrap: 'pretty' }}>
-                  {tr.hosting.desc}
-                </p>
-              ) : null}
+              <p style={{ fontSize: '0.88rem', color: '#444440', marginBottom: '0.75rem', lineHeight: 1.5, textWrap: 'pretty' }}>
+                {tr.hosting.desc}
+              </p>
             </div>
-            <p style={{ fontSize: '0.82rem', color: '#666660', lineHeight: 1.5, margin: 0, borderTop: '1px solid #E2E2DE', paddingTop: '0.85rem', textWrap: 'pretty' }}>
-              {tr.hosting.cost || tr.hosting.desc}
+            <p style={{ fontSize: '0.8rem', color: '#666660', lineHeight: 1.5, margin: 0, borderTop: '1px solid #E2E2DE', paddingTop: '0.85rem', textWrap: 'pretty' }}>
+              {tr.hosting.cost}
             </p>
           </div>
         </div>

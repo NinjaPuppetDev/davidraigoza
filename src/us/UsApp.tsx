@@ -12,6 +12,7 @@ import UsCollaborationSection from './components/UsCollaborationSection';
 import UsCraftSection from './components/UsCraftSection';
 import UsCaseStudiesSection from './components/UsCaseStudiesSection';
 import UsModularSection from './components/UsModularSection';
+import InvestmentSummarySection from '../components/InvestmentSummarySection';
 import UsProcessSection from './components/UsProcessSection';
 import UsContactSection from './components/UsContactSection';
 import UsFooter from './components/UsFooter';
@@ -79,6 +80,7 @@ export default function UsApp() {
           <UsCollaborationSection />
           <UsCraftSection />
           <UsModularSection />
+          <InvestmentSummarySection />
           <UsProcessSection />
           <UsContactSection />
         </main>

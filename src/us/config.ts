@@ -43,8 +43,8 @@ export const INTERNATIONAL_CONFIG: InternationalConfig = {
   pricingLabel: 'Your brand running on autopilot',
   pricingSubtext: 'Starting price is visible · Scope defined before work begins',
 
-  // Domain cost benchmark in USD
-  domainCostEstimate: 'Approx. $15 - $20 USD / year',
+  // Domain resource benchmark
+  domainCostEstimate: 'External Resource',
 
   // Contra payment options
   contraHeadline: 'Payment through Contra',

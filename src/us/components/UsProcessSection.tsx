@@ -9,7 +9,7 @@ export default function UsProcessSection() {
     {
       num: '02',
       title: 'Scope',
-      desc: 'We define what will be built, what is included, and the expected delivery timeline.',
+      desc: 'We define what will be built, lock the 7 business days delivery timeline, and map your two approval gates.',
       tag: 'SCOPE',
     },
     {
@@ -22,7 +22,7 @@ export default function UsProcessSection() {
     {
       num: '04',
       title: 'Review + Launch',
-      desc: 'The final details are reviewed, the website is published, analytics are connected, and contact channels are activated. 3 review rounds included.',
+      desc: 'The 2-Gate reviews are completed, the website is published live, analytics are connected, and contact channels are activated.',
       tag: 'DELIVERY',
       accent: '#16A34A',
     },

@@ -63,11 +63,11 @@ export default function UsTransparencySection() {
                 }}
               >
                 <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#10B981', flexShrink: 0 }} />
-                ONE-TIME PAYMENT
+                7 BUSINESS DAYS
               </span>
             </div>
             <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: '#FFFFFF', marginBottom: '0.75rem', letterSpacing: '-0.015em', textWrap: 'balance' }}>
-              Base investment
+              App Launch
             </h3>
             <p className="bauhaus-num" style={{ fontSize: 'clamp(2rem, 3.8vw, 2.5rem)', fontWeight: 600, color: '#FFFFFF', marginBottom: '1.25rem', letterSpacing: '-0.03em' }}>
               {INTERNATIONAL_CONFIG.startingPrice}
@@ -75,17 +75,17 @@ export default function UsTransparencySection() {
           </div>
           <div>
             <p style={{ fontSize: '0.94rem', color: '#D4D4D0', lineHeight: 1.6, margin: '0 0 1rem 0', borderTop: '1px solid #282824', paddingTop: '1.25rem', textWrap: 'pretty' }}>
-              Covers complete design, development, and launch within the agreed project scope. Ongoing maintenance, backups, and security are covered at {INTERNATIONAL_CONFIG.maintenancePrice}—or if you opt out, you can keep the repository and host it on your own.
+              End-to-end design, engineering, and live production deployment.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
               <span style={{ fontSize: '0.72rem', fontFamily: 'ui-monospace, monospace', color: '#A3A39E', backgroundColor: '#1F1F1C', padding: '0.2rem 0.55rem', border: '1px solid #333330' }}>
-                ✓ Starting price visible
+                • 7 Business Days
               </span>
               <span style={{ fontSize: '0.72rem', fontFamily: 'ui-monospace, monospace', color: '#A3A39E', backgroundColor: '#1F1F1C', padding: '0.2rem 0.55rem', border: '1px solid #333330' }}>
-                ✓ Scope defined before work begins
+                • 2-Gate Approval
               </span>
               <span style={{ fontSize: '0.72rem', fontFamily: 'ui-monospace, monospace', color: '#A3A39E', backgroundColor: '#1F1F1C', padding: '0.2rem 0.55rem', border: '1px solid #333330' }}>
-                ✓ Keep the repo if you opt out
+                • 100% Code Ownership
               </span>
             </div>
           </div>
@@ -112,14 +112,14 @@ export default function UsTransparencySection() {
                 CONCEPT 02 · DIRECT ASSET
               </span>
               <h3 style={{ fontSize: '1.15rem', fontWeight: 600, color: '#121210', marginBottom: '0.4rem', textWrap: 'balance' }}>
-                Domain name
+                Domain
               </h3>
               <p style={{ fontSize: '0.88rem', color: '#444440', marginBottom: '0.75rem', lineHeight: 1.5, textWrap: 'pretty' }}>
-                Your distinct web address (e.g. yourbusiness.com). Purchased directly under your personal or company name, guaranteeing you retain permanent ownership.
+                Web address registered under your name with total ownership. Pricing depends on TLD extension (.com, .co, .ai) and availability.
               </p>
             </div>
             <p style={{ fontSize: '0.82rem', color: '#666660', lineHeight: 1.5, margin: 0, borderTop: '1px solid #E2E2DE', paddingTop: '0.85rem', textWrap: 'pretty' }}>
-              {INTERNATIONAL_CONFIG.domainCostEstimate}
+              External Resource
             </p>
           </div>
 
@@ -134,22 +134,22 @@ export default function UsTransparencySection() {
               flexDirection: 'column',
               justifyContent: 'space-between',
               border: '1px solid #E2E2DE',
-              borderTop: '3px solid #EF4444',
+              borderTop: '3px solid #2563EB',
               transitionDelay: '80ms',
             }}
           >
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'nowrap', gap: '0.35rem', marginBottom: '0.4rem', width: '100%', minWidth: 0 }}>
                 <span style={{ fontSize: 'clamp(0.48rem, 1.45vw, 0.62rem)', fontFamily: 'ui-monospace, monospace', color: '#666660', textTransform: 'uppercase', letterSpacing: '-0.01em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>
-                  CONCEPT 03 · MAINTENANCE &amp; INFRASTRUCTURE
+                  CONCEPT 03 · MANAGED INFRASTRUCTURE
                 </span>
                 <span
                   style={{
                     fontSize: 'clamp(0.48rem, 1.4vw, 0.58rem)',
                     fontFamily: 'ui-monospace, monospace',
-                    color: '#B91C1C',
-                    backgroundColor: '#FEF2F2',
-                    border: '1px solid #FECACA',
+                    color: '#1D4ED8',
+                    backgroundColor: '#EFF6FF',
+                    border: '1px solid #BFDBFE',
                     padding: '0.1rem 0.32rem',
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -160,19 +160,19 @@ export default function UsTransparencySection() {
                     flexShrink: 0,
                   }}
                 >
-                  <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#EF4444', flexShrink: 0 }} />
-                  {INTERNATIONAL_CONFIG.maintenancePrice}
+                  <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#2563EB', flexShrink: 0 }} />
+                  $40 USD / month
                 </span>
               </div>
               <h3 style={{ fontSize: '1.15rem', fontWeight: 600, color: '#121210', marginBottom: '0.4rem', textWrap: 'balance' }}>
-                Maintenance, backups &amp; security
+                Managed Infrastructure
               </h3>
               <p style={{ fontSize: '0.88rem', color: '#444440', marginBottom: '0.75rem', lineHeight: 1.5, textWrap: 'pretty' }}>
-                Required to maintain the website, automated backups, and active security after launch.
+                High-performance hosting, daily backups, and continuous protection.
               </p>
             </div>
-            <p style={{ fontSize: '0.82rem', color: '#666660', lineHeight: 1.5, margin: 0, borderTop: '1px solid #E2E2DE', paddingTop: '0.85rem', textWrap: 'pretty' }}>
-              {INTERNATIONAL_CONFIG.maintenancePrice} · If you opt out, you can keep the repository and host it on your own.
+            <p style={{ fontSize: '0.8rem', color: '#666660', lineHeight: 1.5, margin: 0, borderTop: '1px solid #E2E2DE', paddingTop: '0.85rem', textWrap: 'pretty' }}>
+              Optional • Maintain 100% code ownership if opted out.
             </p>
           </div>
 

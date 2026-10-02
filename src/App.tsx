@@ -27,6 +27,7 @@ import NewsletterPage from './components/NewsletterPage';
 import NewsletterThankYouPage from './components/NewsletterThankYouPage';
 import UsNewsletterPage from './us/components/UsNewsletterPage';
 import UsApp from './us/UsApp';
+import GeoSchema from './components/GeoSchema';
 
 function AppContent() {
   const [isVisible, setIsVisible] = useState(false);
@@ -349,105 +350,114 @@ export default function App() {
     };
   }, [route]);
 
-  if (route === 'us-newsletter-thank-you') {
-    return (
-      <LanguageProvider forcedLanguage="en">
-        <NewsletterThankYouPage locale="en" />
-      </LanguageProvider>
-    );
-  }
+  const renderRouteContent = () => {
+    if (route === 'us-newsletter-thank-you') {
+      return (
+        <LanguageProvider forcedLanguage="en">
+          <NewsletterThankYouPage locale="en" />
+        </LanguageProvider>
+      );
+    }
 
-  if (route === 'newsletter-thank-you') {
-    return (
-      <LanguageProvider forcedLanguage="es">
-        <NewsletterThankYouPage locale="es" />
-      </LanguageProvider>
-    );
-  }
+    if (route === 'newsletter-thank-you') {
+      return (
+        <LanguageProvider forcedLanguage="es">
+          <NewsletterThankYouPage locale="es" />
+        </LanguageProvider>
+      );
+    }
 
-  if (route === 'us-newsletter') {
-    return (
-      <LanguageProvider forcedLanguage="en">
-        <UsNewsletterPage />
-      </LanguageProvider>
-    );
-  }
+    if (route === 'us-newsletter') {
+      return (
+        <LanguageProvider forcedLanguage="en">
+          <UsNewsletterPage />
+        </LanguageProvider>
+      );
+    }
 
-  if (route === 'newsletter') {
-    return (
-      <LanguageProvider forcedLanguage="es">
-        <NewsletterPage locale="es" />
-      </LanguageProvider>
-    );
-  }
+    if (route === 'newsletter') {
+      return (
+        <LanguageProvider forcedLanguage="es">
+          <NewsletterPage locale="es" />
+        </LanguageProvider>
+      );
+    }
 
-  if (route === 'us') {
-    return (
-      <LanguageProvider forcedLanguage="en">
-        <UsApp />
-        {/* <VoiceWidget /> */}
-      </LanguageProvider>
-    );
-  }
+    if (route === 'us') {
+      return (
+        <LanguageProvider forcedLanguage="en">
+          <UsApp />
+          {/* <VoiceWidget /> */}
+        </LanguageProvider>
+      );
+    }
 
-  if (route === 'us-case-study-dra-victoria') {
-    return (
-      <LanguageProvider forcedLanguage="en">
-        <DraVictoriaCaseStudy isUs={true} />
-        {/* <VoiceWidget /> */}
-      </LanguageProvider>
-    );
-  }
+    if (route === 'us-case-study-dra-victoria') {
+      return (
+        <LanguageProvider forcedLanguage="en">
+          <DraVictoriaCaseStudy isUs={true} />
+          {/* <VoiceWidget /> */}
+        </LanguageProvider>
+      );
+    }
 
-  if (route === 'us-case-study-commonground') {
-    return (
-      <LanguageProvider forcedLanguage="en">
-        <CommonGroundCaseStudy isUs={true} />
-        {/* <VoiceWidget /> */}
-      </LanguageProvider>
-    );
-  }
+    if (route === 'us-case-study-commonground') {
+      return (
+        <LanguageProvider forcedLanguage="en">
+          <CommonGroundCaseStudy isUs={true} />
+          {/* <VoiceWidget /> */}
+        </LanguageProvider>
+      );
+    }
 
-  if (route === 'us-case-study-talent-showcase') {
-    return (
-      <LanguageProvider forcedLanguage="en">
-        <TalentShowcaseCaseStudy isUs={true} />
-        {/* <VoiceWidget /> */}
-      </LanguageProvider>
-    );
-  }
+    if (route === 'us-case-study-talent-showcase') {
+      return (
+        <LanguageProvider forcedLanguage="en">
+          <TalentShowcaseCaseStudy isUs={true} />
+          {/* <VoiceWidget /> */}
+        </LanguageProvider>
+      );
+    }
 
-  if (route === 'case-study-dra-victoria') {
+    if (route === 'case-study-dra-victoria') {
+      return (
+        <LanguageProvider>
+          <DraVictoriaCaseStudy />
+          {/* <VoiceWidget /> */}
+        </LanguageProvider>
+      );
+    }
+
+    if (route === 'case-study-commonground') {
+      return (
+        <LanguageProvider>
+          <CommonGroundCaseStudy />
+          {/* <VoiceWidget /> */}
+        </LanguageProvider>
+      );
+    }
+
+    if (route === 'case-study-talent-showcase') {
+      return (
+        <LanguageProvider>
+          <TalentShowcaseCaseStudy />
+          {/* <VoiceWidget /> */}
+        </LanguageProvider>
+      );
+    }
+
     return (
       <LanguageProvider>
-        <DraVictoriaCaseStudy />
+        <AppContent />
         {/* <VoiceWidget /> */}
       </LanguageProvider>
     );
-  }
-
-  if (route === 'case-study-commonground') {
-    return (
-      <LanguageProvider>
-        <CommonGroundCaseStudy />
-        {/* <VoiceWidget /> */}
-      </LanguageProvider>
-    );
-  }
-
-  if (route === 'case-study-talent-showcase') {
-    return (
-      <LanguageProvider>
-        <TalentShowcaseCaseStudy />
-        {/* <VoiceWidget /> */}
-      </LanguageProvider>
-    );
-  }
+  };
 
   return (
-    <LanguageProvider>
-      <AppContent />
-      {/* <VoiceWidget /> */}
-    </LanguageProvider>
+    <>
+      <GeoSchema />
+      {renderRouteContent()}
+    </>
   );
 }

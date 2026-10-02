@@ -3,23 +3,23 @@ export default function UsEssentialsSection() {
     {
       num: '05',
       title: 'Responsive Mobile Experience',
-      desc: 'Fluid layout calibrated across modern smartphones, tablets, and desktop displays.',
+      desc: 'Fluid layout precision-calibrated for flawless performance across smartphones, tablets, and desktop displays.',
     },
     {
       num: '06',
       title: 'Publication & Configuration',
-      desc: 'Full DNS setup, domain connection, security certificates, and live production deployment.',
+      desc: 'Full domain connection, DNS records, SSL security certificates, and live production deployment ready to operate.',
     },
     {
       num: '07',
       title: 'Microsoft Clarity Analytics',
-      desc: 'Integrated with Microsoft Clarity to track real visitor behavior, interaction heatmaps, and user journeys.',
+      desc: 'Integrated behavioral telemetry tracking real visitor sessions, interaction heatmaps, and conversion drop-offs.',
       accent: '#2563EB',
     },
     {
       num: '08',
       title: 'Direct Client Collaboration',
-      desc: 'Partner directly with David from initial architecture to delivery with zero intermediary disconnects.',
+      desc: 'Work 1-on-1 directly with David throughout the 7-day build, with zero account managers or communication loss.',
     },
   ];
 
@@ -37,7 +37,7 @@ export default function UsEssentialsSection() {
             marginBottom: '0.5rem',
           }}
         >
-          01 / ESSENTIAL STRUCTURE
+          01 / ESSENTIAL STRUCTURE · 8 DELIVERABLES
         </span>
         <h2
           style={{
@@ -53,7 +53,7 @@ export default function UsEssentialsSection() {
           A digital presence that works for your business
         </h2>
         <p style={{ color: '#444440', fontSize: '1.02rem', maxWidth: '64ch', lineHeight: 1.6, textWrap: 'pretty' }}>
-          A clear, professional digital presence designed for clients to find you, understand what you do, and initiate a conversation easily.
+          Eight core deliverables engineered to position your authority, articulate your offer, and convert visitors into conversations—delivered live in 7 business days.
         </p>
       </div>
 
@@ -97,7 +97,7 @@ export default function UsEssentialsSection() {
             </h3>
           </div>
           <p style={{ fontSize: '0.98rem', color: '#444440', lineHeight: 1.6, margin: 0, maxWidth: '48ch', textWrap: 'pretty' }}>
-            A clear entry point explaining who you are, what you do, and what you offer—engineered to establish authority and trust within seconds.
+            A high-conversion landing page explaining who you are, what you offer, and why clients should choose you—establishing authority within seconds.
           </p>
         </div>
 
@@ -140,7 +140,7 @@ export default function UsEssentialsSection() {
             </h3>
           </div>
           <p style={{ fontSize: '0.92rem', color: '#444440', lineHeight: 1.58, margin: 0, textWrap: 'pretty' }}>
-            A structured presentation of services, products, or professional offerings, organized transparently without jargon.
+            A transparent, structured presentation of your services or products, organized without jargon so prospects immediately understand your value.
           </p>
         </div>
 
@@ -182,7 +182,7 @@ export default function UsEssentialsSection() {
             </h3>
           </div>
           <p style={{ fontSize: '0.88rem', color: '#444440', lineHeight: 1.55, margin: 0, textWrap: 'pretty' }}>
-            Clear contact information and appropriate tools for beginning a conversation, including discovery call scheduling and direct email.
+            Frictionless conversion channels to spark direct conversations, including 15-minute discovery call scheduling and direct inquiry routing.
           </p>
         </div>
 
@@ -229,7 +229,7 @@ export default function UsEssentialsSection() {
             </h3>
           </div>
           <p style={{ fontSize: '0.9rem', color: '#E2E2DE', lineHeight: 1.55, margin: 0, textWrap: 'pretty' }}>
-            Design and development are handled as one integrated process by a single specialist, with zero agency handoff friction.
+            Conceived, designed, and coded end-to-end by David Raigoza as a dual-discipline Product Design Engineer—eliminating agency handoff friction.
           </p>
         </div>
 

@@ -1,8 +1,9 @@
 import { useLanguage } from '../context/LanguageContext';
 
 export default function InvestmentSummarySection() {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const inv = t.investmentSummary;
+  const targetHref = language === 'en' ? '#contact' : '#contacto';
 
   return (
     <section className="scroll-reveal" style={{ padding: '3rem 0 3.5rem', borderTop: '1px solid #E2E2DE' }}>
@@ -70,7 +71,7 @@ export default function InvestmentSummarySection() {
         </p>
         <a
           id="investment-summary-cta"
-          href="#contacto"
+          href={targetHref}
           className="negocios-btn-mobile-full"
           style={{
             backgroundColor: '#121210',
@@ -85,9 +86,10 @@ export default function InvestmentSummarySection() {
             gap: '0.5rem',
             minHeight: '48px',
             border: '1px solid #121210',
+            whiteSpace: 'nowrap',
           }}
         >
-          {inv.cta} <span>→</span>
+          {inv.cta} <span style={{ flexShrink: 0 }}>→</span>
         </a>
       </div>
     </section>

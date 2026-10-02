@@ -56,15 +56,25 @@ export default function UsCollaborationSection() {
               }}
             >
               <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#2563EB' }} />
-              CONTROLLED QUALITY
+              2-GATE APPROVAL SYSTEM
             </div>
             <h3 style={{ fontSize: '1.45rem', fontWeight: 600, color: '#121210', marginBottom: '0.85rem', letterSpacing: '-0.015em', textWrap: 'balance' }}>
-              3 review rounds included
+              2-Gate Approval System
             </h3>
           </div>
-          <p style={{ fontSize: '0.94rem', color: '#444440', lineHeight: 1.6, margin: 0, textWrap: 'pretty' }}>
-            During the build, you have three dedicated review rounds to critique progress, refine details, and approve iterations before deployment.
-          </p>
+          <div style={{ fontSize: '0.92rem', color: '#444440', lineHeight: 1.6, margin: 0, textWrap: 'pretty' }}>
+            <p style={{ margin: '0 0 0.85rem 0' }}>
+              Structured two-phase review to keep momentum without scope drift:
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontFamily: 'ui-monospace, monospace', fontSize: '0.82rem' }}>
+              <div style={{ padding: '0.55rem 0.75rem', backgroundColor: '#F8F8F6', border: '1px solid #E2E2DE' }}>
+                <strong style={{ color: '#121210' }}>Gate 1: Structural Gate</strong> (Layout, user flows, and copy)
+              </div>
+              <div style={{ padding: '0.55rem 0.75rem', backgroundColor: '#F8F8F6', border: '1px solid #E2E2DE' }}>
+                <strong style={{ color: '#121210' }}>Gate 2: Visual Gate</strong> (Design system, typography, and styling)
+              </div>
+            </div>
+          </div>
         </div>
 
         <div

@@ -67,9 +67,19 @@ export default function CollaborationSection() {
               {c.card1.title}
             </h3>
           </div>
-          <p style={{ fontSize: '0.94rem', color: '#444440', lineHeight: 1.6, margin: 0, textWrap: 'pretty' }}>
-            {c.card1.desc}
-          </p>
+          <div style={{ fontSize: '0.92rem', color: '#444440', lineHeight: 1.6, margin: 0, textWrap: 'pretty' }}>
+            <p style={{ margin: '0 0 0.85rem 0' }}>
+              {c.card1.desc}
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontFamily: 'ui-monospace, monospace', fontSize: '0.82rem' }}>
+              <div style={{ padding: '0.55rem 0.75rem', backgroundColor: '#F8F8F6', border: '1px solid #E2E2DE' }}>
+                <strong style={{ color: '#121210' }}>Puerta 1: Revisión Estructural</strong> (Layout, navegación y textos)
+              </div>
+              <div style={{ padding: '0.55rem 0.75rem', backgroundColor: '#F8F8F6', border: '1px solid #E2E2DE' }}>
+                <strong style={{ color: '#121210' }}>Puerta 2: Revisión Visual</strong> (Estilos, colores y sistema de diseño)
+              </div>
+            </div>
+          </div>
         </div>
 
         <div
