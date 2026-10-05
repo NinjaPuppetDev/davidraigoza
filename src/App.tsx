@@ -28,6 +28,7 @@ import NewsletterThankYouPage from './components/NewsletterThankYouPage';
 import UsNewsletterPage from './us/components/UsNewsletterPage';
 import UsApp from './us/UsApp';
 import GeoSchema from './components/GeoSchema';
+import DigitalBusinessCard from './components/DigitalBusinessCard';
 
 function AppContent() {
   const [isVisible, setIsVisible] = useState(false);
@@ -127,6 +128,7 @@ function AppContent() {
 }
 
 type AppRoute =
+  | 'card'
   | 'main'
   | 'us'
   | 'newsletter'
@@ -141,6 +143,13 @@ type AppRoute =
   | 'us-case-study-talent-showcase';
 
 function parseRoute(pathname: string): AppRoute {
+  const normalized = (pathname || '/').toLowerCase().replace(/\/+$/, '') || '/';
+
+  // Digital business card route (/card)
+  if (normalized === '/card' || normalized.startsWith('/card/')) {
+    return 'card';
+  }
+
   // Validación directa del subdominio de EE. UU.
   if (typeof window !== 'undefined' && window.location.hostname.toLowerCase() === 'us.davidraigoza.online') {
     const normalizedPath = (pathname || '/').toLowerCase().replace(/\/+$/, '') || '/';
@@ -177,8 +186,6 @@ function parseRoute(pathname: string): AppRoute {
     }
     return 'us';
   }
-
-  const normalized = (pathname || '/').toLowerCase().replace(/\/+$/, '') || '/';
 
   // Newsletter Thank You routes (/gracias, /us/thank-you, /newsletter/gracias, /us/newsletter/thank-you)
   if (
@@ -349,6 +356,10 @@ export default function App() {
       document.removeEventListener('click', handleLinkClick);
     };
   }, [route]);
+
+  if (route === 'card') {
+    return <DigitalBusinessCard />;
+  }
 
   const renderRouteContent = () => {
     if (route === 'us-newsletter-thank-you') {
