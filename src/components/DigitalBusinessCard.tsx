@@ -45,28 +45,61 @@ export default function DigitalBusinessCard() {
     checkViewport();
     window.addEventListener('resize', checkViewport);
 
-    // Optional subtle device tilt on mobile devices with gyroscope
-    const handleDeviceOrientation = (e: DeviceOrientationEvent) => {
+    // Device orientation motion when rotating the cellphone
+    let isListening = false;
+
+    const handleOrientation = (e: DeviceOrientationEvent) => {
       if (e.beta === null || e.gamma === null) return;
-      // Clamp gentle tilt values (-6 to 6 deg)
-      const tiltX = Math.max(-6, Math.min(6, (e.beta - 45) * 0.2));
-      const tiltY = Math.max(-6, Math.min(6, e.gamma * 0.25));
-      setTilt({ x: -tiltX, y: tiltY });
+      // beta: front/back tilt (natural holding angle ~45deg)
+      // gamma: left/right tilt (-90 to 90deg)
+      const deltaBeta = e.beta - 45;
+      const tiltX = Math.max(-15, Math.min(15, -deltaBeta * 0.55));
+      const tiltY = Math.max(-15, Math.min(15, e.gamma * 0.55));
+
+      setTilt({ x: tiltX, y: tiltY });
       setLightPos({
-        x: 50 + tiltY * 4,
-        y: 30 + tiltX * 4,
+        x: Math.max(10, Math.min(90, 50 + tiltY * 2.2)),
+        y: Math.max(10, Math.min(90, 30 - tiltX * 2.2)),
       });
     };
 
-    if (window.DeviceOrientationEvent && typeof (window.DeviceOrientationEvent as unknown as { requestPermission?: () => Promise<string> }).requestPermission !== 'function') {
-      window.addEventListener('deviceorientation', handleDeviceOrientation, { passive: true });
+    const startOrientation = () => {
+      if (isListening) return;
+      isListening = true;
+      window.addEventListener('deviceorientation', handleOrientation, { passive: true });
+    };
+
+    const DeviceOrientationWithPerm = window.DeviceOrientationEvent as unknown as {
+      requestPermission?: () => Promise<'granted' | 'denied'>;
+    };
+
+    if (DeviceOrientationWithPerm && typeof DeviceOrientationWithPerm.requestPermission === 'function') {
+      // iOS 13+ requires user gesture to enable motion sensors
+      const enableOnGesture = async () => {
+        try {
+          const res = await DeviceOrientationWithPerm.requestPermission!();
+          if (res === 'granted') {
+            startOrientation();
+          }
+        } catch {
+          // Gracefully fallback
+        }
+        window.removeEventListener('touchstart', enableOnGesture);
+        window.removeEventListener('pointerdown', enableOnGesture);
+      };
+
+      window.addEventListener('touchstart', enableOnGesture, { once: true, passive: true });
+      window.addEventListener('pointerdown', enableOnGesture, { once: true, passive: true });
+    } else {
+      // Android / Chrome / modern mobile browsers
+      startOrientation();
     }
 
     return () => {
       clearTimeout(timer);
       document.title = originalTitle;
       window.removeEventListener('resize', checkViewport);
-      window.removeEventListener('deviceorientation', handleDeviceOrientation);
+      window.removeEventListener('deviceorientation', handleOrientation);
     };
   }, []);
 
@@ -204,7 +237,8 @@ export default function DigitalBusinessCard() {
           align-items: center;
           justify-content: center;
           transform-style: preserve-3d;
-          transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: transform 0.09s cubic-bezier(0.2, 0.8, 0.35, 1);
+          will-change: transform;
         }
 
         /* Realistic bottom corner lift shadow underneath paper */
