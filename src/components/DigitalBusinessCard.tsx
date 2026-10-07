@@ -23,10 +23,11 @@ export default function DigitalBusinessCard() {
   const [forcePreview, setForcePreview] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Dynamic 3D paper tilt & specular ambient sheen
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [lightPos, setLightPos] = useState({ x: 35, y: 25 });
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const targetTilt = useRef({ x: 0, y: 0 });
+  const currentTilt = useRef({ x: 0, y: 0 });
+  const rafId = useRef<number | null>(null);
 
   useEffect(() => {
     // Settling trigger on initial load
@@ -45,6 +46,30 @@ export default function DigitalBusinessCard() {
     checkViewport();
     window.addEventListener('resize', checkViewport);
 
+    // High-performance continuous animation loop: runs at native refresh rate (60/120fps)
+    // Mathematical exponential smoothing (lerp) eliminates sensor jitter and lag
+    const updateMotion = () => {
+      // 0.18 lerp factor: ultra-snappy and responsive, zero lag, smooth settling
+      const factor = 0.18;
+      currentTilt.current.x += (targetTilt.current.x - currentTilt.current.x) * factor;
+      currentTilt.current.y += (targetTilt.current.y - currentTilt.current.y) * factor;
+
+      if (wrapperRef.current) {
+        wrapperRef.current.style.transform = `rotateX(${currentTilt.current.x.toFixed(2)}deg) rotateY(${currentTilt.current.y.toFixed(2)}deg)`;
+      }
+
+      if (cardRef.current) {
+        const lightX = 50 + currentTilt.current.y * 2.2;
+        const lightY = 30 - currentTilt.current.x * 2.2;
+        cardRef.current.style.setProperty('--light-x', `${lightX.toFixed(1)}%`);
+        cardRef.current.style.setProperty('--light-y', `${lightY.toFixed(1)}%`);
+      }
+
+      rafId.current = requestAnimationFrame(updateMotion);
+    };
+
+    rafId.current = requestAnimationFrame(updateMotion);
+
     // Device orientation motion when rotating the cellphone
     let isListening = false;
 
@@ -53,14 +78,10 @@ export default function DigitalBusinessCard() {
       // beta: front/back tilt (natural holding angle ~45deg)
       // gamma: left/right tilt (-90 to 90deg)
       const deltaBeta = e.beta - 45;
-      const tiltX = Math.max(-15, Math.min(15, -deltaBeta * 0.55));
-      const tiltY = Math.max(-15, Math.min(15, e.gamma * 0.55));
-
-      setTilt({ x: tiltX, y: tiltY });
-      setLightPos({
-        x: Math.max(10, Math.min(90, 50 + tiltY * 2.2)),
-        y: Math.max(10, Math.min(90, 30 - tiltX * 2.2)),
-      });
+      targetTilt.current = {
+        x: Math.max(-16, Math.min(16, -deltaBeta * 0.6)),
+        y: Math.max(-16, Math.min(16, e.gamma * 0.6)),
+      };
     };
 
     const startOrientation = () => {
@@ -97,6 +118,7 @@ export default function DigitalBusinessCard() {
 
     return () => {
       clearTimeout(timer);
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
       document.title = originalTitle;
       window.removeEventListener('resize', checkViewport);
       window.removeEventListener('deviceorientation', handleOrientation);
@@ -112,21 +134,14 @@ export default function DigitalBusinessCard() {
     const normX = (x / rect.width - 0.5) * 2; // -1 to 1
     const normY = (y / rect.height - 0.5) * 2; // -1 to 1
 
-    // Maximum 5 degrees subtle physical tilt
-    setTilt({
-      x: -normY * 4.5,
-      y: normX * 4.5,
-    });
-    setLightPos({
-      x: (x / rect.width) * 100,
-      y: (y / rect.height) * 100,
-    });
+    targetTilt.current = {
+      x: Math.max(-14, Math.min(14, -normY * 11)),
+      y: Math.max(-14, Math.min(14, normX * 11)),
+    };
   };
 
   const handlePointerLeave = () => {
-    // Gently spring back to resting paper pose
-    setTilt({ x: 0, y: 0 });
-    setLightPos({ x: 35, y: 25 });
+    targetTilt.current = { x: 0, y: 0 };
   };
 
   const handleTalkToMe = (e: React.MouseEvent) => {
@@ -237,7 +252,6 @@ export default function DigitalBusinessCard() {
           align-items: center;
           justify-content: center;
           transform-style: preserve-3d;
-          transition: transform 0.09s cubic-bezier(0.2, 0.8, 0.35, 1);
           will-change: transform;
         }
 
@@ -593,22 +607,14 @@ export default function DigitalBusinessCard() {
       ) : (
         /* Interactive Physical Paper Object */
         <div
+          ref={wrapperRef}
           className="paper-card-wrapper"
-          style={{
-            transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-          }}
         >
           <main
             ref={cardRef}
             className={`paper-card ${mounted ? 'is-settled' : ''}`}
             role="region"
             aria-label="David Raigoza - Tarjeta de Presentación Digital"
-            style={
-              {
-                '--light-x': `${lightPos.x}%`,
-                '--light-y': `${lightPos.y}%`,
-              } as React.CSSProperties
-            }
           >
             {/* Blind Debossed Intaglio Boundary Frame */}
             <div className="paper-deboss-frame" aria-hidden="true" />

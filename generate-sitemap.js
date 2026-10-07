@@ -1,37 +1,33 @@
 import { writeFileSync } from 'fs';
 import { resolve } from 'path';
 
-// 1. Define your domain and static routes
-const DOMAIN = 'https://davidraigoza.design'; // Update with your active domain
-
-const routes = [
-  '/',
-  '/us',
-  '/case-studies/dra-victoria',
-  '/case-studies/common-ground',
-  '/case-studies/talent-showcase-hub',
-  '/us/case-studies/dra-victoria',
-  '/us/case-studies/common-ground',
-  '/us/case-studies/talent-showcase-hub',
+const urls = [
+  'https://us.davidraigoza.online/',
+  'https://us.davidraigoza.online/case-studies/dra-victoria',
+  'https://us.davidraigoza.online/case-studies/common-ground',
+  'https://us.davidraigoza.online/case-studies/talent-showcase-hub',
+  'https://www.davidraigoza.online/',
+  'https://www.davidraigoza.online/case-studies/dra-victoria',
+  'https://www.davidraigoza.online/case-studies/common-ground',
+  'https://www.davidraigoza.online/case-studies/talent-showcase-hub',
 ];
 
-// 2. Build the XML content
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+const sitemap = `<?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes
-  .map((route) => {
+${urls
+  .map((url) => {
     return `  <url>
-    <loc>${DOMAIN}${route}</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>${route === '/' ? '1.0' : '0.8'}</priority>
+    <loc>${url}</loc>
   </url>`;
   })
   .join('\n')}
-</urlset>`;
+</urlset>
+`;
 
-// 3. Output to the public directory (Vite copies contents of /public directly to /dist)
-const outputPath = resolve(process.cwd(), 'public', 'sitemap.xml');
-writeFileSync(outputPath, sitemap, 'utf8');
+const outputPathXml = resolve(process.cwd(), 'public', 'sitemap.xml');
+writeFileSync(outputPathXml, sitemap, 'utf8');
 
-console.log('✅ sitemap.xml generated in /public/sitemap.xml');
+const outputPathXlm = resolve(process.cwd(), 'public', 'sitemap.xlm');
+writeFileSync(outputPathXlm, sitemap, 'utf8');
+
+console.log('✅ sitemap.xml and sitemap.xlm generated in /public');
