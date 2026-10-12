@@ -39,7 +39,7 @@ export default function TalentShowcaseCaseStudy({ isUs }: TalentShowcaseCaseStud
     }
   };
 
-  const backLinkPath = isUsMode ? '/us/' : '/';
+  const backLinkPath = '/';
   const backLinkLabel = isUsMode ? '← RETURN TO STUDIO' : cs.backToStudio;
 
   return (

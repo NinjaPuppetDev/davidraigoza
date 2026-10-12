@@ -36,7 +36,7 @@ export default function CommonGroundCaseStudy({ isUs }: CommonGroundCaseStudyPro
     }
   };
 
-  const backLinkPath = isUsMode ? '/us/' : '/';
+  const backLinkPath = '/';
   const backLinkLabel = isUsMode ? '← RETURN TO STUDIO' : cs.backToStudio;
 
   return (
@@ -1268,8 +1268,7 @@ export default function CommonGroundCaseStudy({ isUs }: CommonGroundCaseStudyPro
               ESTUDIO / INICIO
             </a>
             <a
-              href="/us"
-              onClick={(e) => navigateTo(e, '/us')}
+              href="https://us.davidraigoza.online/"
               style={{
                 fontSize: '0.75rem',
                 fontFamily: 'ui-monospace, monospace',

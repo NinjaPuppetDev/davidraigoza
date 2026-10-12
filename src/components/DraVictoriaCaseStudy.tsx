@@ -36,7 +36,7 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
     }
   };
 
-  const backLinkPath = isUsMode ? '/us/' : '/';
+  const backLinkPath = '/';
   const backLinkLabel = isUsMode ? '← RETURN TO STUDIO' : cs.backToStudio;
 
   return (
@@ -1208,8 +1208,8 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
               {/* Direct Link Back to Studio Offer & Contact */}
               <a
                 id="cta-return-studio-consultation"
-                href={isUsMode ? '/us/#contact' : '/#contacto'}
-                onClick={(e) => navigateTo(e, isUsMode ? '/us/#contact' : '/#contacto')}
+                href={isUsMode ? '/#contact' : '/#contacto'}
+                onClick={(e) => navigateTo(e, isUsMode ? '/#contact' : '/#contacto')}
                 style={{
                   display: 'inline-flex',
                   flexWrap: 'nowrap',
@@ -1329,8 +1329,7 @@ export default function DraVictoriaCaseStudy({ isUs }: DraVictoriaCaseStudyProps
               {isEs ? 'ESTUDIO / INICIO' : 'STUDIO / HOME'}
             </a>
             <a
-              href="/us"
-              onClick={(e) => navigateTo(e, '/us')}
+              href="https://us.davidraigoza.online/"
               style={{
                 fontSize: '0.75rem',
                 fontFamily: 'ui-monospace, monospace',

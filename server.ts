@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import http from 'http';
 import path from 'path';
+import fs from 'fs';
 import { WebSocketServer, WebSocket } from 'ws';
 import { GoogleGenAI, LiveServerMessage, Modality } from '@google/genai';
 
@@ -206,6 +207,16 @@ async function startServer() {
     });
   });
 
+  // 301 redirect for duplicate English aliases: /us and /us/ to /
+  app.get(['/us', '/us/'], (_req, res) => {
+    res.redirect(301, '/');
+  });
+
+  // 301 redirect for legacy /us/case-studies/:slug to /case-studies/:slug
+  app.get('/us/case-studies/:slug', (req, res) => {
+    res.redirect(301, `/case-studies/${req.params.slug}`);
+  });
+
   if (process.env.NODE_ENV !== 'production') {
     const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
@@ -216,8 +227,77 @@ async function startServer() {
   } else {
     const distPath = path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));
-    app.get('*', (_req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+    app.get('*', (req, res) => {
+      const indexPath = path.join(distPath, 'index.html');
+      try {
+        let html = fs.readFileSync(indexPath, 'utf-8');
+        const host = (req.headers.host || '').toLowerCase();
+        const isUsDomain =
+          host.startsWith('us.') ||
+          host.includes('us.davidraigoza.online') ||
+          req.query.lang === 'en' ||
+          req.query.us === 'true';
+
+        const reqPath = req.path.toLowerCase().replace(/\/+$/, '') || '/';
+        const isCaseStudy = reqPath.startsWith('/case-studies/');
+
+        if (isCaseStudy) {
+          const slug = reqPath.split('/')[2] || '';
+          const caseStudyDomain = isUsDomain
+            ? 'https://us.davidraigoza.online'
+            : 'https://www.davidraigoza.online';
+          const lang = isUsDomain ? 'en' : 'es';
+
+          html = html.replace(/<html lang="[^"]*">/, `<html lang="${lang}">`);
+          html = html.replace(
+            /<link rel="canonical" href="[^"]*" \/>/,
+            `<link rel="canonical" href="${caseStudyDomain}/case-studies/${slug}" />`
+          );
+          html = html.replace(/<link rel="alternate"[^>]*\/>\s*/g, '');
+        } else if (isUsDomain) {
+          html = html.replace(/<html lang="[^"]*">/, '<html lang="en">');
+          html = html.replace(
+            /<title>[^<]*<\/title>/,
+            '<title>David Raigoza - Digital Products for Professionals</title>'
+          );
+          html = html.replace(
+            /<meta name="description" content="[^"]*" \/>/,
+            '<meta name="description" content="High-performance digital products, web platforms, and engineering for professionals and businesses." />'
+          );
+          html = html.replace(
+            /<meta property="og:title" content="[^"]*" \/>/,
+            '<meta property="og:title" content="David Raigoza - Digital Products for Professionals" />'
+          );
+          html = html.replace(
+            /<meta property="og:description" content="[^"]*" \/>/,
+            '<meta property="og:description" content="High-performance digital products, web platforms, and engineering for professionals and businesses." />'
+          );
+          const enLinks = `<link rel="canonical" href="https://us.davidraigoza.online/" />\n    <link rel="alternate" hreflang="en-US" href="https://us.davidraigoza.online/" />\n    <link rel="alternate" hreflang="es" href="https://www.davidraigoza.online/" />`;
+          html = html.replace(
+            /<link rel="canonical"[^>]*\/>\s*<link rel="alternate"[^>]*\/>\s*<link rel="alternate"[^>]*\/>/,
+            enLinks
+          );
+        } else {
+          html = html.replace(/<html lang="[^"]*">/, '<html lang="es">');
+          html = html.replace(
+            /<title>[^<]*<\/title>/,
+            '<title>David Raigoza - Profesionales y Especialistas</title>'
+          );
+          html = html.replace(
+            /<meta name="description" content="[^"]*" \/>/,
+            '<meta name="description" content="Presencia digital profesional e ingeniería de diseño de producto para profesionales y especialistas." />'
+          );
+          const esLinks = `<link rel="canonical" href="https://www.davidraigoza.online/" />\n    <link rel="alternate" hreflang="es" href="https://www.davidraigoza.online/" />\n    <link rel="alternate" hreflang="en-US" href="https://us.davidraigoza.online/" />`;
+          html = html.replace(
+            /<link rel="canonical"[^>]*\/>\s*<link rel="alternate"[^>]*\/>\s*<link rel="alternate"[^>]*\/>/,
+            esLinks
+          );
+        }
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.send(html);
+      } catch {
+        res.sendFile(indexPath);
+      }
     });
   }
 

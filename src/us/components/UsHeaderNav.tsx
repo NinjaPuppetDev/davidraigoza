@@ -55,7 +55,7 @@ export default function UsHeaderNav() {
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
         <a
           id="us-nav-brand-link"
-          href="/us/"
+          href="/"
           aria-label="David Raigoza - International"
           style={{
             display: 'flex',

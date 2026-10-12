@@ -61,7 +61,7 @@ const THANK_YOU_COPY = {
         text: 'Open the email and click the confirmation link to activate your subscription.',
       },
     ],
-    returnHref: '/us',
+    returnHref: '/',
     returnLabel: '← Back to homepage',
   },
 } as const;

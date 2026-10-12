@@ -1,4 +1,9 @@
 {
+  "redirects": [
+    { "source": "/us", "destination": "/", "permanent": true },
+    { "source": "/us/", "destination": "/", "permanent": true },
+    { "source": "/us/case-studies/:slug*", "destination": "/case-studies/:slug*", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]

@@ -28,6 +28,7 @@ import NewsletterThankYouPage from './components/NewsletterThankYouPage';
 import UsNewsletterPage from './us/components/UsNewsletterPage';
 import UsApp from './us/UsApp';
 import GeoSchema from './components/GeoSchema';
+import SeoHead from './components/SeoHead';
 import DigitalBusinessCard from './components/DigitalBusinessCard';
 
 function AppContent() {
@@ -225,20 +226,13 @@ function parseRoute(pathname: string): AppRoute {
     return 'newsletter';
   }
 
-  // Specific /us case study routes (strictly in English, no translation toggle)
-  if (normalized === '/us/case-studies/dra-victoria' || normalized.startsWith('/us/case-studies/dra-victoria/')) {
-    return 'us-case-study-dra-victoria';
-  }
-  if (normalized === '/us/case-studies/common-ground' || normalized.startsWith('/us/case-studies/common-ground/')) {
-    return 'us-case-study-commonground';
-  }
-  if (
-    normalized === '/us/case-studies/talent-showcase-hub' ||
-    normalized.startsWith('/us/case-studies/talent-showcase-hub/') ||
-    normalized === '/us/case-studies/talent-showcase' ||
-    normalized.startsWith('/us/case-studies/talent-showcase/')
-  ) {
-    return 'us-case-study-talent-showcase';
+  // Redirect legacy /us/case-studies/... dead routes to canonical /case-studies/...
+  if (normalized.startsWith('/us/case-studies/')) {
+    const realCaseStudyPath = normalized.replace(/^\/us/, '');
+    if (typeof window !== 'undefined') {
+      window.history.replaceState(null, '', realCaseStudyPath);
+    }
+    return parseRoute(realCaseStudyPath);
   }
 
   if (normalized === '/case-studies/dra-victoria' || normalized.startsWith('/case-studies/dra-victoria/')) {
@@ -257,8 +251,21 @@ function parseRoute(pathname: string): AppRoute {
   ) {
     return 'case-study-talent-showcase';
   }
-  if (normalized === '/us' || normalized.startsWith('/us/')) {
-    return 'us';
+
+  // Remove or redirect duplicate English aliases: /us and /us/ should redirect to /
+  if (normalized === '/us' || normalized === '/us/') {
+    if (typeof window !== 'undefined') {
+      window.history.replaceState(null, '', '/');
+    }
+    if (
+      typeof window !== 'undefined' &&
+      (window.location.hostname.toLowerCase() === 'us.davidraigoza.online' ||
+        window.location.search.includes('lang=en') ||
+        window.location.search.includes('us=true'))
+    ) {
+      return 'us';
+    }
+    return 'main';
   }
   return 'main';
 }
@@ -467,6 +474,7 @@ export default function App() {
 
   return (
     <>
+      <SeoHead route={route} />
       <GeoSchema />
       {renderRouteContent()}
     </>
